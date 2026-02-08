@@ -1,0 +1,85 @@
+/* عام */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #2980b9, #6dd5fa);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* صندوق تسجيل الدخول */
+.login-container {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
+  width: 350px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 30px;
+  color: #2980b9;
+  font-size: 28px;
+}
+
+.login-container h2 i {
+  margin-left: 10px;
+}
+
+/* الحقول */
+.login-container input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* زر الدخول */
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #2980b9;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.login-container button i {
+  font-size: 18px;
+}
+
+.login-container button:hover {
+  background-color: #3498db;
+}
+
+/* نص تذكير أو رابط */
+.login-container .links {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login-container .links a {
+  color: #2980b9;
+  text-decoration: none;
+}
+
+.login-container .links a:hover {
+  text-decoration: underline;
+}

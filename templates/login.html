@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل دخول الطالب</title>
+  <!-- أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- ربط ملف CSS خارجي -->
+ <link rel="stylesheet" href="{{ request.url_for('static', path='style.css') }}">
+
+</head>
+<body>
+<div class="login-container">
+  <h2><i class="fas fa-user-graduate"></i> تسجيل الدخول</h2>
+  <form>
+    <input type="email" placeholder="البريد الإلكتروني" required>
+    <input type="password" placeholder="كلمة المرور" required>
+    <button type="submit"><i class="fas fa-sign-in-alt"></i> دخول</button>
+  </form>
+  <div class="links">
+    <a href="#">نسيت كلمة المرور؟</a>
+    <a href="#">تسجيل حساب جديد لأول مرة</a>
+  </div>
+</div>
+</body>
+</html>
