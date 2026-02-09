@@ -21,6 +21,9 @@
   <div class="links">
     <a href="#">نسيت كلمة المرور؟</a>
     <a href="/Auth/signup">تسجيل حساب جديد لأول مرة</a>
+    {%if message%}
+    <p style="color: red">{{message}}</p>
+    {%endif%}
 
   </div>
 </div>

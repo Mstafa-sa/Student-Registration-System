@@ -1,0 +1,240 @@
+:root {
+    --main-bg: #f5f7f9;
+    --header-gray: #6c7a89;
+    --accent-yellow: #f9bf29;
+    --border-color: #e1e4e8;
+    --text-dark: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+   background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    padding: 30px 15px;
+}
+
+/* Navbar */
+/* Navbar المعدل ليطابق الصورة الأخيرة */
+nav {
+    background-color: #2c3e50;
+    color: white;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between; /* توزيع العناصر على الأطراف */
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    direction: rtl; /* التأكد من أن الاتجاه العام من اليمين لليسار */
+}
+
+/* العنوان في جهة اليمين */
+.nav-brand h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-brand h2 i {
+    color: #f1c40f;
+}
+
+/* الروابط في جهة اليسار */
+nav ul.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+nav ul.nav-links li a:hover {
+    background-color: #34495e;
+    color: var(--accent-yellow);
+}
+
+/* التجاوب مع الجوال (Media Query شرحناه سابقاً) */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column; /* تحويل العناصر لتصبح فوق بعضها */
+        align-items: center;
+        padding: 15px;
+    }
+
+    .nav-toggle {
+        display: block; /* إظهار زر القائمة في الموبايل */
+        order: -1; /* وضعه في الأعلى */
+        margin-bottom: 10px;
+    }
+
+    ul.nav-links {
+        display: none; /* إخفاء الروابط افتراضياً في الموبايل */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background: #34495e;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    ul.nav-links.show {
+        display: flex; /* إظهارها عند الضغط على الزر */
+    }
+
+    ul.nav-links li a {
+        border-bottom: 1px solid #2c3e50;
+        padding: 15px;
+    }
+}
+/* باقي تصميم الصفحة */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* البطاقات */
+.card-section {
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
+    background-color: var(--header-gray);
+    color: #fff;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.card-header.dark {
+    background-color: #546e7a;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content.no-padding {
+    padding: 0;
+}
+
+/* شبكة المدخلات */
+.form-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.input-field {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+
+.input-field input, .input-field select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #fff;
+}
+
+.input-field input[readonly] {
+    background-color: #f9f9f9;
+    color: #777;
+}
+
+/* زر التسجيل */
+.button-wrapper {
+    display: flex;
+    align-items: flex-end;
+}
+
+.btn-register {
+    background-color: var(--accent-yellow);
+    color: #000;
+    border: none;
+    padding: 11px 25px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.btn-register:hover {
+    background-color: #e5af25;
+}
+
+/* تصميم الجدول */
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modern-table th {
+    background-color: #f8f9fa;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #607d8b;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.modern-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #444;
+}
+
+.modern-table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* تجاوب البطاقات والجداول مع الجوال */
+@media (max-width: 768px) {
+    .form-grid {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-register {
+        width: 100%;
+        justify-content: center;
+    }
+}

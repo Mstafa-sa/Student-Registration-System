@@ -19,7 +19,7 @@ async def dashboard(request: Request):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         user_email = payload.get("email")
-        user_id = payload.get("id")
+
     except jwt.ExpiredSignatureError:
         return RedirectResponse(url="/Auth/login")  # التوكن انتهى
     except jwt.InvalidTokenError:

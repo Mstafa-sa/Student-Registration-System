@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تسجيل المواد المطور</title>
+    <link rel="stylesheet" href="{{ request.url_for('static', path='courses.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+    <div class="nav-toggle" id="navToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
+        <li><a href="/STU/schedule">جدولي</a></li>
+        <li><a href="/STU/courses">المواد المتاحة</a></li>
+        <li><a href="dashboard.html">الرئيسية</a></li>
+    </ul>
+
+    <div class="nav-brand">
+        <h2>نظام تسجيل الطلاب <i class="fas fa-graduation-cap"></i></h2>
+    </div>
+</nav>
+
+    <div class="container">
+        <section class="card-section">
+            <div class="card-header">تسجيل مادة</div>
+            <div class="card-content">
+                <div class="form-grid">
+                    <div class="input-field">
+                        <label>رمز المساق</label>
+                        <input type="text" name="Course_code" placeholder="مثلاً: CS101">
+                    </div>
+                    <div class="input-field">
+                        <label>اسم المساق</label>
+                        <input type="text" value="مقدمة في البرمجة" readonly>
+                    </div>
+                    <div class="input-field">
+                        <label>الشعبة</label>
+                         <input type="text" name="Division" readonly>
+                    </div>
+                    <div class="button-wrapper">
+                        <button class="btn-register"><i class="fas fa-edit"></i> تسجيل المساق</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card-section">
+            <div class="card-header dark">المواد المتاحة للتسجيل</div>
+            <div class="card-content no-padding">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>رمز المادة</th>
+                            <th>اسم المادة</th>
+                            <th>الساعات</th>
+                            <th>المدرس</th>
+                            <th>الشعبة</th>
+                            <th>الوقت</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CS101</td>
+                            <td>مقدمة في البرمجة</td>
+                            <td>3</td>
+                            <td>د. أحمد</td>
+                            <td>خز 102</td>
+                            <td>10-11</td>
+                        </tr>
+                        <tr>
+                            <td>CS102</td>
+                            <td>هياكل البيانات</td>
+                            <td>3</td>
+                            <td>د. سارة</td>
+                            <td>خز 102</td>
+                            <td>10-11</td>
+                        </tr>
+                        <tr>
+                            <td>CS103</td>
+                            <td>قواعد البيانات</td>
+                            <td>3</td>
+                            <td>د. خالد</td>
+                            <td>خز 102</td>
+                            <td>10-11</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.querySelector('ul.nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
