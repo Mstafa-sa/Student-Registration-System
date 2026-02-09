@@ -26,7 +26,47 @@ async def courses(request: Request,Course_code:str=Form(...),Division:str=Form(.
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         user_email = payload.get("email")
-        print("user_email",user_email)
+        con=mysql.connector.connect(host="localhost",user="root",password="Admin@123",database="school")
+        cursor = con.cursor()
+        sql="select id from user where email = %s"
+        cursor.execute(sql,(user_email,))
+        id_student = cursor.fetchone()
+        if id_student:
+            sql="select * from materials_available_for_operation where رمزالمساق = %s and القاعة =%s"
+            cursor.execute(sql, (Course_code, Division))
+
+            course=cursor.fetchone()
+            if course:
+             sql="select * from courses where id_student = %s and المادة=%s "
+             cursor.execute(sql, (id_student[0], course[4]))
+             a=cursor.fetchone()
+
+             if a==None:
+
+
+               sql = """
+                  INSERT INTO courses
+                      (id_student, القاعة, الوقت, المدرس, المادة, اليوم, الساعات)
+                  VALUES (%s, %s, %s, %s, %s, %s, %s) \
+                   """
+
+               cursor.execute(sql, (
+                id_student[0],  # id_student
+                course[1],  # القاعة / رمز المساق
+                course[2],  # الوقت (datetime)
+                course[3],  # المدرس
+                course[4],  # المادة
+                course[5],  # اليوم
+                course[6]  # الساعات
+               ))
+
+               con.commit()
+               cursor.close()
+               return templates.TemplateResponse("courses.html", {"request": request,"messages":"تم التسجيل بنجاح"})
+             return templates.TemplateResponse("courses.html", {"request": request, "messages": "الماده موجوده"})
+            return templates.TemplateResponse("courses.html", {"request": request, "messages": "الماده غير موجود من المواد المتاحه"})
+
+
 
     except jwt.ExpiredSignatureError:
         return RedirectResponse(url="/Auth/login")  # التوكن انتهى
