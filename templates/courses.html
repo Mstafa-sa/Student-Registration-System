@@ -14,8 +14,8 @@
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar">
     <ul class="nav-links">
-        <li><a href="dashboard.html">الرئيسية</a></li>
-        <li><a href="/STU/courses">المواد المتاحة</a></li>
+        <li><a href="/STU/dashboard">الرئيسية</a></li>
+        <li><a href="/STU/courses">تسجيل المواد</a></li>
         <li><a href="/STU/schedule">جدولي</a></li>
         <li><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
     </ul>
@@ -68,7 +68,7 @@
 
     <!-- ===== TABLE ===== -->
     <section class="card-section">
-        <div class="card-header dark">المواد المتاحة للتسجيل</div>
+        <div class="card-header dark">المواد المسجله</div>
 
         <div class="card-content no-padding">
             <table class="modern-table">
@@ -80,33 +80,22 @@
                         <th>المدرس</th>
                         <th>الشعبة</th>
                         <th>الوقت</th>
+                        <th>اليوم</th>
                     </tr>
                 </thead>
                 <tbody>
+                  {%for i in course%}
                     <tr>
-                        <td>CS101</td>
-                        <td>مقدمة في البرمجة</td>
-                        <td>3</td>
-                        <td>د. أحمد</td>
-                        <td>خز 102</td>
-                        <td>10-11</td>
+                        <td>{{i[8]}}</td>
+                        <td>{{i[5]}}</td>
+                        <td>{{i[7]}}</td>
+                        <td>{{i[4]}}</td>
+                        <td>{{i[2]}}</td>
+                        <td>{{i[3]}}</td>
+                        <td>{{i[6]}}</td>
                     </tr>
-                    <tr>
-                        <td>CS102</td>
-                        <td>هياكل البيانات</td>
-                        <td>3</td>
-                        <td>د. سارة</td>
-                        <td>خز 102</td>
-                        <td>10-11</td>
-                    </tr>
-                    <tr>
-                        <td>CS103</td>
-                        <td>قواعد البيانات</td>
-                        <td>3</td>
-                        <td>د. خالد</td>
-                        <td>خز 102</td>
-                        <td>10-11</td>
-                    </tr>
+                  {%endfor%}
+
                 </tbody>
             </table>
         </div>

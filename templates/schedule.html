@@ -14,8 +14,8 @@
         <h2><i class="fas fa-school"></i> نظام تسجيل الطلاب</h2>
         <ul>
             <li><a href="/STU/dashboard"><i class="fas fa-home"></i> الرئيسية</a></li>
-            <li><a href="/STU/courses"><i class="fas fa-book"></i> المواد المتاحة</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> جدولي</a></li>
+            <li><a href="/STU/courses"><i class="fas fa-book"></i> تسجيل المواد</a></li>
+            <li><a href="/STU/schedule"><i class="fas fa-calendar-alt"></i> جدولي</a></li>
             <li><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
         </ul>
     </nav>
@@ -28,10 +28,12 @@
             <thead>
                 <tr>
                     <th>اليوم</th>
-                    <th>المادة</th>
+                    <th>القاعة</th>
                     <th>المدرس</th>
                     <th>الوقت</th>
-                    <th>القاعة</th>
+                    <th>عدد الساعات</th>
+                    <th>المادة</th>
+                    <th>رمز المساق</th>
                 </tr>
             </thead>
 
@@ -40,10 +42,12 @@
              {%for i in courses%}
                 <tr>
                     <td>{{i[6]}}</td>
-                    <td>{{i[5]}}</td>
+                    <td>{{i[2]}}</td>
                     <td>{{i[4]}}</td>
                     <td>{{i[3]}}</td>
-                    <td>{{i[2]}}</td>
+                    <td>{{i[7]}}</td>
+                    <td>{{i[5]}}</td>
+                    <td>{{i[8]}}</td>
                 </tr>
              {%endfor%}
 
