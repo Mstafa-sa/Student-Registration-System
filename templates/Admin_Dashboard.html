@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المدير</title>
+   <link rel="stylesheet" href="{{ request.url_for('static', path='Admin_Dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <h2><i class="fas fa-user-shield"></i> لوحة تحكم المدير</h2>
+        <ul>
+            <li><a href="admin_dashboard.html"><i class="fas fa-tachometer-alt"></i> الرئيسية</a></li>
+            <li><a href="/ADM/manage_students"><i class="fas fa-users"></i> إدارة الطلاب</a></li>
+            <li><a href="manage_courses_sections.html"><i class="fas fa-book"></i> المواد والشعب</a></li>
+            <li><a href="reports.html"><i class="fas fa-chart-line"></i> التقارير</a></li>
+            <li><a href="/STU/log_out"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        <h3><i class="fas fa-home"></i> مرحبًا بك، المدير!</h3>
+        <p>يمكنك إدارة الطلاب، المواد، الشعب، وعرض التقارير من القائمة الجانبية.</p>
+    </div>
+</body>
+</html>

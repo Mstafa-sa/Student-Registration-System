@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" xmlns="http://www.w3.org/1999/html" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
         <li><a href="/STU/dashboard">الرئيسية</a></li>
         <li><a href="/STU/courses">تسجيل المواد</a></li>
         <li><a href="/STU/schedule">جدولي</a></li>
-        <li><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
+        <li><a href="/STU/log_out"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
     </ul>
 
     <div class="nav-brand">
@@ -30,6 +30,7 @@
 
     <!-- ===== FORM ===== -->
     <form action="/STU/courses" method="post">
+         <input type="hidden" name="method" value="post">
         <section class="card-section">
             <div class="card-header">تسجيل مادة</div>
 
@@ -71,9 +72,12 @@
         <div class="card-header dark">المواد المسجله</div>
 
         <div class="card-content no-padding">
+              <form action="/STU/courses" method="post">
+                   <input type="hidden" name="method" value="delete">
             <table class="modern-table">
                 <thead>
                     <tr>
+                        <th> سحب </th>
                         <th>رمز المادة</th>
                         <th>اسم المادة</th>
                         <th>الساعات</th>
@@ -86,6 +90,9 @@
                 <tbody>
                   {%for i in course%}
                     <tr>
+
+                      <td> <input type="checkbox" name="id" value="{{ i[0] }}"></td>
+
                         <td>{{i[8]}}</td>
                         <td>{{i[5]}}</td>
                         <td>{{i[7]}}</td>
@@ -94,10 +101,15 @@
                         <td>{{i[3]}}</td>
                         <td>{{i[6]}}</td>
                     </tr>
+
                   {%endfor%}
 
                 </tbody>
+
             </table>
+             <input type="submit" value="سحب" style="background-color: #f39c12;margin-right: 32px;">
+
+            </form>
         </div>
     </section>
 

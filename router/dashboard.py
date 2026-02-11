@@ -1,11 +1,15 @@
-from fastapi import APIRouter, Request, Query
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from fastapi import Form
 import mysql.connector
-
 import jwt
 from fastapi.responses import RedirectResponse
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()  # ← تقرأ ملف .env
+secret_key = os.getenv("JWT_SECRET")
 
 
 router = APIRouter()
@@ -17,9 +21,14 @@ async def dashboard(request: Request):
     if not token:
         return RedirectResponse(url="/Auth/login")
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        payload = jwt.decode(token, secret_key, algorithms=["HS256"])
         user_email = payload.get("email")
-        con=mysql.connector.connect(host="localhost",user="root",password="Admin@123",database="school")
+        con = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password=os.getenv("DB_PASSWORD"),
+        database="school"
+    )
         cursor = con.cursor()
         sql = "SELECT * FROM user WHERE email = %s"
         cursor.execute(sql,(user_email,))
@@ -30,6 +39,9 @@ async def dashboard(request: Request):
         sql = "SELECT sum(الساعات) FROM courses WHERE id_student = %s"
         cursor.execute(sql, (id[0],))
         numberstime = cursor.fetchone()
+        con.close()
+
+
 
         return templates.TemplateResponse("dashboard.html", {"request": request,"numbers":numbers,"numberstime":numberstime})
     except jwt.ExpiredSignatureError:
