@@ -37,10 +37,18 @@ async def index(request: Request):
         cursor.execute(sql,(id[0],))
         courses=cursor.fetchall()
 
+        response = templates.TemplateResponse(
+            "schedule.html",
+            {"request": request,"courses":courses }
+        )
 
+        # 🔥 منع الكاش
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
 
+        return response
 
-        return templates.TemplateResponse("schedule.html", {"request": request, "courses":courses})
     except jwt.ExpiredSignatureError:
         return RedirectResponse(url="/Auth/login")  # التوكن انتهى
     except jwt.InvalidTokenError:

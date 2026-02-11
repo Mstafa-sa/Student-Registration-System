@@ -1,18 +1,26 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Cookie
 from fastapi.responses import RedirectResponse
-from fastapi import Cookie
-
 
 router = APIRouter()
-
-
 
 BLACKLIST = set()
 
 @router.get("/log_out")
-async def logout(token: str = Cookie(None)):
+async def logout(
+    token: str = Cookie(None),        # توكن الطالب
+    token_ad: str = Cookie(None)      # توكن المدير
+):
+
+    response = RedirectResponse(url="/Auth/login", status_code=302)
+
+    # إذا طالب
     if token:
-        BLACKLIST.add(token)  # أضف التوكن إلى القائمة السوداء
-    response = RedirectResponse(url="/Auth/login")
-    response.delete_cookie(key="token")  # حذف الكوكي من المتصفح
+        BLACKLIST.add(token)
+        response.delete_cookie("token")
+
+    # إذا مدير
+    if token_ad:
+        BLACKLIST.add(token_ad)
+        response.delete_cookie("token_ad")
+
     return response

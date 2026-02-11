@@ -15,4 +15,13 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 @router.get("/Admin_Dashboard", response_class=HTMLResponse)
 async def Admin_Dashboard(request: Request):
-    return templates.TemplateResponse("Admin_Dashboard.html", {"request": request})
+    response = templates.TemplateResponse(
+        "Admin_Dashboard.html",
+        {"request": request}
+    )
+
+    # 🔥 منع الكاش
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response

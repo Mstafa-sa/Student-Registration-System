@@ -8,26 +8,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    <!-- القائمة الجانبية -->
     <nav>
         <h2><i class="fas fa-user-shield"></i> لوحة تحكم المدير</h2>
         <ul>
-            <li><a href="admin_dashboard.html"><i class="fas fa-tachometer-alt"></i> الرئيسية</a></li>
+            <li><a href="/ADM/Admin_Dashboard"><i class="fas fa-tachometer-alt"></i> الرئيسية</a></li>
             <li><a href="manage_students.html" class="active"><i class="fas fa-users"></i> إدارة الطلاب</a></li>
             <li><a href="manage_courses_sections.html"><i class="fas fa-book"></i> المواد والشعب</a></li>
             <li><a href="reports.html"><i class="fas fa-chart-line"></i> التقارير</a></li>
-            <li><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
+            <li><a href="/STU/log_out"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a></li>
         </ul>
     </nav>
 
+    <!-- الحاوية -->
     <div class="students-container">
         <h3><i class="fas fa-users"></i> إدارة الطلاب</h3>
 
         <!-- بحث وإضافة -->
-        <div class="search-add">
-            <input type="text" placeholder="ابحث عن طالب بالاسم أو الرقم الجامعي أو القسم">
-            <button><i class="fas fa-search"></i> بحث</button>
-            <a href="#studentModal" class="btn-add"><i class="fas fa-user-plus"></i> إضافة طالب جديد</a>
-        </div>
+        <form action="/ADM/manage_students" method="post">
+            <input type="hidden" name="action" value="serch">
+            <div class="search-add">
+                <input type="text" name="search" placeholder="ابحث عن طالب بالاسم أو الرقم الجامعي أو القسم">
+                <button><i class="fas fa-search"></i> بحث</button>
+                <a href="#addStudentModal" class="btn-add"><i class="fas fa-user-plus"></i> إضافة طالب جديد</a>
+            </div>
+        </form>
 
         <!-- جدول الطلاب -->
         <table>
@@ -36,43 +41,88 @@
                     <th>رقم الطالب</th>
                     <th>الاسم الكامل</th>
                     <th>البريد الإلكتروني</th>
-                    <th>التخصص </th>
+                    <th>التخصص</th>
                     <th>إجراءات</th>
                 </tr>
             </thead>
             <tbody>
-            {%for student in students %}
+            {% for student in students %}
                 <tr>
                     <td>{{student[0]}}</td>
                     <td>{{student[1]}}</td>
                     <td>{{student[2]}}</td>
                     <td>{{student[4]}}</td>
                     <td>
-                        <a href="#studentModal" class="btn-edit"><i class="fas fa-edit"></i> تعديل</a>
-                        <button class="btn-delete"><i class="fas fa-trash"></i> حذف</button>
+                        <!-- زر تعديل -->
+                        <a href="#studentModal-{{student[0]}}" class="btn-edit">
+                            <i class="fas fa-edit"></i> تعديل
+                        </a>
+
+                        <!-- زر حذف -->
+                        <form action="/ADM/manage_students" method="post" style="display:inline;">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="student_id" value="{{student[0]}}">
+                            <button type="submit" class="btn-delete">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </form>
                     </td>
                 </tr>
-            {%endfor%}
+            {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <!-- مودال إضافة / تعديل طالب (CSS-only باستخدام :target) -->
-    <div id="studentModal" class="modal">
+    <!-- مودال إضافة طالب -->
+    <div id="addStudentModal" class="modal">
         <div class="modal-content">
             <a href="#" class="close">&times;</a>
-            <h4><i class="fas fa-user-plus"></i> إضافة / تعديل طالب</h4>
+            <h4><i class="fas fa-user-plus"></i> إضافة طالب جديد</h4>
             <form action="/ADM/manage_students" method="post">
                 <input type="hidden" name="method" value="post">
+                <input type="hidden" name="action" value="add">
+
                 <input type="text" name="name" placeholder="الاسم الكامل" required>
                 <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-                <input type="text" name="Specialization" placeholder="التخصص" required>
-                 <input type="text" name="password" placeholder="كلمة السر" required>
-                    <input type="text" name="check_password" placeholder="تاكيد من كلمة السر" required>
-                <input type="hidden" name="hid"  value="student">
+                <select  name="Specialization" required>
+                <option value="" >اختر التخصص</option>
+                <option value="cs">cs</option>
+                <option value="css">css</option>
+                <option value="match">match</option>
+                </select>
+                <input type="password" name="password" placeholder="كلمة السر" required>
+                <input type="password" name="check_password" placeholder="تأكيد كلمة السر" required>
+
                 <button type="submit"><i class="fas fa-save"></i> حفظ</button>
             </form>
         </div>
     </div>
+
+    <!-- مودالات تعديل لكل طالب -->
+    {% for student in students %}
+    <div id="studentModal-{{student[0]}}" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a>
+            <h4><i class="fas fa-user-edit"></i> تعديل الطالب</h4>
+            <form action="/ADM/manage_students" method="post">
+                  <input type="hidden" name="method" value="post">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="student_id" value="{{student[0]}}">
+
+                <input type="text" name="name" placeholder="الاسم الكامل" value="{{student[1]}}" required>
+                <input type="email" name="email" placeholder="البريد الإلكتروني" value="{{student[2]}}" required>
+                <input type="text" name="Specialization" placeholder="التخصص" value="{{student[4]}}" required>
+
+
+                <button type="submit"><i class="fas fa-save"></i> حفظ</button>
+
+            </form>
+
+        </div>
+    </div>
+    {% endfor %}
+          {%if msege%}
+           <p>{{                        msege}}</p>
+          {%endif%}
 </body>
 </html>

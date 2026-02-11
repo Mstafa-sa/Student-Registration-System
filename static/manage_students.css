@@ -105,6 +105,7 @@ nav ul li a.active {
     background-color: #3498db;
 }
 
+
 /* الجدول */
 .students-container table {
     width: 100%;
@@ -188,7 +189,10 @@ nav ul li a.active {
     color: #2980b9;
 }
 
-.modal-content input {
+
+
+.modal-content input,
+.modal-content select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;

@@ -40,7 +40,16 @@ async def courses(request: Request):
             sql="select * from courses where id_student = %s"
             cursor.execute(sql, (id_student[0],))
             course=cursor.fetchall()
-            return templates.TemplateResponse("courses.html", {"request": request,"course":course})
+            response = templates.TemplateResponse(
+                "courses.html",
+                {"request": request,"course":course}
+            )
+
+            # 🔥 منع الكاش
+            response.headers["Cache-Control"] = "no-store"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+            return response
         return templates.TemplateResponse("courses.html", {"request": request, })#note
 
     except jwt.ExpiredSignatureError:

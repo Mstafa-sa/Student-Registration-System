@@ -41,9 +41,18 @@ async def dashboard(request: Request):
         numberstime = cursor.fetchone()
         con.close()
 
+        response = templates.TemplateResponse(
+            "dashboard.html",
+            {"request": request,"numbers":numbers,"numberstime":numberstime}
+        )
 
+        # 🔥 منع الكاش
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
 
-        return templates.TemplateResponse("dashboard.html", {"request": request,"numbers":numbers,"numberstime":numberstime})
+        return response
+
     except jwt.ExpiredSignatureError:
         return RedirectResponse(url="/Auth/login")  # التوكن انتهى
     except jwt.InvalidTokenError:
