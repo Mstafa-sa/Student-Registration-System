@@ -1,0 +1,80 @@
+body {
+    font-family: Arial;
+    direction: rtl;
+    background: #f4f6f9;
+    padding: 40px;
+}
+
+h2 {
+    margin-top: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+th {
+    background: #2c3e50;
+    color: white;
+}
+
+.inline {
+    display: inline;
+}
+
+.btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add { background: #27ae60; color: white; }
+.edit { background: #2980b9; color: white; }
+.delete { background: #c0392b; color: white; }
+.save { background: #2c3e50; color: white; width: 100%; }
+.cancel { background: gray; color: white; display:block; text-align:center; margin-top:10px; }
+
+
+/* ===== Modal ===== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.box {
+    background: white;
+    width: 420px;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 120px auto;
+}
+
+.box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}

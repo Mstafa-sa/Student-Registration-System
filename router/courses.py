@@ -84,42 +84,68 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
              sql = "select * from courses where id_student = %s"
              cursor.execute(sql, (id_student[0],))
              Recorded_materials = cursor.fetchall()
-
+             cursor.close()
              if Course_code and Division:
+               con = mysql.connector.connect(
+                     host="localhost",
+                     user="root",
+                     password=os.getenv("DB_PASSWORD"),
+                     database="school"
+                 )
+               cursor = con.cursor()
                sql="select * from materials_available_for_operation where رمزالمساق = %s and القاعة =%s"
                cursor.execute(sql, (Course_code, Division))
 
                course=cursor.fetchone()
-
+               cursor.close()
                if course:
+                con = mysql.connector.connect(
+                       host="localhost",
+                       user="root",
+                       password=os.getenv("DB_PASSWORD"),
+                       database="school"
+                   )
+                cursor = con.cursor()
                 sql="select * from courses where id_student = %s and (المادة=%s or (الوقت=%s and اليوم=%s)) "
                 cursor.execute(sql, (id_student[0], course[4],course[2],course[5]))
                 a=cursor.fetchone()
-
+                cursor.close()
                 if a==None:
+                  con = mysql.connector.connect(
+                        host="localhost",
+                        user="root",
+                        password=os.getenv("DB_PASSWORD"),
+                        database="school"
+                    )
+                  cursor = con.cursor()
+                  sql="select sum(الساعات) from courses where id_student=%s"
+                  cursor.execute(sql, (id_student[0],))
+                  sum_time=cursor.fetchone()
+                  if sum_time[0]+course[6] <=21 :
+                    print(sum_time[0])
 
+                    sql = """
+                      INSERT INTO courses
+                          (id_student,القاعة, الوقت, المدرس, المادة, اليوم, الساعات,رمزالمساق)
+                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s) \
+                       """
 
-                  sql = """
-                     INSERT INTO courses
-                         (id_student,القاعة, الوقت, المدرس, المادة, اليوم, الساعات,رمزالمساق)
-                     VALUES (%s, %s, %s, %s, %s, %s, %s,%s) \
-                      """
+                    cursor.execute(sql, (
+                     id_student[0],  # id_student
+                     course[1],  # القاعة / رمز المساق
+                     course[2],  # الوقت (datetime)
+                     course[3],  # المدرس
+                     course[4],  # المادة
+                     course[5],  # اليوم
+                     course[6],  # الساعات
+                     course[7]   #رمز المساق
 
-                  cursor.execute(sql, (
-                   id_student[0],  # id_student
-                   course[1],  # القاعة / رمز المساق
-                   course[2],  # الوقت (datetime)
-                   course[3],  # المدرس
-                   course[4],  # المادة
-                   course[5],  # اليوم
-                   course[6],  # الساعات
-                   course[7]   #رمز المساق
+                    ))
 
-                  ))
-
-                  con.commit()
-                  cursor.close()
-                  return RedirectResponse(url="/STU/courses",status_code=303)
+                    con.commit()
+                    cursor.close()
+                    return RedirectResponse(url="/STU/courses",status_code=303)
+                  return templates.TemplateResponse("courses.html", {"request": request, "messages": "لا تستطيع التسجيل اكثر من 21 ساعه",  "course": Recorded_materials})
                 return templates.TemplateResponse("courses.html", {"request": request, "messages": "الماده موجوده او امسجل بنفس الوقت","course":Recorded_materials})
                return templates.TemplateResponse("courses.html", {"request": request, "messages": "الماده غير موجود من المواد المتاحه","course":Recorded_materials})
              return templates.TemplateResponse("courses.html",{"request": request, "messages": "الرجاء تعبئة جميع الحقول المطلوبة",  "course": Recorded_materials})

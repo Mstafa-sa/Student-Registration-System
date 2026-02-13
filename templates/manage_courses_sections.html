@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>إدارة المواد والشعب</title>
+ <link rel="stylesheet" href="{{ request.url_for('static', path='manage_courses_sections.css') }}">
+</head>
+
+<body>
+
+<h2>إدارة المواد</h2>
+
+<a href="#addCourse" class="btn add">إضافة مادة</a>
+
+<table>
+
+<tr>
+<th>رقم المادة</th>
+<th>رمز المادة</th>
+<th>اسم المادة</th>
+<th>الساعات</th>
+<th>رمز التخصص</th>
+<th>إجراءات</th>
+</tr>
+{%for course in subject%}
+<tr>
+<td>{{course[0]}}</td>
+<td>{{course[3]}}</td>
+<td>{{course[2]}}</td>
+<td>{{course[1]}}</td>
+<td>{{course[4]}}</td>
+<td>
+<a href="#editCourse1" class="btn edit">تعديل</a>
+
+<form method="post" action="/delete_course" class="inline">
+<input type="hidden" name="id" value="1">
+<button class="btn delete">حذف</button>
+ {%endfor%}
+</form>
+
+</td>
+</tr>
+</table>
+{%if messages%}
+{{messages}}
+{%endif%}
+
+
+<h2>إدارة الشعب</h2>
+
+<a href="#addSection" class="btn add">إضافة شعبة</a>
+
+<table>
+
+<tr>
+<th>رقم</th>
+<th>رقم المادة</th>
+<th>القاعة</th>
+<th>الوقت</th>
+<th>الايام </th>
+<th>المدرس</th>
+<th>إجراءات</th>
+</tr>
+
+{%for sections in section%}
+<tr>
+<td>{{sections[0]}}</td>
+<td>{{sections[1]}}</td>
+<td>{{sections[3]}}</td>
+<td>{{sections[4]}}</td>
+<td>{{sections[5]}}</td>
+<td>{{sections[2]}}</td>
+<td>
+<a href="#editSection1" class="btn edit">تعديل</a>
+
+<form method="post" action="/delete_section" class="inline">
+<input type="hidden" name="id" value="1">
+<button class="btn delete">حذف</button>
+
+</form>
+
+</td>
+  {%endfor%}
+</tr>
+</table>
+
+
+<!-- ================= إضافة مادة ================= -->
+
+<div id="addCourse" class="modal">
+<div class="box">
+<h3>إضافة مادة</h3>
+
+<form method="post" action="">
+<input type="hidden" name="action" value="addCourse">
+<input name="subject_code" placeholder="رمز المادة">
+<input name="subject_name" placeholder="اسم المادة">
+<input name="hours" placeholder="الساعات">
+ <input name="majors_code" placeholder="رمز التخصص">
+
+
+<button class="btn save">حفظ</button>
+<a href="#" class="btn cancel">إلغاء</a>
+</form>
+
+</div>
+</div>
+
+
+<!-- ================= تعديل مادة ================= -->
+
+<div id="editCourse1" class="modal">
+<div class="box">
+<h3>تعديل مادة</h3>
+
+<form method="post" action="/update_course">
+<input type="hidden" name="id" value="1">
+<input name="code" value="CS101">
+<input name="name" value="مقدمة في البرمجة">
+<input name="hours" value="3">
+<input name="teacher" value="د. أحمد">
+
+<button class="btn save">حفظ</button>
+<a href="#" class="btn cancel">إلغاء</a>
+</form>
+
+</div>
+</div>
+
+
+<!-- ================= إضافة شعبة ================= -->
+
+<div id="addSection" class="modal">
+<div class="box">
+<h3>إضافة شعبة</h3>
+
+<form method="post" action="">
+ <input type="hidden" name="action" value="addSection" >
+<input name="course" placeholder="رقم المادة">
+<input name="room" placeholder="القاعة">
+<input name="time" placeholder="الوقت">
+ <input name="time_today" placeholder="الايام">
+<input name="teacher" placeholder="المدرس">
+
+<button class="btn save">حفظ</button>
+<a href="#" class="btn cancel">إلغاء</a>
+</form>
+
+</div>
+</div>
+
+
+<!-- ================= تعديل شعبة ================= -->
+
+<div id="editSection1" class="modal">
+<div class="box">
+<h3>تعديل شعبة</h3>
+
+<form method="post" action="/update_section">
+<input type="hidden" name="id" value="1">
+<input name="section_no" value="1">
+<input name="course" value="CS101">
+<input name="room" value="101">
+<input name="time" value="8-10">
+<input name="teacher" value="د. أحمد">
+
+<button class="btn save">حفظ</button>
+<a href="#" class="btn cancel">إلغاء</a>
+</form>
+
+</div>
+</div>
+
+</body>
+</html>
