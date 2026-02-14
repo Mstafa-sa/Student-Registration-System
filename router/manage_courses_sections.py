@@ -49,7 +49,29 @@ async def manage_courses_sections(request: Request):
 async def manage_courses_sections(request: Request,subject_code: str = Form(None),subject_name: str = Form(None),hours: int = Form(None),majors_code: str = Form(None),
                                   room:str=Form(None),time:str=Form(None),action: str = Form(...),course:int=Form(None),teacher:str=Form(None),time_today:str=Form(None),course_id:int=Form(None),
                                   sections_id:int=Form(None),update_id:int=Form(None),update_name:str=Form(None),update_hours:int=Form(None),update_majors:str=Form(None),update_code:str=Form(None),
-                                  update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_time:str=Form(None),update_today:str=Form(None)):
+                                   update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_time:str=Form(None),update_today:str=Form(None)):
+    con = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password=os.getenv("DB_PASSWORD"),
+        database="school"
+    )
+    cursor = con.cursor()
+    sql = "select * from sections "
+    cursor.execute(sql)
+    section = cursor.fetchall()
+    cursor.close()
+    con = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password=os.getenv("DB_PASSWORD"),
+        database="school"
+    )
+    cursor = con.cursor()
+    sql = "select * from subject "
+    cursor.execute(sql)
+    subject = cursor.fetchall()
+    cursor.close()
     if action == "addCourse":
       con = mysql.connector.connect(
         host="localhost",
@@ -62,13 +84,6 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
       sql="select * from subject where subject_code=%s and major_code=%s  "
       cursor.execute(sql, (subject_code,majors_code))
       subjects=cursor.fetchone()
-      cursor1 = con.cursor()
-      sql = "select * from subject "
-      cursor1.execute(sql)
-      subject = cursor.fetchall()
-      cursor.close()
-      cursor1.close()
-
       if subjects ==None:
         con = mysql.connector.connect(
               host="localhost",
@@ -80,12 +95,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         sql="insert into subject (الساعات,subject_name,subject_code,major_code) values (%s,%s,%s,%s)";
         cursor.execute(sql,(hours,subject_name,subject_code,majors_code))
         con.commit()
-        cursor1=con.cursor()
-        sql="select * from subject "
-        cursor.execute(sql)
-        subject=cursor.fetchall()
-
-        cursor1.close()
+        cursor.close()
         return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject, "messages": "تم اصافه الماده لا تنسى اضافه الشعبه"})
 
 
@@ -113,29 +123,6 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
 
         cursor.execute(sql, (time,room,teacher,time_today))
         section_id = cursor.fetchone()
-
-        con = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password=os.getenv("DB_PASSWORD"),
-            database="school"
-        )
-        cursor = con.cursor()
-        sql = "select * from sections "
-        cursor.execute(sql)
-        section = cursor.fetchall()
-        cursor.close()
-        con = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password=os.getenv("DB_PASSWORD"),
-            database="school"
-        )
-        cursor = con.cursor()
-        sql = "select * from subject "
-        cursor.execute(sql)
-        subject= cursor.fetchall()
-        cursor.close()
         if section_id ==None:
 
             con = mysql.connector.connect(
@@ -148,26 +135,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             sql = "insert into sections (subject_id,teacher_name,room_code,time,todays) values (%s,%s,%s,%s,%s)";
             cursor.execute(sql, ( course,teacher,room,time,time_today ))
             con.commit()
-
-
-            cursor2 = con.cursor()
-            sql = "select * from sections "
-            cursor2.execute(sql)
-            section = cursor2.fetchall()
-            cursor2.close()
-
-            con = mysql.connector.connect(
-                    host="localhost",
-                    user="root",
-                    password=os.getenv("DB_PASSWORD"),
-                    database="school"
-                )
-            cursor = con.cursor()
-            sql="select * from subject"
-            cursor.execute(sql)
-            subject=cursor.fetchall()
-            print( section)
-
+            cursor.close()
             return  templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject,"section": section})
 
         return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,"messages":"لا يمكن إضافة الشعبة — يوجد تعارض في الوقت مع نفس القاعة أو نفس الدكتور في هذا اليوم."})
