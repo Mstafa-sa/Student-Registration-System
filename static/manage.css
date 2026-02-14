@@ -1,9 +1,42 @@
 body {
     font-family: Arial;
     direction: rtl;
-    background: #f4f6f9;
     padding: 40px;
+    margin: 0;
+
+    background: linear-gradient(135deg, #eef2f7, #dbe6f3);
 }
+/* ===== Topbar ===== */
+
+.topbar {
+    background: #2c3e50;
+    color: white;
+    padding: 14px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    margin: -40px -40px 30px -40px;
+}
+
+.topbar-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.topbar-menu a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 14px;
+    opacity: .9;
+}
+
+.topbar-menu a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
 
 h2 {
     margin-top: 40px;
@@ -14,8 +47,15 @@ table {
     border-collapse: collapse;
     background: white;
     margin-top: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    border-radius: 10px;
+    overflow: hidden;
 }
+
+tr:hover {
+    background: #f9fbfd;
+}
+
 
 th, td {
     padding: 12px;

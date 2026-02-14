@@ -3,10 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>إدارة المواد والشعب</title>
- <link rel="stylesheet" href="{{ request.url_for('static', path='manage_courses_sections.css') }}">
+ <link rel="stylesheet" href="{{ request.url_for('static', path='manage.css') }}">
 </head>
 
 <body>
+<!-- ===== Top Navbar ===== -->
+<div class="topbar">
+    <div class="topbar-title">🎓 لوحة تحكم المدير</div>
+
+    <div class="topbar-menu">
+        <a href="/ADM/Admin_Dashboard">الرئيسية</a>
+        <a href="/ADM/manage_students">إدارة الطلاب</a>
+        <a href="/ADM/manage_courses_sections">المواد والشعب</a>
+        <a href="/ADM/reports">التقارير</a>
+        <a href="/logout">تسجيل خروج</a>
+    </div>
+</div>
+
 
 <h2>إدارة المواد</h2>
 
@@ -30,16 +43,14 @@
 <td>{{course[1]}}</td>
 <td>{{course[4]}}</td>
 <td>
-<a href="#editCourse1" class="btn edit">تعديل</a>
+<a href="#editCourse{{course[0]}}" class="btn edit">تعديل</a>
 
-<form method="post" action="/delete_course" class="inline">
-<input type="hidden" name="id" value="1">
-<button class="btn delete">حذف</button>
- {%endfor%}
-</form>
-
+ <a href="#deleteCourse{{course[0]}}" class="btn delete">حذف</a>
 </td>
 </tr>
+
+ {%endfor%}
+
 </table>
 {%if messages%}
 {{messages}}
@@ -62,7 +73,7 @@
 <th>إجراءات</th>
 </tr>
 
-{%for sections in section%}
+{%for sections in  section %}
 <tr>
 <td>{{sections[0]}}</td>
 <td>{{sections[1]}}</td>
@@ -71,17 +82,19 @@
 <td>{{sections[5]}}</td>
 <td>{{sections[2]}}</td>
 <td>
-<a href="#editSection1" class="btn edit">تعديل</a>
+<a href="#editSection{{sections[0]}}" class="btn edit">تعديل</a>
 
-<form method="post" action="/delete_section" class="inline">
-<input type="hidden" name="id" value="1">
-<button class="btn delete">حذف</button>
-
-</form>
+<a href="#deleteSection{{sections[0]}}" class="btn delete">حذف</a>
 
 </td>
-  {%endfor%}
+
 </tr>
+{%endfor%}
+
+
+
+
+
 </table>
 
 
@@ -109,24 +122,27 @@
 
 <!-- ================= تعديل مادة ================= -->
 
-<div id="editCourse1" class="modal">
+{% for course in subject %}
+<div id="editCourse{{course[0]}}" class="modal">
 <div class="box">
 <h3>تعديل مادة</h3>
 
-<form method="post" action="/update_course">
-<input type="hidden" name="id" value="1">
-<input name="code" value="CS101">
-<input name="name" value="مقدمة في البرمجة">
-<input name="hours" value="3">
-<input name="teacher" value="د. أحمد">
+<form method="post" action="/ADM/manage_courses_sections">
+<input type="hidden" name="action" value="updateCourse">
+<input type="hidden" name="update_id" value="{{course[0]}}">
+
+<input name="update_code" value="{{course[3]}}">
+<input name="update_name" value="{{course[2]}}">
+<input name="update_hours" value="{{course[1]}}">
+<input name="update_majors" value="{{course[4]}}">
 
 <button class="btn save">حفظ</button>
 <a href="#" class="btn cancel">إلغاء</a>
+
 </form>
-
 </div>
 </div>
-
+{% endfor %}
 
 <!-- ================= إضافة شعبة ================= -->
 
@@ -152,24 +168,62 @@
 
 <!-- ================= تعديل شعبة ================= -->
 
-<div id="editSection1" class="modal">
-<div class="box">
-<h3>تعديل شعبة</h3>
+{% for sections in section %}
+<div id="editSection{{sections[0]}}" class="modal">
+  <div class="box">
+    <h3>تعديل شعبة</h3>
 
-<form method="post" action="/update_section">
-<input type="hidden" name="id" value="1">
-<input name="section_no" value="1">
-<input name="course" value="CS101">
-<input name="room" value="101">
-<input name="time" value="8-10">
-<input name="teacher" value="د. أحمد">
+    <form method="post" action="">
+      <input type="hidden" name="action" value="updateSection">
+      <input type="hidden" name="update_id" value="{{sections[0]}}">
 
-<button class="btn save">حفظ</button>
-<a href="#" class="btn cancel">إلغاء</a>
-</form>
+      <input name="number_subject" value="{{sections[1]}}" placeholder="رقم المادة">
+      <input name="update_teacher" value="{{sections[2]}}" placeholder="المدرس">
+      <input name="update_room" value="{{sections[3]}}" placeholder="القاعة">
+      <input name="update_time" value="{{sections[4]}}" placeholder="الوقت">
+      <input name="update_today" value="{{sections[5]}}" placeholder="الأيام">
 
+      <button class="btn save">حفظ</button>
+      <a href="#" class="btn cancel">إلغاء</a>
+    </form>
+
+  </div>
 </div>
+{% endfor %}
+
+{% for course in subject %}
+<div id="deleteCourse{{course[0]}}" class="modal">
+  <div class="box">
+    <h3>تأكيد الحذف</h3>
+    <p>هل أنت متأكد من حذف المادة؟</p>
+
+    <form method="post" action="/ADM/manage_courses_sections">
+        <input type="hidden" name="action" value="deleteCourse">
+        <input type="hidden" name="course_id" value="{{course[0]}}">
+        <button class="btn delete">نعم احذف</button>
+    </form>
+
+    <a href="#" class="btn cancel">إلغاء</a>
+  </div>
 </div>
+{% endfor %}
+ {% for sections in section %}
+<div id="deleteSection{{sections[0]}}" class="modal">
+  <div class="box">
+    <h3>تأكيد حذف الشعبة</h3>
+
+    <form method="post" action="/ADM/manage_courses_sections">
+         <input type="hidden" name="action" value="deleteSection">
+        <input type="hidden" name="sections_id" value="{{sections[0]}}">
+        <button class="btn delete">تأكيد الحذف</button>
+    </form>
+
+    <a href="#" class="btn cancel">إلغاء</a>
+  </div>
+</div>
+{% endfor %}
+
+
 
 </body>
 </html>

@@ -93,10 +93,25 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                      database="school"
                  )
                cursor = con.cursor()
-               sql="select * from materials_available_for_operation where رمزالمساق = %s and القاعة =%s"
-               cursor.execute(sql, (Course_code, Division))
+               sql = """
+                     SELECT s.subject_name, \
+                            s.major_code, \
+                            s.الساعات, \
+                            s.subject_code, \
+                            sec.room_code, \
+                            sec.id, \
+                            sec.teacher_name, \
+                            sec.time, \
+                            sec.todays
+                     FROM sections sec
+                              JOIN subject s ON sec.subject_id = s.id
+                     WHERE s.subject_code = %s
+                       AND sec.room_code = %s \
+                     """
 
-               course=cursor.fetchone()
+               cursor.execute(sql,(Course_code, Division))
+               course=cursor.fetchone()# name
+               cursor.fetchall()
                cursor.close()
                if course:
                 con = mysql.connector.connect(
@@ -121,7 +136,7 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                   sql="select sum(الساعات) from courses where id_student=%s"
                   cursor.execute(sql, (id_student[0],))
                   sum_time=cursor.fetchone()
-                  if sum_time[0]+course[6] <=21 :
+                  if sum_time[0]+course[2] <=21 :
                     print(sum_time[0])
 
                     sql = """
@@ -132,13 +147,13 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
 
                     cursor.execute(sql, (
                      id_student[0],  # id_student
-                     course[1],  # القاعة / رمز المساق
-                     course[2],  # الوقت (datetime)
-                     course[3],  # المدرس
-                     course[4],  # المادة
-                     course[5],  # اليوم
-                     course[6],  # الساعات
-                     course[7]   #رمز المساق
+                     course[4],  # القاعة
+                     course[7],  # الوقت (datetime)
+                     course[6],  # المدرس
+                     course[0],  # المادة
+                     course[8],  # اليوم
+                     course[2],  # الساعات
+                     course[3]   #رمز المساق
 
                     ))
 
