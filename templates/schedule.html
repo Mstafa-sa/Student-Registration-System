@@ -27,6 +27,7 @@
         <table class="schedule-table">
             <thead>
                 <tr>
+                    <th>الماده موجوده؟</th>
                     <th>اليوم</th>
                     <th>القاعة</th>
                     <th>المدرس</th>
@@ -41,6 +42,7 @@
             <tbody>
              {%for i in courses%}
                 <tr>
+                    <td>{{i[9]}}</td>
                     <td>{{i[6]}}</td>
                     <td>{{i[2]}}</td>
                     <td>{{i[4]}}</td>

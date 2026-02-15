@@ -136,24 +136,30 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                   sql="select sum(الساعات) from courses where id_student=%s"
                   cursor.execute(sql, (id_student[0],))
                   sum_time=cursor.fetchone()
+                  if sum_time[0] == None:
+                      sum_time=(0,)
+                  print(sum_time)
                   if sum_time[0]+course[2] <=21 :
                     print(sum_time[0])
 
                     sql = """
                       INSERT INTO courses
-                          (id_student,القاعة, الوقت, المدرس, المادة, اليوم, الساعات,رمزالمساق)
-                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s) \
+                          (id_student,materialIsAvailable,القاعة, الوقت, المدرس, المادة, اليوم, الساعات,رمزالمساق)
+                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s) \
                        """
 
                     cursor.execute(sql, (
-                     id_student[0],  # id_student
+                     id_student[0], # id_student
+                     "نعم",
+
                      course[4],  # القاعة
                      course[7],  # الوقت (datetime)
                      course[6],  # المدرس
                      course[0],  # المادة
                      course[8],  # اليوم
                      course[2],  # الساعات
-                     course[3]   #رمز المساق
+                     course[3],#رمز المساق
+
 
                     ))
 

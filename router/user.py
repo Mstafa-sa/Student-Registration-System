@@ -27,6 +27,7 @@ async def login(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 @router.post("/login", response_class=HTMLResponse)
 async def register(request: Request,email: str=Form(...),password: str=Form(...)):
+
     conn = mysql.connector.connect(
         host="localhost",
         user="root",

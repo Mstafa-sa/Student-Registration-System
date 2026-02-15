@@ -33,7 +33,7 @@ async def manage_courses_sections(request: Request):
     cursor2 = con.cursor()
     sql="select * from sections "
     cursor2.execute(sql)
-    section=cursor.fetchall()
+    section=cursor2.fetchall()
     cursor2.close()
     response = templates.TemplateResponse(
         "manage_courses_sections.html",
@@ -56,7 +56,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         password=os.getenv("DB_PASSWORD"),
         database="school"
     )
-    cursor = con.cursor()
+    cursor = con.cursor(buffered=True)
     sql = "select * from sections "
     cursor.execute(sql)
     section = cursor.fetchall()
@@ -67,7 +67,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         password=os.getenv("DB_PASSWORD"),
         database="school"
     )
-    cursor = con.cursor()
+    cursor = con.cursor(buffered=True)
     sql = "select * from subject "
     cursor.execute(sql)
     subject = cursor.fetchall()
@@ -80,7 +80,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         database="school"
       )
 
-      cursor = con.cursor()
+      cursor = con.cursor(buffered=True)
       sql="select * from subject where subject_code=%s and major_code=%s  "
       cursor.execute(sql, (subject_code,majors_code))
       subjects=cursor.fetchone()
@@ -109,7 +109,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             password=os.getenv("DB_PASSWORD"),
             database="school"
         )
-        cursor = con.cursor()
+        cursor = con.cursor(buffered=True)
         sql = """
               SELECT id
               FROM sections
@@ -146,13 +146,80 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             password=os.getenv("DB_PASSWORD"),
             database="school"
         )
+        cursor = con.cursor(buffered=True)
+        sql = "select * from subject where id = %s"
+        cursor.execute(sql, (course_id,))
+        course_all = cursor.fetchone()
+        cursor.close()
+        con = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password=os.getenv("DB_PASSWORD"),
+            database="school"
+        )
+        cursor = con.cursor(buffered=True)
+        sql = """SELECT id
+                 FROM courses
+                 WHERE الساعات = %s \
+                   AND المادة = %s \
+                   AND رمزالمساق = %s"""
+        cursor.execute(sql, (course_all[1], course_all[2].strip(), course_all[3].strip()))
+        courseId = cursor.fetchone()
+        cursor.close()
+
+        con = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password=os.getenv("DB_PASSWORD"),
+            database="school"
+        )
         cursor = con.cursor()
         sql = "delete from subject where id = %s"
         cursor.execute(sql, (course_id,))
         con.commit()
         cursor.close()
+        con = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password=os.getenv("DB_PASSWORD"),
+            database="school"
+        )
+        cursor = con.cursor()
+        sql="update courses set materialIsAvailable = %s where id = %s"
+        cursor.execute(sql, ("لا", courseId[0]))
+        con.commit()
+        cursor.close()
         return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
     elif action == "deleteSection":
+        con = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password=os.getenv("DB_PASSWORD"),
+            database="school"
+        )
+        cursor = con.cursor(buffered=True)
+        sql = "select * from sections where id = %s"
+        cursor.execute(sql, (sections_id,))
+        course_all = cursor.fetchone()
+        cursor.close()
+        con = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password=os.getenv("DB_PASSWORD"),
+            database="school"
+        )
+        cursor = con.cursor(buffered=True)
+        sql = """select id \
+                 from courses \
+                 where المدرس = %s \
+                   and القاعة = %s \
+                   and الوقت = %s \
+                   and اليوم = %s """
+        cursor.execute(sql, (course_all[2], course_all[3], course_all[4], course_all[5]))
+        courseId = cursor.fetchone()
+        cursor.close()
+        print(courseId)
+
         con = mysql.connector.connect(
             host="localhost",
             user="root",
@@ -164,6 +231,17 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor.execute(sql, (sections_id,))
         con.commit()
         cursor.close()
+        con = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password=os.getenv("DB_PASSWORD"),
+            database="school"
+        )
+        cursor = con.cursor()
+        sql="update courses set materialIsAvailable = %s where id = %s"
+        cursor.execute(sql, ("لا", courseId[0]))
+        con.commit()
+        cursor.close()
         return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
     elif action == "updateCourse":
         con = mysql.connector.connect(
@@ -172,13 +250,65 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             password=os.getenv("DB_PASSWORD"),
             database="school"
         )
-        cursor = con.cursor()
-        sql = """update subject set   الساعات=%s , subject_name=%s , subject_code=%s , major_code=%s 
+        cursor = con.cursor(buffered=True)
+        sql="select id from subject where id != %s and subject_code=%s and major_code=%s"
+        cursor.execute(sql,(update_id,update_code,update_majors))
+        update_course=cursor.fetchone()
+        if update_course ==None:
+          con = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                password=os.getenv("DB_PASSWORD"),
+                database="school"
+            )
+          cursor = con.cursor(buffered=True)
+          sql="select * from subject where id = %s"
+          cursor.execute(sql,(update_id,))
+          subject_all = cursor.fetchone()
+          cursor.close()
+          con = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                password=os.getenv("DB_PASSWORD"),
+                database="school"
+            )
+          cursor = con.cursor(buffered=True)
+          sql = """SELECT id
+                   FROM courses
+                   WHERE الساعات = %s \
+                     AND المادة = %s \
+                     AND رمزالمساق = %s"""
+          cursor.execute(sql, (subject_all[1], subject_all[2].strip(),subject_all[3].strip()))
+          course_id = cursor.fetchone()
+
+          cursor.close()
+
+
+          con = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password=os.getenv("DB_PASSWORD"),
+            database="school"
+          )
+          cursor = con.cursor()
+          sql = """update subject set   الساعات=%s , subject_name=%s , subject_code=%s , major_code=%s 
                 where id = %s """
-        cursor.execute(sql,(update_hours,update_name,update_code,update_majors,update_id))
-        con.commit()
-        cursor.close()
-        return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
+          cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),update_majors.strip(),update_id))
+          con.commit()
+          cursor.close()
+          con = mysql.connector.connect(
+              host="localhost",
+              user="root",
+              password=os.getenv("DB_PASSWORD"),
+              database="school"
+          )
+          cursor = con.cursor()
+          sql="update courses set  الساعات=%s , المادة=%s , رمزالمساق=%s  where id = %s"
+          cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),course_id[0]))
+          con.commit()
+          cursor.close()
+          return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
+        return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject, "section": section, "messages": "الماده موجود لا يمكن اضافتها"})
     elif action == "updateSection":
         con = mysql.connector.connect(
             host="localhost",
@@ -186,7 +316,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             password=os.getenv("DB_PASSWORD"),
             database="school"
         )
-        cursor = con.cursor()
+        cursor = con.cursor(buffered=True)
         sql = """
               SELECT id
               FROM sections
@@ -201,7 +331,36 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor.execute(sql,(update_time,update_room,update_teacher,update_today))
         update_section = cursor.fetchone()
         cursor.close()
+
         if update_section == None:
+          con = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                password=os.getenv("DB_PASSWORD"),
+                database="school"
+          )
+          cursor = con.cursor(buffered=True)
+          sql = "select * from sections where id = %s"
+          cursor.execute(sql, (update_id,))
+          subject_all = cursor.fetchone()
+          cursor.close()
+          print(subject_all)
+          con = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                password=os.getenv("DB_PASSWORD"),
+                database="school"
+            )
+          cursor = con.cursor(buffered=True)
+          sql = """select id from courses where المدرس=%s and القاعة=%s and الوقت=%s and اليوم=%s """
+          cursor.execute(sql,(subject_all[2],subject_all[3],subject_all[4],subject_all[5]))
+          course_id = cursor.fetchone()
+          cursor.close()
+          print(course_id)
+          print(subject_all[2])
+          print(subject_all[3])
+          print(subject_all[4])
+          print(subject_all[5])
           con = mysql.connector.connect(
             host="localhost",
             user="root",
@@ -213,6 +372,17 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           sql = """update sections set   subject_id=%s , teacher_name=%s , room_code=%s , time=%s ,todays=%s
                 where id = %s """
           cursor.execute(sql,(number_subject,update_teacher,update_room,update_time,update_today,update_id))
+          con.commit()
+          cursor.close()
+          con = mysql.connector.connect(
+              host="localhost",
+              user="root",
+              password=os.getenv("DB_PASSWORD"),
+              database="school"
+          )
+          cursor = con.cursor()
+          sql="update courses set المدرس=%s , القاعة=%s , الوقت=%s ,اليوم=%s where id= %s "
+          cursor.execute(sql,(update_teacher,update_room,update_time,update_today,course_id[0]))
           con.commit()
           cursor.close()
           return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
