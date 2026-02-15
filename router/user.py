@@ -26,7 +26,7 @@ templates = Jinja2Templates(directory="templates")
 async def login(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 @router.post("/login", response_class=HTMLResponse)
-async def register(request: Request,email: str=Form(...),password: str=Form(...)):
+async def register(request: Request, email: str=Form(...), password: str=Form(...)):
 
     conn = mysql.connector.connect(
         host="localhost",
@@ -34,15 +34,17 @@ async def register(request: Request,email: str=Form(...),password: str=Form(...)
         password=os.getenv("DB_PASSWORD"),
         database="school"
     )
-    cursor = conn.cursor()
-    sql = "SELECT * FROM user WHERE email = %s AND password = %s"
-    cursor.execute(sql, (email, password))
+    cursor = conn.cursor(buffered=True)
+    sql = "SELECT * FROM user WHERE email = %s "
+    cursor.execute(sql, (email, ))
 
     user = cursor.fetchone()
     cursor.close()
     conn.close()
-    print("user:", user)
-    if user :
+    pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
+
+    if user and pwd_context.verify(password, user[3]):
+
         print("user:", user[5])
         if user [5] == "student":
 
