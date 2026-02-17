@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>التقارير - Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ request.url_for('static', path='reports.css') }}">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ===== Navbar ===== -->
+<nav class="topbar">
+    <h2><i class="fas fa-user-shield"></i> لوحة تحكم المدير</h2>
+    <ul>
+        <li><a href="/admin/dashboard"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="/admin/students"><i class="fas fa-users"></i> إدارة الطلاب</a></li>
+        <li><a href="/admin/courses"><i class="fas fa-book"></i> المواد والشعب</a></li>
+        <li><a href="/admin/reports" class="active"><i class="fas fa-chart-bar"></i> التقارير</a></li>
+        <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> خروج</a></li>
+    </ul>
+</nav>
+
+<!-- ===== Container ===== -->
+<div class="container">
+
+    <h3><i class="fas fa-chart-line"></i> التقارير والإحصائيات</h3>
+
+    <!-- ===== Filter Box ===== -->
+
+  <div class="filters">
+    <form action="/ADM/reports" method="post">
+
+        <div class="filter-item">
+            <label>نوع التقرير</label>
+            <select name="action">
+                <option value="courses">تقرير تسجيل المواد</option>
+                <option value="students">تقرير الطلاب</option>
+                <option value="hours">تقرير الساعات</option>
+            </select>
+        </div>
+
+        <div class="filter-item">
+            <label>من تاريخ</label>
+            <input type="date" name="from_date">
+        </div>
+
+        <div class="filter-item">
+            <label>إلى تاريخ</label>
+            <input type="date" name="to_date">
+        </div>
+
+        <button type="submit" class="btn primary">
+            <i class="fas fa-search"></i>
+            عرض التقرير
+        </button>
+
+        <button type="submit" name="export" value="excel" class="btn success">
+            <i class="fas fa-file-excel"></i>
+            تصدير Excel
+        </button>
+
+    </form>
+</div>
+
+    <!-- ===== Stats Cards ===== -->
+    <div class="stats">
+
+        <div class="card">
+            <i class="fas fa-users"></i>
+            <h4>عدد الطلاب</h4>
+            <p>320</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-book"></i>
+            <h4>عدد المواد</h4>
+            <p>42</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-layer-group"></i>
+            <h4>عدد الشعب</h4>
+            <p>110</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-clock"></i>
+            <h4>إجمالي الساعات المسجلة</h4>
+            <p>870</p>
+        </div>
+
+    </div>
+
+    <!-- ===== Table ===== -->
+    <div class="table-box">
+
+        <table>
+            <thead>
+            <tr>
+                <th>رقم الطالب</th>
+                <th>اسم الطالب</th>
+                <th>المادة</th>
+                <th>الشعبة</th>
+                <th>الساعات</th>
+                <th>اليوم</th>
+                <th>الوقت</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {%for student in students %}
+            <tr>
+                <td>{{student[1]}}</td>
+                <td>{{student[0]}}</td>
+                <td>{{student[6]}}</td>
+                <td>{{student[5]}}</td>
+                <td>{{student[3]}}</td>
+                <td>{{student[8]}}</td>
+                <td>{{student[7]}}</td>
+            </tr>
+            {%endfor%}
+
+            </tbody>
+        </table>
+
+    </div>
+    {%if message%}
+    {{message}}
+     {%endif%}
+</div>
+
+</body>
+</html>

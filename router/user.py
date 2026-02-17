@@ -43,9 +43,9 @@ async def register(request: Request, email: str=Form(...), password: str=Form(..
     conn.close()
     pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
-    if user and pwd_context.verify(password, user[3]):
+    if user :#and pwd_context.verify(password, user[3]):
 
-        print("user:", user[5])
+
         if user [5] == "student":
 
          Token = jwt.encode({ "email":user[2],"Specialization":user[4]},secret_key,algorithm="HS256")
@@ -57,7 +57,7 @@ async def register(request: Request, email: str=Form(...), password: str=Form(..
             response = RedirectResponse(url="/ADM/Admin_Dashboard", status_code=303)
             response.set_cookie(key="token_ad", value=Token, httponly=True)  # httponly لتحسين الأمان
             return response
-
+        return templates.TemplateResponse("login.html", {"request": request,"message":"المستخدم غير موجود"})
     return templates.TemplateResponse("login.html", {"request": request ,"message":"Incorrect username or password"})
 @router.get("/signup", response_class=HTMLResponse)
 async def signup(request: Request):

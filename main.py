@@ -11,6 +11,7 @@ from router.Log_out import router as Log_out
 from router.Admin_Dashboard import router as Admin_Dashboard
 from router.manage_students import router as manage_students
 from router.manage_courses_sections import router as manage_courses_sections
+from router.reports import router as reports
 app = FastAPI()
 # 1️⃣ ربط مجلد static للـ CSS
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -47,6 +48,10 @@ app.include_router(manage_students, prefix="/ADM", tags=["user"],
                    # هنا نمرر templates كـ dependency
 )
 app.include_router(manage_courses_sections, prefix="/ADM", tags=["user"],
+                   responses={404: {"description": "Not found"}},
+                   # هنا نمرر templates كـ dependency
+)
+app.include_router(reports, prefix="/ADM", tags=["user"],
                    responses={404: {"description": "Not found"}},
                    # هنا نمرر templates كـ dependency
 )
