@@ -110,8 +110,12 @@
 <input name="subject_code" placeholder="رمز المادة">
 <input name="subject_name" placeholder="اسم المادة">
 <input name="hours" placeholder="الساعات">
- <input name="majors_code" placeholder="رمز التخصص">
-
+<select  name="majors_code" style="width: 400px;margin-bottom: 10px;height: 30px" required>
+                <option value="">اختر التخصص</option>
+                <option value="cs">cs</option>
+                <option value="cis">cis</option>
+                <option value="match">match</option>
+            </select>
 
 <button class="btn save">حفظ</button>
 <a href="#" class="btn cancel">إلغاء</a>
@@ -135,6 +139,7 @@
 <input name="update_code" value="{{course[3]}}">
 <input name="update_name" value="{{course[2]}}">
 <input name="update_hours" value="{{course[1]}}">
+
 <input name="update_majors" value="{{course[4]}}">
 
 <button class="btn save">حفظ</button>
