@@ -44,7 +44,7 @@ async def courses(request: Request):
             )
 
             # 🔥 منع الكاش
-            response.headers["Cache-Control"] = "no-store"
+            response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
             response.headers["Pragma"] = "no-cache"
             response.headers["Expires"] = "0"
             return response
@@ -85,7 +85,7 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                sql = """
                      SELECT s.subject_name, \
                             s.major_code, \
-                            s.الساعات, \
+                            s.hours, \
                             s.subject_code, \
                             sec.room_code, \
                             sec.id, \
@@ -103,16 +103,18 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                cursor.fetchall()
                cursor.close()
                if course:
+                print(id_student)
                 con = get_connection()
                 cursor = con.cursor(buffered=True)
-                sql="select * from courses where id_student = %s and (المادة=%s or (الوقت=%s and اليوم=%s)) "
-                cursor.execute(sql, (id_student[0], course[4],course[2],course[5]))
+                sql="select * from courses where id_student = %s and (article =%s or (time_s=%s and today=%s)) "
+                cursor.execute(sql, (id_student[0], course[4],course[7],course[8]))
                 a=cursor.fetchone()
                 cursor.close()
+
                 if a==None:
                   con = get_connection()
                   cursor = con.cursor(buffered=True)
-                  sql="select sum(الساعات) from courses where id_student=%s"
+                  sql="select sum(hours) from courses where id_student=%s"
                   cursor.execute(sql, (id_student[0],))
                   sum_time=cursor.fetchone()
                   cursor.close()
@@ -123,7 +125,7 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                     cursor = con.cursor()
                     sql = """
                       INSERT INTO courses
-                          (id_student,materialIsAvailable,القاعة, الوقت, المدرس, المادة, اليوم, الساعات,رمزالمساق)
+                          (id_student,materialIsAvailable,Hall, time_s, teacher, article, today, hours,Course_code)
                       VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s) \
                        """
                     cursor.execute(sql, (

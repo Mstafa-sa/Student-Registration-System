@@ -30,7 +30,7 @@ async def dashboard(request: Request):
         cursor.close()
         con = get_connection()
         cursor = con.cursor(buffered=True)
-        sql = "SELECT count(*), sum(الساعات) FROM courses WHERE id_student = %s"
+        sql = "SELECT count(*), sum(hours) FROM courses WHERE id_student = %s"
         cursor.execute(sql,(id[0],))
         numbers = cursor.fetchone()
         cursor.close()
@@ -40,7 +40,7 @@ async def dashboard(request: Request):
         )
 
         # 🔥 منع الكاش
-        response.headers["Cache-Control"] = "no-store"
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
         response.headers["Pragma"] = "no-cache"
         response.headers["Expires"] = "0"
 

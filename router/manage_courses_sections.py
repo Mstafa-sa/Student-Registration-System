@@ -33,7 +33,7 @@ async def manage_courses_sections(request: Request):
     )
 
     # 🔥 منع الكاش
-    response.headers["Cache-Control"] = "no-store"
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "0"
     return response
@@ -64,11 +64,11 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
       if subjects ==None:
         con = get_connection()
         cursor = con.cursor()
-        sql="insert into subject (الساعات,subject_name,subject_code,major_code) values (%s,%s,%s,%s)";
+        sql="insert into subject (hours,subject_name,subject_code,major_code) values (%s,%s,%s,%s)";
         cursor.execute(sql,(hours,subject_name,subject_code,majors_code))
         con.commit()
         cursor.close()
-        return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject, "messages": "تم اصافه الماده لا تنسى اضافه الشعبه"})
+        return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
       return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject,  "messages": "الماده موجود لا يمكن اضافتها"})
     elif action == "addSection":
         con = get_connection()
@@ -94,7 +94,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             cursor.execute(sql, ( course,teacher,room,time,time_today ))
             con.commit()
             cursor.close()
-            return  templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject,"section": section})
+            return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,"messages":"لا يمكن إضافة الشعبة — يوجد تعارض في الوقت مع نفس القاعة أو نفس الدكتور في هذا اليوم."})
     elif action == "deleteCourse":
         con = get_connection()
@@ -107,9 +107,9 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor = con.cursor(buffered=True)
         sql = """SELECT id
                  FROM courses
-                 WHERE الساعات = %s \
-                   AND المادة = %s \
-                   AND رمزالمساق = %s"""
+                 WHERE hours = %s \
+                   AND article = %s \
+                   AND Course_code = %s"""
         cursor.execute(sql, (course_all[1], course_all[2].strip(), course_all[3].strip()))
         courseId = cursor.fetchone()
         cursor.close()
@@ -119,12 +119,14 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor.execute(sql, (course_id,))
         con.commit()
         cursor.close()
-        con = get_connection()
-        cursor = con.cursor()
-        sql="update courses set materialIsAvailable = %s where id = %s"
-        cursor.execute(sql, ("لا", courseId[0]))
-        con.commit()
-        cursor.close()
+        if courseId :
+          con = get_connection()
+          cursor = con.cursor()
+          sql="update courses set materialIsAvailable = %s where id = %s"
+          cursor.execute(sql, ("لا", courseId[0]))
+          con.commit()
+          cursor.close()
+          return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
     elif action == "deleteSection":
         con = get_connection()
@@ -137,10 +139,10 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor = con.cursor(buffered=True)
         sql = """select id \
                  from courses \
-                 where المدرس = %s \
-                   and القاعة = %s \
-                   and الوقت = %s \
-                   and اليوم = %s """
+                 where teacher = %s \
+                   and Hall = %s \
+                   and time_s = %s \
+                   and today = %s """
         cursor.execute(sql, (course_all[2], course_all[3], course_all[4], course_all[5]))
         courseId = cursor.fetchone()
         cursor.close()
@@ -150,12 +152,14 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor.execute(sql, (sections_id,))
         con.commit()
         cursor.close()
-        con = get_connection()
-        cursor = con.cursor()
-        sql="update courses set materialIsAvailable = %s where id = %s"
-        cursor.execute(sql, ("لا", courseId[0]))
-        con.commit()
-        cursor.close()
+        if courseId :
+          con = get_connection()
+          cursor = con.cursor()
+          sql="update courses set materialIsAvailable = %s where id = %s"
+          cursor.execute(sql, ("لا", courseId[0]))
+          con.commit()
+          cursor.close()
+          return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
     elif action == "updateCourse":
         con = get_connection()
@@ -174,22 +178,22 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           cursor = con.cursor(buffered=True)
           sql = """SELECT id
                    FROM courses
-                   WHERE الساعات = %s \
-                     AND المادة = %s \
-                     AND رمزالمساق = %s"""
+                   WHERE hours = %s \
+                     AND article = %s \
+                     AND Course_code = %s"""
           cursor.execute(sql, (subject_all[1], subject_all[2].strip(),subject_all[3].strip()))
           course_id = cursor.fetchone()
           cursor.close()
           con = get_connection()
           cursor = con.cursor()
-          sql = """update subject set   الساعات=%s , subject_name=%s , subject_code=%s , major_code=%s 
+          sql = """update subject set   hours=%s , subject_name=%s , subject_code=%s , major_code=%s 
                 where id = %s """
           cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),update_majors.strip(),update_id))
           con.commit()
           cursor.close()
           con = get_connection()
           cursor = con.cursor()
-          sql="update courses set  الساعات=%s , المادة=%s , رمزالمساق=%s  where id = %s"
+          sql="update courses set  hours=%s , article=%s , Course_code=%s  where id = %s"
           cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),course_id[0]))
           con.commit()
           cursor.close()
@@ -221,7 +225,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           cursor.close()
           con = get_connection()
           cursor = con.cursor(buffered=True)
-          sql = """select id from courses where المدرس=%s and القاعة=%s and الوقت=%s and اليوم=%s """
+          sql = """select id from courses where teacher=%s and Hall=%s and time_s=%s and today=%s """
           cursor.execute(sql,(subject_all[2],subject_all[3],subject_all[4],subject_all[5]))
           course_id = cursor.fetchone()
           cursor.close()
@@ -235,7 +239,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           cursor.close()
           con = get_connection()
           cursor = con.cursor()
-          sql="update courses set المدرس=%s , القاعة=%s , الوقت=%s ,اليوم=%s where id= %s "
+          sql="update courses set teacher=%s , Hall=%s , time_s=%s ,today=%s where id= %s "
           cursor.execute(sql,(update_teacher,update_room,update_time,update_today,course_id[0]))
           con.commit()
           cursor.close()

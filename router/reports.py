@@ -20,7 +20,7 @@ async def reports(request: Request):
     )
 
     # 🔥 منع الكاش
-    response.headers["Cache-Control"] = "no-store"
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "0"
 
@@ -35,12 +35,12 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
               SELECT s.full_name, \
                      s.id, \
                      s.role,\
-                     sec.الساعات, \
-                     sec.رمزالمساق, \
-                     sec.القاعة, \
-                     sec.المادة, \
-                     sec.الوقت, \
-                     sec.اليوم\
+                     sec.hours, \
+                     sec.Course_code, \
+                     sec.Hall, \
+                     sec.article, \
+                     sec.time_s, \
+                     sec.today\
                      
               FROM courses sec
                        JOIN user s ON sec.id_student = s.id 
@@ -57,9 +57,9 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
             cursor = con.cursor(buffered=True)
             sql = """ \
                   SELECT COUNT(DISTINCT sec.id_student) AS students_count, \
-                         count(DISTINCT sec.المادة)     as courses_count, \
-                         COUNT(DISTINCT sec.القاعة)     AS room_count, \
-                         sum(sec.الساعات)               as clook_count \
+                         count(DISTINCT sec.article)     as courses_count, \
+                         COUNT(DISTINCT sec.Hall)     AS room_count, \
+                         sum(sec.hours)               as clook_count \
                   FROM courses sec \
                            JOIN user s ON sec.id_student = s.id \
                   WHERE sec.Registration_date BETWEEN %s AND %s \
@@ -92,9 +92,9 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
         cursor = con.cursor(buffered=True)
         sql = """ \
               SELECT COUNT(DISTINCT sec.id_student) AS students_count, \
-                     count(DISTINCT sec.المادة)     as courses_count, \
-                     COUNT(DISTINCT sec.القاعة)     AS room_count, \
-                     sum(sec.الساعات)               as clook_count \
+                     count(DISTINCT sec.article)     as courses_count, \
+                     COUNT(DISTINCT sec.Hall)     AS room_count, \
+                     sum(sec.hours)               as clook_count \
               FROM courses sec \
                        JOIN user s ON sec.id_student = s.id \
               WHERE sec.Registration_date BETWEEN %s AND %s \

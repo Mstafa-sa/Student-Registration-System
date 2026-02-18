@@ -24,12 +24,13 @@ async def courses_available(request: Request):
         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
 
         major = payload.get("Specialization")
+        print(major)
         con = get_connection()
         cursor = con.cursor(buffered=True)
         sql = """
              SELECT s.subject_name, \
                     s.major_code, \
-                    s.الساعات, \
+                    s.hours, \
                     s.subject_code, \
                     sec.room_code, \
                     sec.id, \
@@ -48,8 +49,7 @@ async def courses_available(request: Request):
                    {"request": request,"courses":courses}
                        )
 
-
-        response.headers["Cache-Control"] = "no-store"
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
         response.headers["Pragma"] = "no-cache"
         response.headers["Expires"] = "0"
         return response
