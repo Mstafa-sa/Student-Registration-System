@@ -19,11 +19,11 @@
 <nav class="topbar">
     <h2><i class="fas fa-user-shield"></i> لوحة تحكم المدير</h2>
     <ul>
-        <li><a href="/admin/dashboard"><i class="fas fa-home"></i> الرئيسية</a></li>
-        <li><a href="/admin/students"><i class="fas fa-users"></i> إدارة الطلاب</a></li>
-        <li><a href="/admin/courses"><i class="fas fa-book"></i> المواد والشعب</a></li>
-        <li><a href="/admin/reports" class="active"><i class="fas fa-chart-bar"></i> التقارير</a></li>
-        <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> خروج</a></li>
+        <li><a href="/STU/log_out"><i class="fas fa-sign-out-alt"></i> خروج</a></li>
+           <li><a href="/ADM/reports" class="active"><i class="fas fa-chart-bar"></i> التقارير</a></li>
+         <li><a href="/ADM/manage_courses_sections"><i class="fas fa-book"></i> المواد والشعب</a></li>
+           <li><a href="/ADM/manage_students"><i class="fas fa-users"></i> إدارة الطلاب</a></li>
+         <li><a href="/ADM/Admin_Dashboard"><i class="fas fa-home"></i> الرئيسية</a></li>
     </ul>
 </nav>
 
@@ -42,7 +42,7 @@
             <select name="action">
                 <option value="courses">تقرير تسجيل المواد</option>
                 <option value="students">تقرير الطلاب</option>
-                <option value="hours">تقرير الساعات</option>
+
             </select>
         </div>
 
@@ -61,10 +61,7 @@
             عرض التقرير
         </button>
 
-        <button type="submit" name="export" value="excel" class="btn success">
-            <i class="fas fa-file-excel"></i>
-            تصدير Excel
-        </button>
+
 
     </form>
 </div>
@@ -75,25 +72,25 @@
         <div class="card">
             <i class="fas fa-users"></i>
             <h4>عدد الطلاب</h4>
-            <p>320</p>
+            <p>{{num_all[0]}}</p>
         </div>
 
         <div class="card">
             <i class="fas fa-book"></i>
             <h4>عدد المواد</h4>
-            <p>42</p>
+            <p>{{num_all[1]}}</p>
         </div>
 
         <div class="card">
             <i class="fas fa-layer-group"></i>
             <h4>عدد الشعب</h4>
-            <p>110</p>
+            <p>{{num_all[2]}}</p>
         </div>
 
         <div class="card">
             <i class="fas fa-clock"></i>
             <h4>إجمالي الساعات المسجلة</h4>
-            <p>870</p>
+            <p>{{num_all[3]}}</p>
         </div>
 
     </div>

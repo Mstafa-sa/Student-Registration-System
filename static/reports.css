@@ -57,12 +57,14 @@ body {
 
 /* ===== Filters ===== */
 
-.filters {
+.filters form {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
-    margin-bottom: 30px;
+    align-items: end;
+     margin-bottom: 60px;
 }
+
 
 .filter-item {
     display: flex;
@@ -100,9 +102,8 @@ body {
     background: #3498db;
 }
 
-.success {
-    background: #27ae60;
-}
+
+
 
 .btn:hover {
     opacity: .9;
