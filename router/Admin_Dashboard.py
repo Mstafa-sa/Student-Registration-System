@@ -1,9 +1,6 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from fastapi import Form
-import jwt
-from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
 

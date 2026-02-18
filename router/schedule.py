@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-import mysql.connector
+from db import get_connection
 import jwt
 from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
 load_dotenv()  # ← تقرأ ملف .env
 secret_key = os.getenv("JWT_SECRET")
-import mysql.connector
+
 router = APIRouter()
 
 
@@ -23,32 +23,27 @@ async def index(request: Request):
     try:
         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
         user_email = payload.get("email")
-        con = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password=os.getenv("DB_PASSWORD"),
-        database="school"
-    )
-        cursor = con.cursor()
+        con = get_connection()
+        cursor = con.cursor(buffered=True)
         sql="select id from user where email=%s"
         cursor.execute(sql,(user_email,))
         id=cursor.fetchone()
+        cursor.close()
+        con = get_connection()
+        cursor = con.cursor(buffered=True)
         sql="select * from courses where id_student=%s"
         cursor.execute(sql,(id[0],))
         courses=cursor.fetchall()
-
+        cursor.close()
         response = templates.TemplateResponse(
             "schedule.html",
             {"request": request,"courses":courses }
         )
-
         # 🔥 منع الكاش
         response.headers["Cache-Control"] = "no-store"
         response.headers["Pragma"] = "no-cache"
         response.headers["Expires"] = "0"
-
         return response
-
     except jwt.ExpiredSignatureError:
         return RedirectResponse(url="/Auth/login")  # التوكن انتهى
     except jwt.InvalidTokenError:

@@ -1,10 +1,7 @@
 from fastapi import APIRouter, Cookie
 from fastapi.responses import RedirectResponse
-
 router = APIRouter()
-
 BLACKLIST = set()
-
 @router.get("/log_out")
 async def logout(
     token: str = Cookie(None),        # توكن الطالب

@@ -1,13 +1,11 @@
 from fastapi import APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from fastapi import Form
 import jwt
 from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
-import mysql.connector
-
+from db import get_connection
 load_dotenv()  # ← تقرأ ملف .env
 
 secret_key = os.getenv("JWT_SECRET")
@@ -26,13 +24,8 @@ async def courses_available(request: Request):
         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
 
         major = payload.get("Specialization")
-        con = mysql.connector.connect(
-          host="localhost",
-           user="root",
-           password=os.getenv("DB_PASSWORD"),
-          database="school"
-         )
-        cursor = con.cursor()
+        con = get_connection()
+        cursor = con.cursor(buffered=True)
         sql = """
              SELECT s.subject_name, \
                     s.major_code, \
@@ -49,7 +42,7 @@ async def courses_available(request: Request):
                     """
         cursor.execute(sql,(major,))
         courses = cursor.fetchall()
-
+        cursor.close()
         response = templates.TemplateResponse(
                    "coursesAvailable.html",
                    {"request": request,"courses":courses}

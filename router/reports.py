@@ -1,13 +1,11 @@
 from datetime import date
-
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Form
-import mysql.connector
+from db import get_connection
 from dotenv import load_dotenv
 import os
-
 load_dotenv()  # ← تقرأ ملف .env
 secret_key = os.getenv("JWT_SECRET")
 router = APIRouter()
@@ -31,13 +29,8 @@ async def reports(request: Request):
 async def reports(request: Request,action: str = Form(...),from_date:date=Form(...),to_date:date=Form(...)):
     num_all = (0,0,0,0)
     if action == "courses":
-        con = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password=os.getenv("DB_PASSWORD"),
-            database="school"
-        )
-        cursor = con.cursor()
+        con = get_connection()
+        cursor = con.cursor(buffered=True)
         sql = """
               SELECT s.full_name, \
                      s.id, \
@@ -58,17 +51,10 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
               """
         cursor.execute(sql,(from_date,to_date,"student"))
         students=cursor.fetchall()
-
-
-
+        cursor.close()
         if students != []:
-            con = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                password=os.getenv("DB_PASSWORD"),
-                database="school"
-            )
-            cursor = con.cursor()
+            con = get_connection()
+            cursor = con.cursor(buffered=True)
             sql = """ \
                   SELECT COUNT(DISTINCT sec.id_student) AS students_count, \
                          count(DISTINCT sec.المادة)     as courses_count, \
@@ -82,17 +68,12 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
                 """
             cursor.execute(sql, (from_date, to_date, "student"))
             num_all = cursor.fetchone()
-            print(num_all)
+            cursor.close()
             return templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all})
         return templates.TemplateResponse("reports.html", {"request": request, "message":"لا يوجد مواد تم تسجيلها بهادا الوقت","num_all":num_all})
     elif action == "students":
-        con = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password=os.getenv("DB_PASSWORD"),
-            database="school"
-        )
-        cursor = con.cursor()
+        con = get_connection()
+        cursor = con.cursor(buffered=True)
         sql = """
               SELECT DISTINCT s.id,
                               s.full_name,
@@ -104,16 +85,11 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
                 AND s.role = %s
               ORDER BY s.Registration_date \
               """
-
         cursor.execute(sql, (from_date, to_date,"student"))
         students = cursor.fetchall()
-        con = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password=os.getenv("DB_PASSWORD"),
-            database="school"
-        )
-        cursor = con.cursor()
+        cursor.close()
+        con = get_connection()
+        cursor = con.cursor(buffered=True)
         sql = """ \
               SELECT COUNT(DISTINCT sec.id_student) AS students_count, \
                      count(DISTINCT sec.المادة)     as courses_count, \
@@ -127,7 +103,7 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
             """
         cursor.execute(sql, (from_date, to_date, "student"))
         num_all = cursor.fetchone()
-
+        cursor.close()
         if students != []:
             return  templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all})
         return templates.TemplateResponse("reports.html",   {"request": request, "message": "لا يوجد طلاب تم تسجيلهم بهاذا الوقت","num_all":num_all})
