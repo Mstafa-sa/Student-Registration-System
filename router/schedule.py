@@ -1,6 +1,8 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Cookie, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+
+from blacklist import BLACKLIST
 from db import get_connection
 import jwt
 from fastapi.responses import RedirectResponse
@@ -15,11 +17,11 @@ router = APIRouter()
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/schedule", response_class=HTMLResponse)
-async def index(request: Request):
-
-    token = request.cookies.get("token")
+async def index(request: Request,token:str =Cookie(None)):
     if not token:
         return RedirectResponse(url="/Auth/login")
+    if token in BLACKLIST:
+        raise HTTPException(status_code=401)
     try:
         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
         user_email = payload.get("email")

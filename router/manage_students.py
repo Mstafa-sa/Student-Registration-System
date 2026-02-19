@@ -1,10 +1,12 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Cookie, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Form
 from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
+
+from blacklist import BLACKLIST
 from db import get_connection
 from passlib.context import CryptContext
 load_dotenv()  # ← تقرأ ملف .env
@@ -13,10 +15,11 @@ router = APIRouter()
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/manage_students", response_class=HTMLResponse)
-async def index(request: Request):
-    token = request.cookies.get("token_ad")
-    if not token:
+async def index(request: Request,token_ad:str =Cookie(None)):
+    if not token_ad:
         return RedirectResponse(url="/Auth/login", status_code=303)
+    if token_ad in BLACKLIST:
+        raise HTTPException(status_code=401)
     con = get_connection()
     cursor = con.cursor(buffered=True)
     sql = "select * from user where role = %s"

@@ -1,6 +1,7 @@
 import aiosmtplib
 from email.message import EmailMessage
-
+import os
+from dotenv import load_dotenv
 async def send_email(to_email: str, reset_link: str):
     message = EmailMessage()
     message["From"] = "your_email@gmail.com"
@@ -14,7 +15,7 @@ async def send_email(to_email: str, reset_link: str):
         port=465,
         use_tls=True,
         username="pupilsystem@gmail.com",
-        password="nzka bima hdff xypf",
+        password=os.getenv("password"),
         timeout=20
     )
 

@@ -88,33 +88,129 @@ async def forgotPassword(request: Request):
 
 @router.post("/forgot-password", response_class=HTMLResponse)
 async def forgot_password_submit(request: Request, email: str = Form(...)):
-    # ... التحقق من DB
-    reset_token = secrets.token_urlsafe(16)
-    reset_tokens[reset_token] = email
-    BASE_URL = "http://127.0.0.1:8001"
+    # 1️⃣ تحقق من وجود المستخدم
+    con = get_connection()
+    cursor = con.cursor(buffered=True)
+    cursor.execute("SELECT id FROM user WHERE email=%s", (email,))
+    user = cursor.fetchone()
+    cursor.close()
+    con.close()
+
+    if not user:
+        return templates.TemplateResponse(
+            "forgotPassword.html",
+            {"request": request, "message": "لا يوجد مستخدم بهذا البريد"}
+        )
+
+    user_id = user[0]
+
+    # 2️⃣ توليد توكن فريد
+    reset_token = secrets.token_urlsafe(32)
+
+    # 3️⃣ حدد مدة انتهاء صلاحية التوكن (مثلاً 1 ساعة)
+    expires_at = datetime.utcnow() + timedelta(minutes=15)
+
+    # 4️⃣ احفظ التوكن في قاعدة البيانات
+    con = get_connection()
+    cursor = con.cursor()
+    cursor.execute(
+        "INSERT INTO reset_password_tokens (user_id, token, expires_at) VALUES (%s, %s, %s)",
+        (user_id, reset_token, expires_at)
+    )
+    con.commit()
+    cursor.close()
+    con.close()
+
+    # 5️⃣ إنشاء الرابط
+    BASE_URL = "http://127.0.0.1:8001"  # استخدم HTTPS في production
     reset_link = f"{BASE_URL}/Auth/resetPassword/{reset_token}"
 
-    print("Email:", email)
-    print("Reset link:", reset_link)
-
-    # استدعاء الدالة من الملف الخارجي
+    # 6️⃣ أرسل الرابط عبر البريد
     await send_email(email, reset_link)
 
-    return templates.TemplateResponse("forgotPassword.html", {"request": request, "message": "تم إرسال رابط إعادة التعيين"})
+    return templates.TemplateResponse(
+        "forgotPassword.html",
+        {"request": request, "message": "تم إرسال رابط إعادة التعيين إلى بريدك الإلكتروني"}
+    )
+    # ... التحقق من DB
+    # reset_token = secrets.token_urlsafe(16)
+    # reset_tokens[reset_token] = email
+    # BASE_URL = "http://127.0.0.1:8001"
+    # reset_link = f"{BASE_URL}/Auth/resetPassword/{reset_token}"
+    #
+    # print("Email:", email)
+    # print("Reset link:", reset_link)
+    #
+    # # استدعاء الدالة من الملف الخارجي
+    # await send_email(email, reset_link)
+    #
+    # return templates.TemplateResponse("forgotPassword.html", {"request": request, "message": "تم إرسال رابط إعادة التعيين"})
 
 
 
 @router.get("/resetPassword/{token}", response_class=HTMLResponse)
 async def reset_password_form(request: Request, token: str):
-    email = reset_tokens.get(token)
-    if not email:
+
+    con = get_connection()
+    cursor = con.cursor(dictionary=True)
+
+    sql= """
+SELECT * FROM reset_password_tokens
+WHERE token = %s
+AND used = 0 
+"""
+
+    cursor.execute(sql, (token,))
+    token_entry = cursor.fetchone()
+
+    cursor.close()
+    con.close()
+
+    if not token_entry:
         return HTMLResponse(content="رابط إعادة التعيين غير صالح أو منتهي", status_code=400)
-    return templates.TemplateResponse("reset-password.html", {"request": request, "message": ""})
+
+    # لا تعرض الإيميل مباشرة في الصفحة
+    return templates.TemplateResponse(
+        "reset-password.html",
+        {"request": request, "token": token, "message": ""}
+    )
+    # email = reset_tokens.get(token)
+    # if not email:
+    #     return HTMLResponse(content="رابط إعادة التعيين غير صالح أو منتهي", status_code=400)
+    # return templates.TemplateResponse("reset-password.html", {"request": request, "message": ""})
 
 @router.post("/resetPassword/{token}", response_class=HTMLResponse)
 async def reset_password_submit(request: Request, token: str, new_password: str = Form(...)):
-    email = reset_tokens.get(token)
-    if not email:
+    con = get_connection()
+    cursor = con.cursor(dictionary=True)
+
+    # تحقق من صحة التوكن
+    sql = """
+          SELECT id, user_id \
+          FROM reset_password_tokens
+          WHERE token = %s \
+            AND used = 0 \
+             \
+          """
+    cursor.execute(sql, (token,))
+    token_entry = cursor.fetchone()
+    print(token_entry)
+    if not token_entry:
+        cursor.close()
+        con.close()
+        return HTMLResponse(content="رابط إعادة التعيين غير صالح أو منتهي", status_code=400)
+
+
+    con = get_connection()
+    cursor = con.cursor(buffered=True)
+    sql="select email from user where id = %s"
+    cursor.execute(sql, (token_entry["user_id"],))
+    user = cursor.fetchone()
+    cursor.close()
+
+
+
+    if not user:
         return HTMLResponse(content="رابط إعادة التعيين غير صالح أو منتهي", status_code=400)
 
     # تحديث كلمة السر في قاعدة البيانات
@@ -122,13 +218,19 @@ async def reset_password_submit(request: Request, token: str, new_password: str 
     cursor = con.cursor()
     pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
     hash = pwd_context.hash(new_password)
-    cursor.execute("UPDATE user SET password=%s WHERE email=%s", (hash, email))
+    cursor.execute("UPDATE user SET password=%s WHERE email=%s", (hash, user[0]))
+    con.commit()
+    cursor.close()
+    con.close()
+    con = get_connection()
+    cursor = con.cursor()
+    # تعليم التوكن بأنه مستعمل
+    cursor.execute("UPDATE reset_password_tokens SET used=1 WHERE id=%s", (token_entry['id'],))
+
     con.commit()
     cursor.close()
     con.close()
 
-    # إزالة التوكن بعد الاستخدام
-    del reset_tokens[token]
-
-    return templates.TemplateResponse("reset_password.html", {"request": request, "message": "تم تغيير كلمة السر بنجاح!"})
+    return templates.TemplateResponse("reset-password.html",
+                                      {"request": request, "message": "تم تغيير كلمة السر بنجاح!"})
 
