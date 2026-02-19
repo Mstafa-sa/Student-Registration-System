@@ -132,22 +132,6 @@ async def forgot_password_submit(request: Request, email: str = Form(...)):
         "forgotPassword.html",
         {"request": request, "message": "تم إرسال رابط إعادة التعيين إلى بريدك الإلكتروني"}
     )
-    # ... التحقق من DB
-    # reset_token = secrets.token_urlsafe(16)
-    # reset_tokens[reset_token] = email
-    # BASE_URL = "http://127.0.0.1:8001"
-    # reset_link = f"{BASE_URL}/Auth/resetPassword/{reset_token}"
-    #
-    # print("Email:", email)
-    # print("Reset link:", reset_link)
-    #
-    # # استدعاء الدالة من الملف الخارجي
-    # await send_email(email, reset_link)
-    #
-    # return templates.TemplateResponse("forgotPassword.html", {"request": request, "message": "تم إرسال رابط إعادة التعيين"})
-
-
-
 @router.get("/resetPassword/{token}", response_class=HTMLResponse)
 async def reset_password_form(request: Request, token: str):
 
