@@ -60,15 +60,16 @@ async def courses(request: Request,token:str =Cookie(None)):
 
 
 @router.post("/courses", response_class=HTMLResponse)
-async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(None),method: str = Form(...),id:list[int]=Form(None)):
-
-    if method=="post":
-     token = request.cookies.get("token")
+async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(None),method: str = Form(...),id:list[int]=Form(None),token:str =Cookie(None)):
+    if method == "post":
      if not token:
          return RedirectResponse(url="/Auth/login")
+     if token in BLACKLIST:
+         raise HTTPException(status_code=401)
      try:
          payload = jwt.decode(token, secret_key, algorithms=["HS256"])
          user_email = payload.get("email")
+         major=payload.get("Specialization")
          con = get_connection()
          cursor = con.cursor(buffered=True)
          sql="select id from user where email = %s"
@@ -93,27 +94,32 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                             sec.room_code, \
                             sec.id, \
                             sec.teacher_name, \
-                            sec.time, \
-                            sec.todays
+                            sec.from_time, \
+                            sec.todays,
+                            sec.to_time
                      FROM sections sec
                               JOIN subject s ON sec.subject_id = s.id
                      WHERE s.subject_code = %s
                        AND sec.room_code = %s \
+                         and  s.major_code=%s
                      """
 
-               cursor.execute(sql,(Course_code, Division))
+               cursor.execute(sql,(Course_code, Division,major))
                course=cursor.fetchone()# name
-               cursor.fetchall()
+
                cursor.close()
                if course:
-
                 con = get_connection()
                 cursor = con.cursor(buffered=True)
-                sql="select * from courses where id_student = %s and (article =%s or (from_time=%s and today=%s)) "##################
-                cursor.execute(sql, (id_student[0], course[4],course[7],course[8]))
+                sql="""SELECT *
+                        FROM courses
+                        WHERE id_student = %s
+                          AND today = %s
+                          AND NOT (to_time <= %s OR from_time >= %s)
+ """
+                cursor.execute(sql, (id_student[0], course[8],course[7],course[9]))
                 a=cursor.fetchone()
                 cursor.close()
-
                 if a==None:
                   con = get_connection()
                   cursor = con.cursor(buffered=True)
@@ -121,7 +127,7 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                   cursor.execute(sql, (id_student[0],))
                   sum_time=cursor.fetchone()
                   cursor.close()
-                  if sum_time[0] == None:
+                  if sum_time[0] is None:
                       sum_time=(0,)
                   if sum_time[0]+course[2] <=21 :
                     con = get_connection()
@@ -141,7 +147,7 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                      course[8],  # اليوم
                      course[2],  # الساعات
                      course[3],#رمز المساق
-                     course[11],
+                     course[9],
                     ))
                     con.commit()
                     cursor.close()
@@ -156,6 +162,8 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
      except jwt.InvalidTokenError:
          return RedirectResponse(url="/Auth/login")  # التوكن غير صحيح
     elif method=="delete":
+      if id == None:
+          return RedirectResponse(url="/STU/courses", status_code=303)
       for i in id:
         con = get_connection()
         cursor = con.cursor()
@@ -163,4 +171,4 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
         cursor.execute(sql, (i,))
         con.commit()
         cursor.close()
-        return RedirectResponse(url="/STU/courses", status_code=303)
+      return RedirectResponse(url="/STU/courses", status_code=303)

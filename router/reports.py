@@ -78,7 +78,7 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
             cursor.execute(sql, (from_date, to_date, "student"))
             num_all = cursor.fetchone()
             cursor.close()
-            return templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all})
+            return templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all,"type":"courses"})
         return templates.TemplateResponse("reports.html", {"request": request, "message":"لا يوجد مواد تم تسجيلها بهادا الوقت","num_all":num_all})
     elif action == "students":
         con = get_connection()
@@ -97,6 +97,7 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
         cursor.execute(sql, (from_date, to_date,"student"))
         students = cursor.fetchall()
         cursor.close()
+
         con = get_connection()
         cursor = con.cursor(buffered=True)
         sql = """ \
@@ -114,7 +115,7 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
         num_all = cursor.fetchone()
         cursor.close()
         if students != []:
-            return  templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all})
+            return  templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all,"type":"student"})
         return templates.TemplateResponse("reports.html",   {"request": request, "message": "لا يوجد طلاب تم تسجيلهم بهاذا الوقت","num_all":num_all})
 
 

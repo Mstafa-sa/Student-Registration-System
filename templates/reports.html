@@ -97,7 +97,7 @@
 
     <!-- ===== Table ===== -->
     <div class="table-box">
-
+       {%if type =="courses" %}
         <table>
             <thead>
             <tr>
@@ -119,15 +119,43 @@
                 <td>{{student[6]}}</td>
                 <td>{{student[5]}}</td>
                 <td>{{student[3]}}</td>
+                <td>{{student[9]}}</td>
                 <td>{{student[8]}}</td>
                 <td>{{student[7]}}</td>
-                <td>{{student[9]}}</td>
+
             </tr>
             {%endfor%}
 
             </tbody>
         </table>
+        {%endif%}
+        {%if type =="student" %}
+        <table>
+            <thead>
+            <tr>
+                <th>رقم الطالب</th>
+                <th>اسم الطالب</th>
+                <th>المادة</th>
+                <th>الشعبة</th>
+                <th>الساعات</th>
+                <th>اليوم</th>
+                <th colspan="2">الوقت</th>
+            </tr>
+            </thead>
 
+            <tbody>
+            {%for student in students %}
+            <tr>
+                 <td>{{student[0]}}</td>
+                <td>{{student[1]}}</td>
+
+
+            </tr>
+            {%endfor%}
+
+            </tbody>
+        </table>
+        {%endif%}
     </div>
     {%if message%}
     {{message}}

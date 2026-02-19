@@ -39,11 +39,12 @@ async def courses_available(request: Request,token:str =Cookie(None)):
                     sec.room_code, \
                     sec.id, \
                     sec.teacher_name, \
-                    sec.time, \
-                    sec.todays
+                    sec.from_time, \
+                    sec.todays,
+                    sec.to_time
                    FROM sections sec
                    JOIN subject s ON sec.subject_id = s.id
-                   WHERE major_code=%s
+                   WHERE major_code=%s\
                     """
         cursor.execute(sql,(major,))
         courses = cursor.fetchall()

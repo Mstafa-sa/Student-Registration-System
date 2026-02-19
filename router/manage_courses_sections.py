@@ -198,12 +198,14 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),update_majors.strip(),update_id))
           con.commit()
           cursor.close()
-          con = get_connection()
-          cursor = con.cursor()
-          sql="update courses set  hours=%s , article=%s , Course_code=%s  where id = %s"
-          cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),course_id[0]))
-          con.commit()
-          cursor.close()
+          if course_id :
+            con = get_connection()
+            cursor = con.cursor()
+            sql="update courses set  hours=%s , article=%s , Course_code=%s  where id = %s"
+            cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),course_id[0]))
+            con.commit()
+            cursor.close()
+            return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
           return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject, "section": section, "messages": "الماده موجود لا يمكن اضافتها"})
     elif action == "updateSection":
@@ -223,6 +225,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor.execute(sql,(update_from_time,update_to_time,update_room,update_teacher,update_today))
         update_section = cursor.fetchone()
         cursor.close()
+        print(update_section)
         if update_section == None:
           con = get_connection()
           cursor = con.cursor(buffered=True)
@@ -246,10 +249,12 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           cursor.close()
           con = get_connection()
           cursor = con.cursor()
-          sql="update courses set teacher=%s , Hall=%s , from_time=%s ,today=%s,to_time=%s where id= %s "
-          cursor.execute(sql,(update_teacher,update_room,update_from_time,update_today,update_to_time,course_id[0]))
-          con.commit()
-          cursor.close()
+          if course_id :
+            sql="update courses set teacher=%s , Hall=%s , from_time=%s ,today=%s,to_time=%s where id= %s "
+            cursor.execute(sql,(update_teacher,update_room,update_from_time,update_today,update_to_time,course_id[0]))
+            con.commit()
+            cursor.close()
+            return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
           return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,"messages": "لا يمكن إضافة الشعبة — يوجد تعارض في الوقت مع نفس القاعة أو نفس الدكتور في هذا اليوم."})
 

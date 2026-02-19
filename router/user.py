@@ -190,7 +190,7 @@ async def reset_password_submit(request: Request, token: str, new_password: str 
           """
     cursor.execute(sql, (token,))
     token_entry = cursor.fetchone()
-    print(token_entry)
+
     if not token_entry:
         cursor.close()
         con.close()
