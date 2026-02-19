@@ -106,10 +106,10 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                cursor.fetchall()
                cursor.close()
                if course:
-                print(id_student)
+
                 con = get_connection()
                 cursor = con.cursor(buffered=True)
-                sql="select * from courses where id_student = %s and (article =%s or (time_s=%s and today=%s)) "
+                sql="select * from courses where id_student = %s and (article =%s or (from_time=%s and today=%s)) "##################
                 cursor.execute(sql, (id_student[0], course[4],course[7],course[8]))
                 a=cursor.fetchone()
                 cursor.close()
@@ -128,8 +128,8 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                     cursor = con.cursor()
                     sql = """
                       INSERT INTO courses
-                          (id_student,materialIsAvailable,Hall, time_s, teacher, article, today, hours,Course_code)
-                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s) \
+                          (id_student,materialIsAvailable,Hall, from_time, teacher, article, today, hours,Course_code,to_time)####################
+                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s) \
                        """
                     cursor.execute(sql, (
                      id_student[0], # id_student
@@ -141,6 +141,7 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                      course[8],  # اليوم
                      course[2],  # الساعات
                      course[3],#رمز المساق
+                     course[11],
                     ))
                     con.commit()
                     cursor.close()

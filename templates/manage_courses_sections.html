@@ -68,7 +68,7 @@
 <th>رقم</th>
 <th>رقم المادة</th>
 <th>القاعة</th>
-<th>الوقت</th>
+<th colspan="2">الوقت</th>
 <th>الايام </th>
 <th>المدرس</th>
 <th>إجراءات</th>
@@ -80,6 +80,7 @@
 <td>{{sections[1]}}</td>
 <td>{{sections[3]}}</td>
 <td>{{sections[4]}}</td>
+    <td>{{sections[6]}}</td>
 <td>{{sections[5]}}</td>
 <td>{{sections[2]}}</td>
 <td>
@@ -160,7 +161,8 @@
  <input type="hidden" name="action" value="addSection" >
 <input name="course" placeholder="رقم المادة">
 <input name="room" placeholder="القاعة">
-<input name="time" placeholder="الوقت">
+<input type="time" name="from_time" placeholder="الوقت البدايه">
+    <input type="time" name="to_time" placeholder=" الوقت نهايه">
  <input name="time_today" placeholder="الايام">
 <input name="teacher" placeholder="المدرس">
 
@@ -186,7 +188,8 @@
       <input name="number_subject" value="{{sections[1]}}" placeholder="رقم المادة">
       <input name="update_teacher" value="{{sections[2]}}" placeholder="المدرس">
       <input name="update_room" value="{{sections[3]}}" placeholder="القاعة">
-      <input name="update_time" value="{{sections[4]}}" placeholder="الوقت">
+      <input name="update_from_time" value="{{sections[4]}}" placeholder=" البدايه الوقت">
+          <input name="update_to_time" value="{{sections[6]}}" placeholder="نهايه الوقت">
       <input name="update_today" value="{{sections[5]}}" placeholder="الأيام">
 
       <button class="btn save">حفظ</button>

@@ -2,11 +2,11 @@
 from fastapi import APIRouter, Request, Cookie, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from fastapi import Form
 from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
-
+from datetime import time
+from fastapi import Form
 from blacklist import BLACKLIST
 from db import get_connection
 load_dotenv()  # ← تقرأ ملف .env
@@ -45,9 +45,9 @@ async def manage_courses_sections(request: Request,token_ad:str =Cookie(None)):
     return response
 @router.post("/manage_courses_sections", response_class=HTMLResponse)
 async def manage_courses_sections(request: Request,subject_code: str = Form(None),subject_name: str = Form(None),hours: int = Form(None),majors_code: str = Form(None),
-                                  room:str=Form(None),time:str=Form(None),action: str = Form(...),course:int=Form(None),teacher:str=Form(None),time_today:str=Form(None),course_id:int=Form(None),
+                                  room:str=Form(None),from_time:time=Form(None),action: str = Form(...),course:int=Form(None),teacher:str=Form(None),time_today:str=Form(None),course_id:int=Form(None),
                                   sections_id:int=Form(None),update_id:int=Form(None),update_name:str=Form(None),update_hours:int=Form(None),update_majors:str=Form(None),update_code:str=Form(None),
-                                   update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_time:str=Form(None),update_today:str=Form(None)):
+                                   update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_from_time:time=Form(None),update_to_time:time=Form(None),update_today:str=Form(None),to_time:time=Form(None),):
     con = get_connection()
     cursor = con.cursor(buffered=True)
     sql = "select * from sections "
@@ -82,7 +82,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         sql = """
               SELECT id
               FROM sections
-              WHERE time = %s
+              WHERE from_time = %s and to_time = %s
                 AND (
                   room_code = %s
                  OR teacher_name = %s
@@ -90,14 +90,14 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                    \
               """
 
-        cursor.execute(sql, (time,room,teacher,time_today))
+        cursor.execute(sql, (from_time,to_time,room,teacher,time_today))
         section_id = cursor.fetchone()
         cursor.close()
         if section_id ==None:
             con = get_connection()
             cursor = con.cursor()
-            sql = "insert into sections (subject_id,teacher_name,room_code,time,todays) values (%s,%s,%s,%s,%s)";
-            cursor.execute(sql, ( course,teacher,room,time,time_today ))
+            sql = "insert into sections (subject_id,teacher_name,room_code,from_time,to_time,todays) values (%s,%s,%s,%s,%s,%s)";
+            cursor.execute(sql, ( course,teacher,room,from_time,to_time,time_today ))
             con.commit()
             cursor.close()
             return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
@@ -147,9 +147,10 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                  from courses \
                  where teacher = %s \
                    and Hall = %s \
-                   and time_s = %s \
-                   and today = %s """
-        cursor.execute(sql, (course_all[2], course_all[3], course_all[4], course_all[5]))
+                   and from_time = %s \
+                   and today = %s 
+                     and to_time=%s"""
+        cursor.execute(sql, (course_all[2], course_all[3], course_all[4], course_all[5],course_all[6]))
         courseId = cursor.fetchone()
         cursor.close()
         con = get_connection()
@@ -211,7 +212,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         sql = """
               SELECT id
               FROM sections
-              WHERE time = %s
+              WHERE from_time = %s and to_time = %s
                 AND (
                   room_code = %s
                  OR teacher_name = %s
@@ -219,7 +220,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                 and todays=%s \
  \
               """
-        cursor.execute(sql,(update_time,update_room,update_teacher,update_today))
+        cursor.execute(sql,(update_from_time,update_to_time,update_room,update_teacher,update_today))
         update_section = cursor.fetchone()
         cursor.close()
         if update_section == None:
@@ -231,22 +232,22 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           cursor.close()
           con = get_connection()
           cursor = con.cursor(buffered=True)
-          sql = """select id from courses where teacher=%s and Hall=%s and time_s=%s and today=%s """
-          cursor.execute(sql,(subject_all[2],subject_all[3],subject_all[4],subject_all[5]))
+          sql = """select id from courses where teacher=%s and Hall=%s and from_time=%s and today=%s and to_time=%s """
+          cursor.execute(sql,(subject_all[2],subject_all[3],subject_all[4],subject_all[5],subject_all[6]))
           course_id = cursor.fetchone()
           cursor.close()
           con = get_connection()
           cursor = con.cursor()
 
-          sql = """update sections set   subject_id=%s , teacher_name=%s , room_code=%s , time=%s ,todays=%s
+          sql = """update sections set   subject_id=%s , teacher_name=%s , room_code=%s , from_time=%s ,todays=%s,to_time=%s
                 where id = %s """
-          cursor.execute(sql,(number_subject,update_teacher,update_room,update_time,update_today,update_id))
+          cursor.execute(sql,(number_subject,update_teacher,update_room,update_from_time,update_today,update_to_time,update_id))
           con.commit()
           cursor.close()
           con = get_connection()
           cursor = con.cursor()
-          sql="update courses set teacher=%s , Hall=%s , time_s=%s ,today=%s where id= %s "
-          cursor.execute(sql,(update_teacher,update_room,update_time,update_today,course_id[0]))
+          sql="update courses set teacher=%s , Hall=%s , from_time=%s ,today=%s,to_time=%s where id= %s "
+          cursor.execute(sql,(update_teacher,update_room,update_from_time,update_today,update_to_time,course_id[0]))
           con.commit()
           cursor.close()
           return RedirectResponse("/ADM/manage_courses_sections", status_code=303)

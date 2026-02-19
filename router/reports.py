@@ -47,7 +47,8 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
                      sec.Course_code, \
                      sec.Hall, \
                      sec.article, \
-                     sec.time_s, \
+                     sec.from_time, \
+                     sec.to_time,
                      sec.today\
                      
               FROM courses sec

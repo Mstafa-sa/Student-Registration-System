@@ -108,7 +108,7 @@ async def forgot_password_submit(request: Request, email: str = Form(...)):
     reset_token = secrets.token_urlsafe(32)
 
     # 3️⃣ حدد مدة انتهاء صلاحية التوكن (مثلاً 1 ساعة)
-    expires_at = datetime.utcnow() + timedelta(minutes=15)
+    expires_at = datetime.utcnow() + timedelta(hours=3,minutes=15)
 
     # 4️⃣ احفظ التوكن في قاعدة البيانات
     con = get_connection()
@@ -157,7 +157,7 @@ async def reset_password_form(request: Request, token: str):
     sql= """
 SELECT * FROM reset_password_tokens
 WHERE token = %s
-AND used = 0 
+AND used = 0 AND expires_at > NOW()
 """
 
     cursor.execute(sql, (token,))
@@ -174,10 +174,6 @@ AND used = 0
         "reset-password.html",
         {"request": request, "token": token, "message": ""}
     )
-    # email = reset_tokens.get(token)
-    # if not email:
-    #     return HTMLResponse(content="رابط إعادة التعيين غير صالح أو منتهي", status_code=400)
-    # return templates.TemplateResponse("reset-password.html", {"request": request, "message": ""})
 
 @router.post("/resetPassword/{token}", response_class=HTMLResponse)
 async def reset_password_submit(request: Request, token: str, new_password: str = Form(...)):
@@ -190,7 +186,7 @@ async def reset_password_submit(request: Request, token: str, new_password: str 
           FROM reset_password_tokens
           WHERE token = %s \
             AND used = 0 \
-             \
+            and expires_at > NOW() \
           """
     cursor.execute(sql, (token,))
     token_entry = cursor.fetchone()
