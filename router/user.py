@@ -1,6 +1,6 @@
 import secrets
 from datetime import datetime, timedelta
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse,JSONResponse
 from fastapi import Form
@@ -34,27 +34,39 @@ async def register(request: Request, email: str=Form(...), password: str=Form(..
     con.close()
     pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
     if user and pwd_context.verify(password, user[3]):
-        if user [5] == "student":
-         payload = {
-                "email": user[2],
-                "Specialization": user[4],
-                "exp": datetime.utcnow() + timedelta(hours=2)
-            }
+        role = user[5]
 
-         Token = jwt.encode(payload, secret_key, algorithm="HS256")
-         response = RedirectResponse(url="/STU/dashboard", status_code=303)
-         response.set_cookie(key="token", value=Token, httponly=True)  # httponly لتحسين الأمان
-         return response
-        elif user [5] == "Admin":
-            payload = {
-                "email": user[2],
-                "exp": datetime.utcnow() + timedelta(hours=2)
-            }
-            Token = jwt.encode(payload, secret_key, algorithm="HS256")
-            response = RedirectResponse(url="/ADM/Admin_Dashboard", status_code=303)
-            response.set_cookie(key="token_ad", value=Token, httponly=True)  # httponly لتحسين الأمان
-            return response
-        return templates.TemplateResponse("login.html", {"request": request,"message":"المستخدم غير موجود"})
+        payload = {
+            "email": user[2],
+            "role": role,
+            "exp": datetime.utcnow() + timedelta(hours=2)
+        }
+
+        # إذا بدك تضيف specialization للطالب فقط
+        if role == "student":
+            payload["Specialization"] = user[4]
+
+        token = jwt.encode(payload, secret_key, algorithm="HS256")
+
+        # تحديد صفحة التحويل حسب الدور
+        if role == "student":
+            redirect_url = "/STU/dashboard"
+        elif role == "Admin":
+            redirect_url = "/ADM/Admin_Dashboard"
+        else:
+            raise HTTPException(status_code=403, detail="Invalid role")
+
+        response = RedirectResponse(url=redirect_url, status_code=303)
+
+        response.set_cookie(
+            key="token",
+            value=token,
+            httponly=True,
+            samesite="Lax"
+        )
+
+        return response
+
     return templates.TemplateResponse("login.html", {"request": request ,"message":"Incorrect username or password"})
 @router.get("/signup", response_class=HTMLResponse)
 async def signup(request: Request):
@@ -62,9 +74,14 @@ async def signup(request: Request):
 @router.post("/signup", response_class=HTMLResponse)
 async def signup(request: Request,name: str=Form(...),email: str=Form(...),password: str=Form(...), check_password:str=Form(...),Specialization:str=Form(...),hid:str=Form(...)):
     con = get_connection()
-    cursor = con.cursor()
-    sql="insert into user (full_name,email,password,Specialization,role) values (%s,%s,%s,%s,%s)"
-    if password == check_password:
+    cursor = con.cursor(buffered=True)
+    sql = "SELECT id FROM user WHERE email = %s "
+    cursor.execute(sql, (email,))
+    id_student=cursor.fetchone()
+    cursor.close()
+    if id_student==None:
+      sql="insert into user (full_name,email,password,Specialization,role) values (%s,%s,%s,%s,%s)"
+      if password == check_password:
         pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
         hash=pwd_context.hash(password)
         payload = {
@@ -80,7 +97,8 @@ async def signup(request: Request,name: str=Form(...),email: str=Form(...),passw
         response=RedirectResponse("/STU/dashboard", status_code=303)
         response.set_cookie(key="token", value=token, httponly=True)
         return response
-    return templates.TemplateResponse("signup.html", {"request": request,"message":"Incorrect username or password"})
+      return templates.TemplateResponse("signup.html", {"request": request,"message":"Incorrect  password"})
+    return templates.TemplateResponse("signup.html", {"request": request, "message": "Email is available"})
 @router.get("/forgotPassword", response_class=HTMLResponse)
 async def forgotPassword(request: Request):
     return templates.TemplateResponse("forgotPassword.html", {"request": request})
@@ -88,7 +106,7 @@ async def forgotPassword(request: Request):
 
 @router.post("/forgot-password", response_class=HTMLResponse)
 async def forgot_password_submit(request: Request, email: str = Form(...)):
-    # 1️⃣ تحقق من وجود المستخدم
+    # 1️ تحقق من وجود المستخدم
     con = get_connection()
     cursor = con.cursor(buffered=True)
     cursor.execute("SELECT id FROM user WHERE email=%s", (email,))
@@ -104,13 +122,13 @@ async def forgot_password_submit(request: Request, email: str = Form(...)):
 
     user_id = user[0]
 
-    # 2️⃣ توليد توكن فريد
+    # 2️ توليد توكن فريد
     reset_token = secrets.token_urlsafe(32)
 
-    # 3️⃣ حدد مدة انتهاء صلاحية التوكن (مثلاً 1 ساعة)
+    # 3⃣ حدد مدة انتهاء صلاحية التوكن (مثلاً 1 ساعة)
     expires_at = datetime.utcnow() + timedelta(hours=3,minutes=15)
 
-    # 4️⃣ احفظ التوكن في قاعدة البيانات
+    # 4️ احفظ التوكن في قاعدة البيانات
     con = get_connection()
     cursor = con.cursor()
     cursor.execute(
@@ -121,11 +139,11 @@ async def forgot_password_submit(request: Request, email: str = Form(...)):
     cursor.close()
     con.close()
 
-    # 5️⃣ إنشاء الرابط
+    # 5️ إنشاء الرابط
     BASE_URL = "http://127.0.0.1:8001"  # استخدم HTTPS في production
     reset_link = f"{BASE_URL}/Auth/resetPassword/{reset_token}"
 
-    # 6️⃣ أرسل الرابط عبر البريد
+    # 6️ أرسل الرابط عبر البريد
     await send_email(email, reset_link)
 
     return templates.TemplateResponse(

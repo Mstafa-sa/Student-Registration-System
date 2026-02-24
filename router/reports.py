@@ -1,10 +1,11 @@
 from datetime import date
-from fastapi import APIRouter, Request, Cookie, HTTPException
+from fastapi import APIRouter, Request, Cookie, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Form
 from starlette.responses import RedirectResponse
 
+from auth_utils import get_current_user
 from blacklist import BLACKLIST
 from db import get_connection
 from dotenv import load_dotenv
@@ -17,11 +18,9 @@ num_all = (0,0,0,0)
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/reports", response_class=HTMLResponse)
-async def reports(request: Request,token_ad:str =Cookie(None)):
-    if not token_ad:
-        return RedirectResponse(url="/Auth/login", status_code=303)
-    if token_ad in BLACKLIST:
-        raise HTTPException(status_code=401)
+async def reports(request: Request,user: dict = Depends(get_current_user)):
+    if user["role"] != "Admin":
+        raise HTTPException(status_code=403, detail="Access denied")
     response = templates.TemplateResponse(
         "reports.html",
         {"request": request,"num_all":num_all}
@@ -34,7 +33,9 @@ async def reports(request: Request,token_ad:str =Cookie(None)):
 
     return response
 @router.post("/reports", response_class=HTMLResponse)
-async def reports(request: Request,action: str = Form(...),from_date:date=Form(...),to_date:date=Form(...)):
+async def reports(request: Request,action: str = Form(...),from_date:date=Form(...),to_date:date=Form(...),user: dict = Depends(get_current_user)):
+    if user["role"] != "Admin":
+        raise HTTPException(status_code=403, detail="Access denied")
     num_all = (0,0,0,0)
     if action == "courses":
         con = get_connection()

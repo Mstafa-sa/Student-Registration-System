@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Cookie, HTTPException
+from fastapi import APIRouter, Request, Cookie, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Form
@@ -6,6 +6,7 @@ from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
 
+from auth_utils import get_current_user
 from blacklist import BLACKLIST
 from db import get_connection
 from passlib.context import CryptContext
@@ -15,11 +16,9 @@ router = APIRouter()
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/manage_students", response_class=HTMLResponse)
-async def index(request: Request,token_ad:str =Cookie(None)):
-    if not token_ad:
-        return RedirectResponse(url="/Auth/login", status_code=303)
-    if token_ad in BLACKLIST:
-        raise HTTPException(status_code=401)
+async def index(request: Request,user: dict = Depends(get_current_user)):
+    if user["role"] != "Admin":
+        raise HTTPException(status_code=403, detail="Access denied")
     con = get_connection()
     cursor = con.cursor(buffered=True)
     sql = "select * from user where role = %s"
@@ -38,7 +37,10 @@ async def index(request: Request,token_ad:str =Cookie(None)):
 
     return response
 @router.post("/manage_students", response_class=HTMLResponse)
-async def manage_students(request: Request,name: str = Form(None), email: str = Form(None), Specialization: str = Form(None),password: str = Form(None),hid: str = Form(None),check_password: str = Form(None),search: str = Form(None),student_id:int=Form(None),action: str = Form(...)):
+async def manage_students(request: Request,name: str = Form(None), email: str = Form(None), Specialization: str = Form(None),password: str = Form(None),
+                          hid: str = Form(None),check_password: str = Form(None),search: str = Form(None),student_id:int=Form(None),action: str = Form(...),user: dict = Depends(get_current_user)):
+    if user["role"] != "Admin":
+        raise HTTPException(status_code=403, detail="Access denied")
 
     if action == "add":
         con = get_connection()

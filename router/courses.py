@@ -1,13 +1,11 @@
-from fastapi import APIRouter, Request, Depends, Cookie
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Form
-import jwt
 from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
-
-from blacklist import BLACKLIST
+from auth_utils import get_current_user
 from db import get_connection
 from fastapi import Depends, HTTPException
 load_dotenv()  # ← تقرأ ملف .env
@@ -20,21 +18,17 @@ router = APIRouter()
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/courses", response_class=HTMLResponse)
-async def courses(request: Request,token:str =Cookie(None)):
-    if not token:
-        return RedirectResponse(url="/Auth/login")
-    if token in BLACKLIST:
-        raise HTTPException(status_code=401)
-    try:
-        payload = jwt.decode(token, secret_key, algorithms=["HS256"])
-        user_email = payload.get("email")
-        con = get_connection()
-        cursor = con.cursor(buffered=True)
-        sql="select id from user where email = %s"
-        cursor.execute(sql,(user_email,))
-        id_student = cursor.fetchone()
-        cursor.close()
-        if id_student:
+async def courses(request: Request,user: dict = Depends(get_current_user)):
+    if user["role"] != "student":
+        raise HTTPException(status_code=403, detail="Access denied")
+    user_email =user["email"]
+    con = get_connection()
+    cursor = con.cursor(buffered=True)
+    sql="select id from user where email = %s"
+    cursor.execute(sql,(user_email,))
+    id_student = cursor.fetchone()
+    cursor.close()
+    if id_student:
             con = get_connection()
             cursor = con.cursor(buffered=True)
             sql="select * from courses where id_student = %s"
@@ -51,32 +45,25 @@ async def courses(request: Request,token:str =Cookie(None)):
             response.headers["Pragma"] = "no-cache"
             response.headers["Expires"] = "0"
             return response
-        return templates.TemplateResponse("courses.html", {"request": request, })#note
-
-    except jwt.ExpiredSignatureError:
-        return RedirectResponse(url="/Auth/login")  # التوكن انتهى
-    except jwt.InvalidTokenError:
-        return RedirectResponse(url="/Auth/login")  # التوكن غير صحيح
-
+    return templates.TemplateResponse("courses.html", {"request": request, })#note
 
 @router.post("/courses", response_class=HTMLResponse)
-async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(None),method: str = Form(...),id:list[int]=Form(None),token:str =Cookie(None)):
+async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(None)
+                  ,method: str = Form(...),id:list[int]=Form(None),user: dict = Depends(get_current_user)):
     if method == "post":
-     if not token:
-         return RedirectResponse(url="/Auth/login")
-     if token in BLACKLIST:
-         raise HTTPException(status_code=401)
-     try:
-         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
-         user_email = payload.get("email")
-         major=payload.get("Specialization")
-         con = get_connection()
-         cursor = con.cursor(buffered=True)
-         sql="select id from user where email = %s"
-         cursor.execute(sql,(user_email,))
-         id_student = cursor.fetchone()
-         cursor.close()
-         if id_student:
+        if user["role"] != "student":
+            raise HTTPException(status_code=403, detail="Access denied")
+
+
+        user_email = user["email"]
+        major=user["Specialization"]
+        con = get_connection()
+        cursor = con.cursor(buffered=True)
+        sql="select id from user where email = %s"
+        cursor.execute(sql,(user_email,))
+        id_student = cursor.fetchone()
+        cursor.close()
+        if id_student:
              con = get_connection()
              cursor = con.cursor(buffered=True)
              sql = "select * from courses where id_student = %s"
@@ -157,10 +144,7 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                return templates.TemplateResponse("courses.html", {"request": request, "messages": "الماده غير موجود من المواد المتاحه","course":Recorded_materials})
              return templates.TemplateResponse("courses.html",{"request": request, "messages": "الرجاء تعبئة جميع الحقول المطلوبة",  "course": Recorded_materials})
 
-     except jwt.ExpiredSignatureError:
-         return RedirectResponse(url="/Auth/login")  # التوكن انتهى
-     except jwt.InvalidTokenError:
-         return RedirectResponse(url="/Auth/login")  # التوكن غير صحيح
+
     elif method=="delete":
       if id == None:
           return RedirectResponse(url="/STU/courses", status_code=303)

@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, Request, Cookie, HTTPException
+from fastapi import APIRouter, Request, Cookie, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 import os
 from datetime import time
 from fastapi import Form
+
+from auth_utils import get_current_user
 from blacklist import BLACKLIST
 from db import get_connection
 load_dotenv()  # ← تقرأ ملف .env
@@ -16,11 +18,9 @@ router = APIRouter()
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/manage_courses_sections", response_class=HTMLResponse)
-async def manage_courses_sections(request: Request,token_ad:str =Cookie(None)):
-    if not token_ad:
-        return RedirectResponse(url="/Auth/login")
-    if token_ad in BLACKLIST:
-        raise HTTPException(status_code=401)
+async def manage_courses_sections(request: Request,user: dict = Depends(get_current_user)):
+    if user["role"] != "Admin":
+        raise HTTPException(status_code=403, detail="Access denied")
     con = get_connection()
     cursor = con.cursor(buffered=True)
     sql="select * from subject "
@@ -44,10 +44,12 @@ async def manage_courses_sections(request: Request,token_ad:str =Cookie(None)):
     response.headers["Expires"] = "0"
     return response
 @router.post("/manage_courses_sections", response_class=HTMLResponse)
-async def manage_courses_sections(request: Request,subject_code: str = Form(None),subject_name: str = Form(None),hours: int = Form(None),majors_code: str = Form(None),
+async def manage_courses_sections(request: Request,subject_code: str = Form(None),subject_name: str = Form(None),hours: int = Form(None),majors_code: str = Form(None),user: dict = Depends(get_current_user),
                                   room:str=Form(None),from_time:time=Form(None),action: str = Form(...),course:int=Form(None),teacher:str=Form(None),time_today:str=Form(None),course_id:int=Form(None),
                                   sections_id:int=Form(None),update_id:int=Form(None),update_name:str=Form(None),update_hours:int=Form(None),update_majors:str=Form(None),update_code:str=Form(None),
                                    update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_from_time:time=Form(None),update_to_time:time=Form(None),update_today:str=Form(None),to_time:time=Form(None),):
+    if user["role"] != "Admin":
+        raise HTTPException(status_code=403, detail="Access denied")
     con = get_connection()
     cursor = con.cursor(buffered=True)
     sql = "select * from sections "
@@ -225,7 +227,6 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         cursor.execute(sql,(update_from_time,update_to_time,update_room,update_teacher,update_today))
         update_section = cursor.fetchone()
         cursor.close()
-        print(update_section)
         if update_section == None:
           con = get_connection()
           cursor = con.cursor(buffered=True)
