@@ -1,7 +1,4 @@
 from fastapi import FastAPI, Form
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.requests import Request
 from fastapi.staticfiles import StaticFiles
 from router.user import router as user_router
 from  router.dashboard import router as dashboard_router
@@ -13,7 +10,10 @@ from router.manage_students import router as manage_students
 from router.manage_courses_sections import router as manage_courses_sections
 from router.reports import router as reports
 from router.courses_available import router as coursesAvailable
+from middleware.logging_middleware import LoggingMiddleware
+
 app = FastAPI()
+app.add_middleware(LoggingMiddleware)
 # 1️⃣ ربط مجلد static للـ CSS
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

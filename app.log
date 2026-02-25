@@ -1,0 +1,24 @@
+2026-02-25 04:03:32,120 - INFO - Request: GET http://127.0.0.1:8001/
+2026-02-25 04:03:32,122 - INFO - Response Status: 404 | Time: 0.002s
+2026-02-25 04:03:32,151 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-25 04:03:32,152 - INFO - Response Status: 404 | Time: 0.001s
+2026-02-25 04:03:53,174 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-02-25 04:03:53,232 - INFO - Response Status: 200 | Time: 0.058s
+2026-02-25 04:03:53,241 - INFO - Request: GET http://127.0.0.1:8001/static/login.css
+2026-02-25 04:03:53,294 - INFO - Response Status: 200 | Time: 0.053s
+2026-02-25 04:04:00,705 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-02-25 04:04:01,002 - INFO - Response Status: 303 | Time: 0.298s
+2026-02-25 04:04:01,006 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-25 04:04:01,037 - INFO - Response Status: 200 | Time: 0.032s
+2026-02-25 04:04:01,058 - INFO - Request: GET http://127.0.0.1:8001/static/Admin_Dashboard.css
+2026-02-25 04:04:01,059 - INFO - Response Status: 200 | Time: 0.001s
+2026-02-25 04:04:04,135 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-25 04:04:04,217 - INFO - Response Status: 200 | Time: 0.081s
+2026-02-25 04:04:04,233 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-02-25 04:04:04,235 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-25 04:22:34,220 - INFO - Request: GET http://127.0.0.1:8001/
+2026-02-25 04:22:34,222 - INFO - Response Status: 404 | Time: 0.002s
+2026-02-25 04:22:43,021 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-02-25 04:22:43,028 - INFO - Response Status: 200 | Time: 0.007s
+2026-02-25 04:23:05,231 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-02-25 04:23:05,353 - INFO - Response Status: 200 | Time: 0.122s
