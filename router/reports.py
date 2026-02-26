@@ -1,13 +1,10 @@
 from datetime import date
-from fastapi import APIRouter, Request, Cookie, HTTPException, Depends
+from fastapi import APIRouter, Request,  HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Form
-from starlette.responses import RedirectResponse
-
 from auth_utils import get_current_user
-from blacklist import BLACKLIST
-from db import get_connection
+from db import  get_db,db_cursor
 from dotenv import load_dotenv
 import os
 
@@ -18,29 +15,29 @@ num_all = (0,0,0,0)
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/reports", response_class=HTMLResponse)
-async def reports(request: Request,user: dict = Depends(get_current_user)):
+async def reports(request: Request,user: dict = Depends(get_current_user),db=Depends(get_db)):
     if user["role"] != "Admin":
         raise HTTPException(status_code=403, detail="Access denied")
     response = templates.TemplateResponse(
         "reports.html",
         {"request": request,"num_all":num_all}
     )
-
-    # 🔥 منع الكاش
+    #  منع الكاش
     response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "0"
 
     return response
 @router.post("/reports", response_class=HTMLResponse)
-async def reports(request: Request,action: str = Form(...),from_date:date=Form(...),to_date:date=Form(...),user: dict = Depends(get_current_user)):
+async def reports(request: Request,action: str = Form(...),from_date:date=Form(None),to_date:date=Form(None),user: dict = Depends(get_current_user),db=Depends(get_db)):
     if user["role"] != "Admin":
         raise HTTPException(status_code=403, detail="Access denied")
     num_all = (0,0,0,0)
+    if from_date == None or to_date == None:
+        return templates.TemplateResponse("reports.html",   {"request": request, "message": "ضع وقت قبل البدء",  "num_all": num_all})
     if action == "courses":
-        con = get_connection()
-        cursor = con.cursor(buffered=True)
-        sql = """
+        with db_cursor(db) as cursor:
+          sql = """
               SELECT s.full_name, \
                      s.id, \
                      s.role,\
@@ -59,13 +56,11 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
                  
                  
               """
-        cursor.execute(sql,(from_date,to_date,"student"))
-        students=cursor.fetchall()
-        cursor.close()
+          cursor.execute(sql,(from_date,to_date,"student"))
+          students=cursor.fetchall()
         if students != []:
-            con = get_connection()
-            cursor = con.cursor(buffered=True)
-            sql = """ \
+            with db_cursor(db) as cursor:
+              sql = """ \
                   SELECT COUNT(DISTINCT sec.id_student) AS students_count, \
                          count(DISTINCT sec.article)     as courses_count, \
                          COUNT(DISTINCT sec.Hall)     AS room_count, \
@@ -76,15 +71,13 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
                     AND s.role = %s; \
 
                 """
-            cursor.execute(sql, (from_date, to_date, "student"))
-            num_all = cursor.fetchone()
-            cursor.close()
+              cursor.execute(sql, (from_date, to_date, "student"))
+              num_all = cursor.fetchone()
             return templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all,"type":"courses"})
         return templates.TemplateResponse("reports.html", {"request": request, "message":"لا يوجد مواد تم تسجيلها بهادا الوقت","num_all":num_all})
     elif action == "students":
-        con = get_connection()
-        cursor = con.cursor(buffered=True)
-        sql = """
+        with db_cursor(db) as cursor:
+          sql = """
               SELECT DISTINCT s.id,
                               s.full_name,
                               s.role,
@@ -95,13 +88,10 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
                 AND s.role = %s
               ORDER BY s.Registration_date \
               """
-        cursor.execute(sql, (from_date, to_date,"student"))
-        students = cursor.fetchall()
-        cursor.close()
-
-        con = get_connection()
-        cursor = con.cursor(buffered=True)
-        sql = """ \
+          cursor.execute(sql, (from_date, to_date,"student"))
+          students = cursor.fetchall()
+        with db_cursor(db) as cursor:
+          sql = """ \
               SELECT COUNT(DISTINCT sec.id_student) AS students_count, \
                      count(DISTINCT sec.article)     as courses_count, \
                      COUNT(DISTINCT sec.Hall)     AS room_count, \
@@ -112,9 +102,8 @@ async def reports(request: Request,action: str = Form(...),from_date:date=Form(.
                 AND s.role = %s; \
 
             """
-        cursor.execute(sql, (from_date, to_date, "student"))
-        num_all = cursor.fetchone()
-        cursor.close()
+          cursor.execute(sql, (from_date, to_date, "student"))
+          num_all = cursor.fetchone()
         if students != []:
             return  templates.TemplateResponse("reports.html",{"request": request,"students":students,"num_all":num_all,"type":"student"})
         return templates.TemplateResponse("reports.html",   {"request": request, "message": "لا يوجد طلاب تم تسجيلهم بهاذا الوقت","num_all":num_all})
