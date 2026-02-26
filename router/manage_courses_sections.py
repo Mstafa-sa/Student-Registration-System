@@ -47,7 +47,8 @@ async def manage_courses_sections(request: Request,user: dict = Depends(get_curr
 async def manage_courses_sections(request: Request,subject_code: str = Form(None),subject_name: str = Form(None),hours: int = Form(None),majors_code: str = Form(None),user: dict = Depends(get_current_user),
                                   room:str=Form(None),from_time:time=Form(None),action: str = Form(...),course:int=Form(None),teacher:str=Form(None),time_today:str=Form(None),course_id:int=Form(None),
                                   sections_id:int=Form(None),update_id:int=Form(None),update_name:str=Form(None),update_hours:int=Form(None),update_majors:str=Form(None),update_code:str=Form(None),
-                                   update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_from_time:time=Form(None),update_to_time:time=Form(None),update_today:str=Form(None),to_time:time=Form(None),):
+                                   update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_from_time:time=Form(None),update_to_time:time=Form(None),update_today:str=Form(None),
+                                  number_seat:int=Form(None),to_time:time=Form(None),):
     if user["role"] != "Admin":
         raise HTTPException(status_code=403, detail="Access denied")
     con = get_connection()
@@ -98,8 +99,8 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         if section_id ==None:
             con = get_connection()
             cursor = con.cursor()
-            sql = "insert into sections (subject_id,teacher_name,room_code,from_time,to_time,todays) values (%s,%s,%s,%s,%s,%s)";
-            cursor.execute(sql, ( course,teacher,room,from_time,to_time,time_today ))
+            sql = "insert into sections (subject_id,teacher_name,room_code,from_time,to_time,todays,number_of_seats) values (%s,%s,%s,%s,%s,%s,%s)";
+            cursor.execute(sql, ( course,teacher,room,from_time,to_time,time_today,number_seat ))
             con.commit()
             cursor.close()
             return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
@@ -243,9 +244,9 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           con = get_connection()
           cursor = con.cursor()
 
-          sql = """update sections set   subject_id=%s , teacher_name=%s , room_code=%s , from_time=%s ,todays=%s,to_time=%s
+          sql = """update sections set   subject_id=%s , teacher_name=%s , room_code=%s , from_time=%s ,todays=%s,to_time=%s,number_of_seats=%s
                 where id = %s """
-          cursor.execute(sql,(number_subject,update_teacher,update_room,update_from_time,update_today,update_to_time,update_id))
+          cursor.execute(sql,(number_subject,update_teacher,update_room,update_from_time,update_today,update_to_time,number_seat,update_id))
           con.commit()
           cursor.close()
           con = get_connection()

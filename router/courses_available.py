@@ -36,7 +36,8 @@ async def courses_available(request: Request,user: dict = Depends(get_current_us
                     sec.teacher_name, \
                     sec.from_time, \
                     sec.todays,
-                    sec.to_time
+                    sec.to_time,
+                    sec.number_of_seats
                    FROM sections sec
                    JOIN subject s ON sec.subject_id = s.id
                    WHERE major_code=%s\

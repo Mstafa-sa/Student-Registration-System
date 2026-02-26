@@ -83,18 +83,19 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                             sec.teacher_name, \
                             sec.from_time, \
                             sec.todays,
-                            sec.to_time
+                            sec.to_time,
+                            sec.number_of_seats
                      FROM sections sec
                               JOIN subject s ON sec.subject_id = s.id
                      WHERE s.subject_code = %s
                        AND sec.room_code = %s \
                          and  s.major_code=%s
                      """
-
                cursor.execute(sql,(Course_code, Division,major))
                course=cursor.fetchone()# name
-
                cursor.close()
+
+               number_seat=course[10]
                if course:
                 con = get_connection()
                 cursor = con.cursor(buffered=True)
@@ -117,11 +118,15 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                   if sum_time[0] is None:
                       sum_time=(0,)
                   if sum_time[0]+course[2] <=21 :
+                    if number_seat == 0:
+                        return templates.TemplateResponse("courses.html", {"request": request,
+                                                                           "messages": "لا يوجد عدد مقاعد متاحه لتسجيل ",
+                                                                           "course": Recorded_materials})
                     con = get_connection()
                     cursor = con.cursor()
                     sql = """
                       INSERT INTO courses
-                          (id_student,materialIsAvailable,Hall, from_time, teacher, article, today, hours,Course_code,to_time)####################
+                          (id_student,materialIsAvailable,Hall, from_time, teacher, article, today, hours,Course_code,to_time)
                       VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s) \
                        """
                     cursor.execute(sql, (
@@ -138,6 +143,15 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                     ))
                     con.commit()
                     cursor.close()
+                    number_seat-=1
+                    con = get_connection()
+                    cursor = con.cursor()
+                    cursor.execute("update sections set number_of_seats=%s where  room_code = %s and from_time=%s and to_time=%s and todays=%s ",
+                                   (number_seat, Division,course[7],course[9],course[8]))
+                    con.commit()
+                    cursor.close()
+
+
                     return RedirectResponse(url="/STU/courses",status_code=303)
                   return templates.TemplateResponse("courses.html", {"request": request, "messages": "لا تستطيع التسجيل اكثر من 21 ساعه",  "course": Recorded_materials})
                 return templates.TemplateResponse("courses.html", {"request": request, "messages": "الماده موجوده او امسجل بنفس الوقت","course":Recorded_materials})

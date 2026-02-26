@@ -71,6 +71,7 @@
 <th colspan="2">الوقت</th>
 <th>الايام </th>
 <th>المدرس</th>
+ <th>عدد المقاعد</th>
 <th>إجراءات</th>
 </tr>
 
@@ -83,6 +84,7 @@
     <td>{{sections[6]}}</td>
 <td>{{sections[5]}}</td>
 <td>{{sections[2]}}</td>
+    <td>{{sections[7]}}</td>
 <td>
 <a href="#editSection{{sections[0]}}" class="btn edit">تعديل</a>
 
@@ -165,6 +167,8 @@
     <input type="time" name="to_time" placeholder=" الوقت نهايه">
  <input name="time_today" placeholder="الايام">
 <input name="teacher" placeholder="المدرس">
+<input name="number_seat" placeholder="عدد المقاعد ">
+
 
 <button class="btn save">حفظ</button>
 <a href="#" class="btn cancel">إلغاء</a>
@@ -191,7 +195,7 @@
       <input  type="time" name="update_from_time" value="{{sections[4]}}" placeholder=" البدايه الوقت">
           <input  type="time" name="update_to_time" value="{{sections[6]}}" placeholder="نهايه الوقت">
       <input name="update_today" value="{{sections[5]}}" placeholder="الأيام">
-
+       <input name="number_seat" value="{{sections[7]}}" placeholder="عدد المقاعد ">
       <button class="btn save">حفظ</button>
       <a href="#" class="btn cancel">إلغاء</a>
     </form>

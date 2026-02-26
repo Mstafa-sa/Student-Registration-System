@@ -33,13 +33,14 @@
     <table>
         <thead>
             <tr>
-                <th>رمز المادة</th>
-                <th>اسم المادة</th>
+                <th>عدد المقاعد</th>
                 <th>الشعبة</th>
                 <th>المدرس</th>
-                <th>الساعات</th>
                 <th>اليوم</th>
                 <th colspan="2">الوقت</th>
+                <th>الساعات</th>
+                <th>رمز المادة</th>
+                 <th>اسم المادة</th>
 
             </tr>
         </thead>
@@ -48,14 +49,15 @@
 
            {%for course in courses%}
             <tr>
-                <td>{{course[3]}}</td>
-                <td>{{course[0]}}</td>
+                <td>{{course[10]}}</td>
                 <td>{{course[4]}}</td>
                 <td>{{course[6]}}</td>
-                <td>{{course[2]}}</td>
                 <td>{{course[8]}}</td>
                  <td>{{course[9]}}</td>
                 <td>{{course[7]}}</td>
+                <td>{{course[2]}}</td>
+                <td>{{course[3]}}</td>
+                <td>{{course[0]}}</td>
 
 
             </tr>
