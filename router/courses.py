@@ -95,8 +95,9 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                course=cursor.fetchone()# name
                cursor.close()
 
-               number_seat=course[10]
+
                if course:
+                number_seat = course[10]
                 con = get_connection()
                 cursor = con.cursor(buffered=True)
                 sql="""SELECT *
@@ -143,11 +144,11 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                     ))
                     con.commit()
                     cursor.close()
-                    number_seat-=1
+
                     con = get_connection()
                     cursor = con.cursor()
-                    cursor.execute("update sections set number_of_seats=%s where  room_code = %s and from_time=%s and to_time=%s and todays=%s ",
-                                   (number_seat, Division,course[7],course[9],course[8]))
+                    cursor.execute("update sections set number_of_seats=number_of_seats-1 where  room_code = %s and from_time=%s and to_time=%s and todays=%s ",
+                                   ( Division,course[7],course[9],course[8]))
                     con.commit()
                     cursor.close()
 
@@ -165,8 +166,22 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
       for i in id:
         con = get_connection()
         cursor = con.cursor()
+        sql="select * from courses where id = %s"
+        cursor.execute(sql, (id[0],))
+        course=cursor.fetchone()
+        cursor.close()
+        con = get_connection()
+        cursor = con.cursor()
         sql = "delete from courses where id = %s"
         cursor.execute(sql, (i,))
+        con.commit()
+        cursor.close()
+
+        con = get_connection()
+        cursor = con.cursor()
+        cursor.execute(
+            "update sections set number_of_seats=number_of_seats+1 where  room_code = %s and from_time=%s and to_time=%s and todays=%s ",
+            ( course[2], course[3], course[11], course[6]))
         con.commit()
         cursor.close()
       return RedirectResponse(url="/STU/courses", status_code=303)
