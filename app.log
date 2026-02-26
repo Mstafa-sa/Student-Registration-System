@@ -187,3 +187,51 @@
 2026-02-26 03:26:04,881 - INFO - Response Status: 303 | Time: 0.030s
 2026-02-26 03:26:04,885 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
 2026-02-26 03:26:04,903 - INFO - Response Status: 200 | Time: 0.018s
+2026-02-26 03:27:11,720 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-02-26 03:27:11,735 - INFO - Response Status: 200 | Time: 0.015s
+2026-02-26 03:27:19,703 - INFO - Request: GET http://127.0.0.1:8001/STU/schedule
+2026-02-26 03:27:19,759 - INFO - Response Status: 200 | Time: 0.056s
+2026-02-26 03:27:19,774 - INFO - Request: GET http://127.0.0.1:8001/static/schedule.css
+2026-02-26 03:27:19,812 - INFO - Response Status: 200 | Time: 0.038s
+2026-02-26 03:27:22,838 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-02-26 03:27:22,857 - INFO - Response Status: 200 | Time: 0.020s
+2026-02-26 03:27:24,175 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-02-26 03:27:24,196 - INFO - Response Status: 200 | Time: 0.021s
+2026-02-26 03:27:26,118 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-02-26 03:27:26,119 - INFO - Response Status: 302 | Time: 0.001s
+2026-02-26 03:27:26,123 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-02-26 03:27:26,125 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-26 19:10:28,647 - INFO - Request: GET http://127.0.0.1:8001/
+2026-02-26 19:10:28,651 - INFO - Response Status: 404 | Time: 0.004s
+2026-02-26 19:10:28,692 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-26 19:10:28,692 - INFO - Response Status: 404 | Time: 0.000s
+2026-02-26 19:10:35,001 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-02-26 19:10:35,069 - INFO - Response Status: 200 | Time: 0.069s
+2026-02-26 19:10:35,084 - INFO - Request: GET http://127.0.0.1:8001/static/login.css
+2026-02-26 19:10:35,174 - INFO - Response Status: 304 | Time: 0.089s
+2026-02-26 19:10:46,782 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-02-26 19:10:47,227 - INFO - Response Status: 200 | Time: 0.446s
+2026-02-26 19:10:55,493 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-02-26 19:10:55,665 - INFO - Response Status: 303 | Time: 0.171s
+2026-02-26 19:10:55,668 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-02-26 19:10:55,751 - INFO - Response Status: 200 | Time: 0.082s
+2026-02-26 19:11:21,358 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-02-26 19:11:21,424 - INFO - Response Status: 200 | Time: 0.066s
+2026-02-26 19:11:31,947 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-02-26 19:11:31,978 - INFO - Response Status: 303 | Time: 0.033s
+2026-02-26 19:11:31,988 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-02-26 19:11:32,002 - INFO - Response Status: 200 | Time: 0.014s
+2026-02-26 19:12:41,159 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-02-26 19:12:41,192 - INFO - Response Status: 200 | Time: 0.034s
+2026-02-26 19:12:56,976 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-02-26 19:12:57,005 - INFO - Response Status: 303 | Time: 0.030s
+2026-02-26 19:12:57,014 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-02-26 19:12:57,041 - INFO - Response Status: 200 | Time: 0.027s
+2026-02-26 19:17:27,848 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-02-26 19:17:27,927 - INFO - Response Status: 200 | Time: 0.079s
+2026-02-26 19:17:29,357 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-02-26 19:17:29,375 - INFO - Response Status: 200 | Time: 0.018s
+2026-02-26 19:19:11,922 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-02-26 19:19:11,978 - INFO - Response Status: 200 | Time: 0.056s
+2026-02-26 19:19:13,953 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-02-26 19:19:13,969 - INFO - Response Status: 200 | Time: 0.016s

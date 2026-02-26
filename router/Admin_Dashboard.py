@@ -1,14 +1,9 @@
-from fastapi import APIRouter, Request, Cookie, HTTPException, Depends
+from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 import os
-
-from starlette.responses import RedirectResponse
-
 from auth_utils import get_current_user
-from blacklist import BLACKLIST
-
 load_dotenv()  # ← تقرأ ملف .env
 secret_key = os.getenv("JWT_SECRET")
 router = APIRouter()
