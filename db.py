@@ -2,10 +2,7 @@ import mysql.connector
 import os
 from dotenv import load_dotenv
 from contextlib import contextmanager
-
 load_dotenv()
-
-
 #  إنشاء الاتصال بقاعدة البيانات
 def get_connection():
     return mysql.connector.connect(
@@ -14,8 +11,6 @@ def get_connection():
         password=os.getenv("DB_PASSWORD"),
         database="school"
     )
-
-
 #  Dependency Injection للـ FastAPI
 def get_db():
     conn = get_connection()
