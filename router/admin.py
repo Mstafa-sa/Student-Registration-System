@@ -1,4 +1,3 @@
-from datetime import datetime
 
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
@@ -10,13 +9,12 @@ import os
 from auth_utils import get_current_user
 from db import  get_db,db_cursor
 from fastapi import Depends, HTTPException
+from datetime import datetime
+
+
 load_dotenv()  # ← تقرأ ملف .env
-
 secret_key = os.getenv("JWT_SECRET")
-
-
 router = APIRouter()
-
 # تعريف templates هنا مباشرة لتجنب circular import
 templates = Jinja2Templates(directory="templates")
 @router.get("/Registration_time", response_class=HTMLResponse)
@@ -52,8 +50,19 @@ async def registration_time(request: Request,user: dict = Depends(get_current_us
          cursor.execute(sql,(delete,))
      return RedirectResponse(url="/ADM/Registration_time",status_code=302)
  elif action == "add_time":
+     if not ( start1 < end1 and start2 < end2 and  startFinal < endFinal and  end1 <= start2 and   end2 <= startFinal   ):
+         return RedirectResponse(url="/ADM/Registration_time", status_code=302)  #########
      with db_cursor(db) as cursor:
-         sql = "select id from registration_time where reg_start1=%s and reg_end1=%s and reg_start2=%s and reg_end2=%s and reg_start3=%s and reg_end3=%s"
+         sql ="""SELECT id
+                    FROM registration_time
+                    WHERE
+                    (
+                        (%s < reg_end1 AND %s > reg_start1)
+                        OR
+                        (%s < reg_end2 AND %s > reg_start2)
+                        OR
+                        (%s < reg_end3 AND %s > reg_start3)
+                    );"""
          cursor.execute(sql, (start1,end1,start2,end2,startFinal,endFinal))
          time_id = cursor.fetchone()
      if time_id != None:
@@ -63,9 +72,20 @@ async def registration_time(request: Request,user: dict = Depends(get_current_us
          cursor.execute(sql, (major,start1, end1, start2, end2, startFinal, endFinal))
      return RedirectResponse(url="/ADM/Registration_time",status_code=302)
  elif action == "update_time":
+     if not (start1 < end1 and start2 < end2 and startFinal < endFinal and end1 <= start2 and end2 <= startFinal):
+         return RedirectResponse(url="/ADM/Registration_time", status_code=302)  #########
      with db_cursor(db) as cursor:
-         sql = "select id from registration_time where reg_start1=%s and reg_end1=%s and reg_start2=%s and reg_end2=%s and reg_start3=%s and reg_end3=%s and id!=%s"
-         cursor.execute(sql, (start1, end1, start2, end2, startFinal, endFinal,registration_id))
+         sql = """SELECT id \
+                  FROM registration_time
+                 WHERE id!=%s and
+                     (
+                         (%s < reg_end1 AND %s > reg_start1)
+                             OR
+                         (%s < reg_end2 AND %s > reg_start2)
+                             OR
+                         (%s < reg_end3 AND %s > reg_start3)
+                         );"""
+         cursor.execute(sql, (registration_id,start1, end1, start2, end2, startFinal, endFinal))
          time_id = cursor.fetchone()
      if time_id != None:
          return RedirectResponse(url="/ADM/Registration_time", status_code=302)  #########
@@ -73,6 +93,11 @@ async def registration_time(request: Request,user: dict = Depends(get_current_us
          sql="update registration_time set reg_start1=%s,reg_end1=%s,reg_start2=%s,reg_end2=%s,reg_start3=%s,reg_end3=%s  where id_major=%s"
          cursor.execute(sql, (start1, end1, start2, end2, startFinal, endFinal,major))
      return RedirectResponse(url="/ADM/Registration_time",status_code=302)
+ elif action == "delete_time":
+     with db_cursor(db) as cursor:
+         sql = "delete from registration_time where id = %s"
+         cursor.execute(sql, (delete,))
+     return RedirectResponse(url="/ADM/Registration_time", status_code=302)
 
 
 

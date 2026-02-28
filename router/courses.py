@@ -8,10 +8,11 @@ import os
 from auth_utils import get_current_user
 from db import  get_db,db_cursor
 from fastapi import Depends, HTTPException
+from datetime import datetime
 load_dotenv()  # ← تقرأ ملف .env
 
 secret_key = os.getenv("JWT_SECRET")
-
+now=datetime.now()
 
 router = APIRouter()
 
@@ -105,6 +106,14 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                     if number_seat == 0:
                         return templates.TemplateResponse("courses.html", {"request": request,
                                                                            "messages": "لا يوجد عدد مقاعد متاحه لتسجيل ",
+                                                                           "course": Recorded_materials})
+                    with db_cursor(db) as cursor:
+                        sql="select * from registration_time reg join major m on  reg.id_major=m.id where  m.major_name=%s and (now() BETWEEN reg_start1 and reg_end1 or  now() BETWEEN reg_start2 and reg_end2 or now() BETWEEN reg_start3 and reg_end3) "
+                        cursor.execute(sql, (major,))
+                        true=cursor.fetchone()
+                    if true == None:
+                        return templates.TemplateResponse("courses.html", {"request": request,
+                                                                           "messages": "انتهى موعد التسجيل ",
                                                                            "course": Recorded_materials})
                     with db_cursor(db) as cursor:
                       sql = """

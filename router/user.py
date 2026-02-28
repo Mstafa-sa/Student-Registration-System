@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Form
-import jwt
+from jose import jwt
 from fastapi.responses import RedirectResponse
 from passlib.context import CryptContext
 from dotenv import load_dotenv
@@ -31,6 +31,7 @@ async def register(request: Request, email: str=Form(...), password: str=Form(..
     pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
     if user and pwd_context.verify(password, user[3]):
         role = user[5]
+        print(role)
         payload = {
             "email": user[2],
             "role": role,
@@ -54,6 +55,7 @@ async def register(request: Request, email: str=Form(...), password: str=Form(..
             key="token",
             value=token,
             httponly=True,
+            path="/",
             samesite="Lax"
         )
 

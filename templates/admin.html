@@ -32,7 +32,7 @@
 <button class="add" onclick="openModal('addTimeModal')">
 ➕ إضافة تسجيل
 </button>
-
+<form action="" method="post">
 <table border="1">
 
 <thead>
@@ -48,6 +48,7 @@
 </tr>
 </thead>
 
+<input type="hidden" name="action" value="delete_time">
 <tbody>
 {%for reg in registration%}
 <tr>
@@ -56,6 +57,15 @@
 <button class="edit" onclick="openModal('updateTimeModal')" type="button">
 تعديل
 </button>
+
+<button class="delete"
+type="submit"
+name="delete"
+value="{{ reg[0] }}"
+>
+حذف
+</button>
+
 </td>
 
 <td>{{reg[9]}}</td>
@@ -69,8 +79,9 @@
 </tr>
 {%endfor%}
 </tbody>
-</table>
 
+</table>
+</form>
 <!-- =============================== -->
 <!-- جدول التخصصات -->
 <!-- =============================== -->
@@ -196,7 +207,7 @@ value="{{ major[0] }}">
 
 </div>
 </div>
-<form action="/ADM/Registration_time" method="post">
+
 <div class="modal" id="updateTimeModal">
 
 <div class="modal-content">
@@ -227,7 +238,7 @@ value="{{ major[0] }}">
 <input name="startFinal" type="datetime-local" value="{{reg[5]}}" required>
  <label>النهايه 3</label>
 <input name="endFinal" type="datetime-local" value="{{reg[6]}}" required>
-{%endfor%}
+
 <br><br>
 
 <button type="submit" class="add">حفظ</button>
@@ -235,8 +246,9 @@ value="{{ major[0] }}">
 إغلاق
 </button>
 
-</form>
 
+</form>
+{%endfor%}
 </div>
 </div>
 
