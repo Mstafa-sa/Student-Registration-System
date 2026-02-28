@@ -20,6 +20,10 @@ async def manage_courses_sections(request: Request,user: dict = Depends(get_curr
     if user["role"] != "Admin":
         raise HTTPException(status_code=403, detail="Access denied")
     with db_cursor(db) as cursor:
+        sql="select * from major  "
+        cursor.execute(sql)
+        majors = cursor.fetchall()
+    with db_cursor(db) as cursor:
       sql="select * from subject "
       cursor.execute(sql)
       subject=cursor.fetchall()
@@ -30,7 +34,7 @@ async def manage_courses_sections(request: Request,user: dict = Depends(get_curr
 
     response = templates.TemplateResponse(
         "manage_courses_sections.html",
-        {"request": request,"subject":subject,"section":section}
+        {"request": request,"subject":subject,"section":section,"majors":majors}
     )
 
     # 🔥 منع الكاش

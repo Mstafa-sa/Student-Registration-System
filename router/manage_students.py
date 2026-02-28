@@ -18,12 +18,16 @@ async def index(request: Request,user: dict = Depends(get_current_user),db=Depen
     if user["role"] != "Admin":
         raise HTTPException(status_code=403, detail="Access denied")
     with db_cursor(db) as cursor:
+        sql="select * from major  "
+        cursor.execute(sql)
+        majors = cursor.fetchall()
+    with db_cursor(db) as cursor:
       sql = "select * from user where role = %s"
       cursor.execute(sql,("student",))
       students = cursor.fetchall()
     response = templates.TemplateResponse(
         "manage_students.html",
-        {"request": request, "students": students}
+        {"request": request, "students": students,"majors": majors}
     )
 
     # 🔥 منع الكاش

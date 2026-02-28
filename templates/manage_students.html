@@ -16,6 +16,7 @@
               <li><a href="/ADM/reports"><i class="fas fa-chart-line"></i> التقارير</a></li>
             <li><a href="/ADM/manage_courses_sections"><i class="fas fa-book"></i> المواد والشعب</a></li>
              <li><a href="/ADM/manage_students" class="active"><i class="fas fa-users"></i> إدارة الطلاب</a></li>
+            <li><a href="/ADM/Registration_time"><i class="fas fa-clock"></i>وقت التسجيل</a></li>
              <li><a href="/ADM/Admin_Dashboard"><i class="fas fa-tachometer-alt"></i> الرئيسية</a></li>
         </ul>
     </nav>
@@ -86,9 +87,9 @@
                 <input type="email" name="email" placeholder="البريد الإلكتروني" required>
                 <select  name="Specialization" required>
                 <option value="" >اختر التخصص</option>
-                <option value="cs">cs</option>
-                <option value="css">css</option>
-                <option value="match">match</option>
+                  {%for major in majors%}
+                <option value="{{major[1]}}">{{major[1]}}</option>
+                {%endfor%}
                 </select>
                 <input type="password" name="password" placeholder="كلمة السر" required>
                 <input type="password" name="check_password" placeholder="تأكيد كلمة السر" required>
@@ -111,8 +112,12 @@
 
                 <input type="text" name="name" placeholder="الاسم الكامل" value="{{student[1]}}" required>
                 <input type="email" name="email" placeholder="البريد الإلكتروني" value="{{student[2]}}" required>
-                <input type="text" name="Specialization" placeholder="التخصص" value="{{student[4]}}" required>
-
+                 <select  name="Specialization" required>
+                <option value="{{student[4]}}" >{{student[4]}}</option>
+                  {%for major in majors%}
+                <option value="{{major[1]}}">{{major[1]}}</option>
+                {%endfor%}
+                </select>
 
                 <button type="submit"><i class="fas fa-save"></i> حفظ</button>
 
@@ -122,7 +127,7 @@
     </div>
     {% endfor %}
           {%if msege%}
-           <p>{{                        msege}}</p>
+           <p>{{msege}}</p>
           {%endif%}
 </body>
 </html>

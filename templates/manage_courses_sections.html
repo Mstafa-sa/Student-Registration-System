@@ -11,6 +11,7 @@
 <div class="topbar">
     <div class="topbar-menu">
         <a href="/ADM/Admin_Dashboard">الرئيسية</a>
+         <a href="/ADM/Registration_time">وقت التسجيل</a>
         <a href="/ADM/manage_students">إدارة الطلاب</a>
         <a href="/ADM/manage_courses_sections">المواد والشعب</a>
         <a href="/ADM/reports">التقارير</a>
@@ -33,7 +34,7 @@
 <th>رمز المادة</th>
 <th>اسم المادة</th>
 <th>الساعات</th>
-<th>رمز التخصص</th>
+<th> التخصص</th>
 <th>إجراءات</th>
 </tr>
 {%for course in subject%}
@@ -115,9 +116,9 @@
 <input name="hours" placeholder="الساعات">
 <select  name="majors_code" style="width: 400px;margin-bottom: 10px;height: 30px" required>
                 <option value="">اختر التخصص</option>
-                <option value="cs">cs</option>
-                <option value="cis">cis</option>
-                <option value="match">match</option>
+              {%for major in majors %}
+                <option value="{{major[1]}}">{{major[1]}}</option>
+                {%endfor%}
             </select>
 
 <button class="btn save">حفظ</button>
@@ -143,7 +144,13 @@
 <input name="update_name" value="{{course[2]}}">
 <input name="update_hours" value="{{course[1]}}">
 
-<input name="update_majors" value="{{course[4]}}">
+
+    <select  name="update_majors" style="width: 440px;margin-bottom: 10px;height: 30px" required>
+                <option value="{{course[4]}}">{{course[4]}}</option>
+              {%for major in majors %}
+                <option value="{{major[1]}}">{{major[1]}}</option>
+                {%endfor%}
+            </select>
 
 <button class="btn save">حفظ</button>
 <a href="#" class="btn cancel">إلغاء</a>

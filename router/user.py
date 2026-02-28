@@ -63,8 +63,12 @@ async def register(request: Request, email: str=Form(...), password: str=Form(..
 
     return templates.TemplateResponse("login.html", {"request": request ,"message":"Incorrect username or password"})
 @router.get("/signup", response_class=HTMLResponse)
-async def signup(request: Request):
-    return templates.TemplateResponse("signup.html", {"request": request})
+async def signup(request: Request,db=Depends(get_db)):
+    with db_cursor(db) as cursor:
+        sql="select * from major  "
+        cursor.execute(sql)
+        majors = cursor.fetchall()
+    return templates.TemplateResponse("signup.html", {"request": request,"majors":majors})
 @router.post("/signup", response_class=HTMLResponse)
 async def signup(request: Request,name: str=Form(...),email: str=Form(...),password: str=Form(...),
                  check_password:str=Form(...),Specialization:str=Form(...),hid:str=Form(...),db=Depends(get_db)):
