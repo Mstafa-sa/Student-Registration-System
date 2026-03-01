@@ -1593,3 +1593,492 @@
 2026-02-28 04:41:08,473 - INFO - Response Status: 200 | Time: 0.003s
 2026-02-28 04:41:10,137 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
 2026-02-28 04:41:10,146 - INFO - Response Status: 200 | Time: 0.009s
+2026-02-28 14:54:18,011 - INFO - Request: GET http://127.0.0.1:8001/
+2026-02-28 14:54:18,013 - INFO - Response Status: 404 | Time: 0.002s
+2026-02-28 14:54:18,232 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 14:54:18,234 - INFO - Response Status: 404 | Time: 0.002s
+2026-02-28 14:54:21,819 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-02-28 14:54:21,826 - INFO - Response Status: 200 | Time: 0.006s
+2026-02-28 14:54:28,066 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-02-28 14:54:28,259 - INFO - Response Status: 303 | Time: 0.193s
+2026-02-28 14:54:28,265 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 14:54:28,265 - INFO - Response Status: 200 | Time: 0.000s
+2026-02-28 14:54:34,663 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 14:54:34,686 - INFO - Response Status: 200 | Time: 0.023s
+2026-02-28 14:54:34,705 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 14:54:34,746 - INFO - Response Status: 304 | Time: 0.041s
+2026-02-28 14:55:38,011 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 14:55:38,063 - INFO - Response Status: 200 | Time: 0.053s
+2026-02-28 14:55:42,696 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 14:55:42,723 - INFO - Response Status: 200 | Time: 0.027s
+2026-02-28 14:55:43,802 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 14:55:43,803 - INFO - Response Status: 200 | Time: 0.001s
+2026-02-28 14:55:44,838 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 14:55:44,840 - INFO - Response Status: 200 | Time: 0.003s
+2026-02-28 14:55:47,051 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 14:55:47,052 - INFO - Response Status: 200 | Time: 0.001s
+2026-02-28 14:57:52,151 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 14:57:52,154 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 14:57:52,867 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 14:57:52,869 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 14:57:54,597 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 14:57:54,613 - INFO - Response Status: 200 | Time: 0.016s
+2026-02-28 14:57:57,426 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 14:57:57,493 - INFO - Response Status: 200 | Time: 0.066s
+2026-02-28 14:57:57,516 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-02-28 14:57:57,517 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 14:58:02,709 - INFO - Request: GET http://127.0.0.1:8001/ADM/reports
+2026-02-28 14:58:02,748 - INFO - Response Status: 200 | Time: 0.039s
+2026-02-28 14:58:02,765 - INFO - Request: GET http://127.0.0.1:8001/static/reports.css
+2026-02-28 14:58:02,767 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 14:58:05,464 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 14:58:05,466 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:01:01,033 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 15:01:01,038 - INFO - Response Status: 200 | Time: 0.005s
+2026-02-28 15:01:37,011 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 15:01:37,013 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:01:50,166 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 15:01:50,170 - INFO - Response Status: 200 | Time: 0.004s
+2026-02-28 15:17:16,343 - INFO - Request: GET http://127.0.0.1:8001/
+2026-02-28 15:17:16,345 - INFO - Response Status: 404 | Time: 0.002s
+2026-02-28 15:17:20,681 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-02-28 15:17:20,688 - INFO - Response Status: 200 | Time: 0.007s
+2026-02-28 15:17:23,407 - INFO - Request: GET http://127.0.0.1:8001/Auth/signup
+2026-02-28 15:17:23,438 - INFO - Response Status: 200 | Time: 0.031s
+2026-02-28 15:17:23,455 - INFO - Request: GET http://127.0.0.1:8001/static/signup.css
+2026-02-28 15:17:23,516 - INFO - Response Status: 200 | Time: 0.061s
+2026-02-28 15:17:51,313 - INFO - Request: GET http://127.0.0.1:8001/Auth/signup
+2026-02-28 15:17:51,328 - INFO - Response Status: 200 | Time: 0.016s
+2026-02-28 15:17:59,468 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:17:59,489 - INFO - Response Status: 200 | Time: 0.021s
+2026-02-28 15:18:10,683 - INFO - Request: POST http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:18:10,710 - INFO - Response Status: 302 | Time: 0.026s
+2026-02-28 15:18:10,713 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:18:10,724 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:18:15,543 - INFO - Request: GET http://127.0.0.1:8001/Auth/signup
+2026-02-28 15:18:15,560 - INFO - Response Status: 200 | Time: 0.016s
+2026-02-28 15:21:09,810 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:21:09,849 - INFO - Response Status: 200 | Time: 0.040s
+2026-02-28 15:22:27,939 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:22:27,958 - INFO - Response Status: 200 | Time: 0.019s
+2026-02-28 15:22:43,547 - INFO - Request: POST http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:22:43,567 - INFO - Response Status: 302 | Time: 0.020s
+2026-02-28 15:22:43,570 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:22:43,578 - INFO - Response Status: 200 | Time: 0.008s
+2026-02-28 15:22:46,261 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:22:46,284 - INFO - Response Status: 200 | Time: 0.023s
+2026-02-28 15:26:06,904 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:26:06,929 - INFO - Response Status: 200 | Time: 0.025s
+2026-02-28 15:26:40,456 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:26:40,474 - INFO - Response Status: 422 | Time: 0.018s
+2026-02-28 15:27:50,589 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:27:50,615 - INFO - Response Status: 200 | Time: 0.026s
+2026-02-28 15:27:51,418 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:27:51,432 - INFO - Response Status: 200 | Time: 0.014s
+2026-02-28 15:27:55,108 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:27:55,133 - INFO - Response Status: 303 | Time: 0.025s
+2026-02-28 15:27:55,137 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:27:55,151 - INFO - Response Status: 200 | Time: 0.014s
+2026-02-28 15:28:24,536 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:24,565 - INFO - Response Status: 200 | Time: 0.029s
+2026-02-28 15:28:25,350 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:25,367 - INFO - Response Status: 200 | Time: 0.018s
+2026-02-28 15:28:25,528 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:25,541 - INFO - Response Status: 200 | Time: 0.013s
+2026-02-28 15:28:25,756 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:25,769 - INFO - Response Status: 200 | Time: 0.013s
+2026-02-28 15:28:33,094 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:33,125 - INFO - Response Status: 200 | Time: 0.031s
+2026-02-28 15:28:39,246 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:39,273 - INFO - Response Status: 200 | Time: 0.027s
+2026-02-28 15:28:44,808 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:44,838 - INFO - Response Status: 200 | Time: 0.030s
+2026-02-28 15:28:52,075 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:52,099 - INFO - Response Status: 200 | Time: 0.024s
+2026-02-28 15:28:57,663 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:28:57,686 - INFO - Response Status: 200 | Time: 0.022s
+2026-02-28 15:29:05,738 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:29:05,764 - INFO - Response Status: 200 | Time: 0.025s
+2026-02-28 15:29:12,865 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:29:12,892 - INFO - Response Status: 200 | Time: 0.027s
+2026-02-28 15:30:15,414 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:30:15,433 - INFO - Response Status: 200 | Time: 0.019s
+2026-02-28 15:34:23,771 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:34:23,816 - INFO - Response Status: 200 | Time: 0.045s
+2026-02-28 15:35:37,526 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:35:37,543 - INFO - Response Status: 200 | Time: 0.017s
+2026-02-28 15:35:59,760 - INFO - Request: GET http://127.0.0.1:8001/ADM/reports
+2026-02-28 15:35:59,777 - INFO - Response Status: 200 | Time: 0.019s
+2026-02-28 15:36:03,112 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:36:03,140 - INFO - Response Status: 200 | Time: 0.028s
+2026-02-28 15:36:05,446 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:36:05,460 - INFO - Response Status: 200 | Time: 0.014s
+2026-02-28 15:36:06,186 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:36:06,198 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:36:07,389 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:36:07,412 - INFO - Response Status: 200 | Time: 0.023s
+2026-02-28 15:36:09,182 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 15:36:09,186 - INFO - Response Status: 200 | Time: 0.004s
+2026-02-28 15:36:38,520 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:36:38,532 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:36:39,770 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:36:39,782 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:36:41,902 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:36:41,913 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:37:22,693 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:22,715 - INFO - Response Status: 200 | Time: 0.022s
+2026-02-28 15:37:37,689 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:37,707 - INFO - Response Status: 200 | Time: 0.018s
+2026-02-28 15:37:46,716 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:46,735 - INFO - Response Status: 200 | Time: 0.019s
+2026-02-28 15:37:47,508 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:47,519 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:37:48,494 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:48,506 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:37:49,412 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:49,422 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:37:58,886 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:58,907 - INFO - Response Status: 200 | Time: 0.020s
+2026-02-28 15:37:59,317 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:59,329 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:37:59,537 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:59,548 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:37:59,782 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:37:59,793 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:38:00,133 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:38:00,145 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:38:00,386 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:38:00,397 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:38:04,210 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:38:04,219 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:38:04,241 - INFO - Request: GET http://127.0.0.1:8001/static/manage_students.css
+2026-02-28 15:38:04,298 - INFO - Response Status: 200 | Time: 0.057s
+2026-02-28 15:38:04,343 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:38:04,344 - INFO - Response Status: 404 | Time: 0.001s
+2026-02-28 15:38:26,935 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:38:26,957 - INFO - Response Status: 200 | Time: 0.022s
+2026-02-28 15:41:24,370 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:24,389 - INFO - Response Status: 200 | Time: 0.019s
+2026-02-28 15:41:25,011 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:25,021 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:41:25,437 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:25,449 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:41:28,736 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:28,751 - INFO - Response Status: 200 | Time: 0.015s
+2026-02-28 15:41:28,954 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:28,965 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:41:29,126 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:29,137 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:41:29,311 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:29,325 - INFO - Response Status: 200 | Time: 0.014s
+2026-02-28 15:41:33,679 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:33,692 - INFO - Response Status: 200 | Time: 0.013s
+2026-02-28 15:41:33,870 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:33,880 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:41:34,069 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:34,080 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:41:34,267 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:34,277 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:41:34,507 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:34,520 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:41:34,720 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:34,731 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:41:34,898 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:34,909 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:41:35,096 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:35,108 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:41:35,281 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:41:35,294 - INFO - Response Status: 200 | Time: 0.013s
+2026-02-28 15:43:02,972 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:43:02,991 - INFO - Response Status: 200 | Time: 0.018s
+2026-02-28 15:43:12,038 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 15:43:12,040 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:43:16,974 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:43:16,989 - INFO - Response Status: 200 | Time: 0.016s
+2026-02-28 15:43:19,594 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 15:43:19,597 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:43:21,510 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:43:21,520 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:44:51,150 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:51,177 - INFO - Response Status: 200 | Time: 0.027s
+2026-02-28 15:44:51,863 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:51,884 - INFO - Response Status: 200 | Time: 0.022s
+2026-02-28 15:44:52,483 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:52,494 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:44:55,236 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:55,251 - INFO - Response Status: 200 | Time: 0.014s
+2026-02-28 15:44:55,462 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:55,474 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:44:55,640 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:55,653 - INFO - Response Status: 200 | Time: 0.013s
+2026-02-28 15:44:55,815 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:55,827 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:44:56,011 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:44:56,022 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:46:05,648 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:46:05,667 - INFO - Response Status: 200 | Time: 0.019s
+2026-02-28 15:47:52,443 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:47:52,457 - INFO - Response Status: 200 | Time: 0.014s
+2026-02-28 15:47:52,949 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:47:52,959 - INFO - Response Status: 200 | Time: 0.009s
+2026-02-28 15:47:53,147 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:47:53,158 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:47:53,325 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:47:53,335 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:47:53,680 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:47:53,691 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:48:26,262 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:26,277 - INFO - Response Status: 200 | Time: 0.015s
+2026-02-28 15:48:26,651 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:26,662 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:48:26,851 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:26,861 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:48:27,035 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:27,050 - INFO - Response Status: 200 | Time: 0.015s
+2026-02-28 15:48:27,240 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:27,250 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:48:40,140 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:40,153 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:48:40,483 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:40,493 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:48:40,675 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:40,687 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:48:40,866 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:40,877 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:48:41,318 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:41,328 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:48:41,511 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:41,521 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:48:48,654 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:48,666 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:48:48,997 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:49,006 - INFO - Response Status: 200 | Time: 0.009s
+2026-02-28 15:48:49,246 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:49,257 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:48:49,401 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:48:49,411 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:49:29,879 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:29,894 - INFO - Response Status: 200 | Time: 0.015s
+2026-02-28 15:49:30,775 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:30,786 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:49:31,200 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:31,211 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:49:37,873 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:37,886 - INFO - Response Status: 200 | Time: 0.013s
+2026-02-28 15:49:37,903 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:37,905 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:38,287 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:38,298 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:49:38,321 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:38,322 - INFO - Response Status: 200 | Time: 0.001s
+2026-02-28 15:49:38,525 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:38,537 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:49:38,553 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:38,555 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:38,740 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:49:38,740 - INFO - Response Status: 404 | Time: 0.000s
+2026-02-28 15:49:40,830 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:40,840 - INFO - Response Status: 200 | Time: 0.009s
+2026-02-28 15:49:40,856 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:40,858 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:41,156 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:41,167 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:49:41,181 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:41,182 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:41,567 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:49:41,567 - INFO - Response Status: 404 | Time: 0.000s
+2026-02-28 15:49:43,389 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:43,399 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:49:43,415 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:43,416 - INFO - Response Status: 200 | Time: 0.001s
+2026-02-28 15:49:43,727 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:49:43,727 - INFO - Response Status: 404 | Time: 0.000s
+2026-02-28 15:49:44,200 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:44,211 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:49:44,227 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:44,228 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:44,559 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:49:44,559 - INFO - Response Status: 404 | Time: 0.000s
+2026-02-28 15:49:44,754 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:44,764 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:49:44,780 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:44,782 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:44,974 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:49:44,976 - INFO - Response Status: 404 | Time: 0.001s
+2026-02-28 15:49:44,997 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:45,006 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:49:45,025 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:45,027 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:45,161 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:45,171 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:49:45,188 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:45,189 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:49:45,348 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:45,361 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:49:45,379 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:45,380 - INFO - Response Status: 200 | Time: 0.001s
+2026-02-28 15:49:45,525 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:49:45,525 - INFO - Response Status: 404 | Time: 0.000s
+2026-02-28 15:49:45,559 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:49:45,569 - INFO - Response Status: 200 | Time: 0.010s
+2026-02-28 15:49:45,586 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:49:45,588 - INFO - Response Status: 200 | Time: 0.001s
+2026-02-28 15:49:45,741 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-02-28 15:49:45,741 - INFO - Response Status: 404 | Time: 0.000s
+2026-02-28 15:49:49,595 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:49:49,608 - INFO - Response Status: 200 | Time: 0.012s
+2026-02-28 15:49:51,239 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:49:51,250 - INFO - Response Status: 200 | Time: 0.011s
+2026-02-28 15:49:54,381 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-02-28 15:49:54,383 - INFO - Response Status: 200 | Time: 0.002s
+2026-02-28 15:50:21,404 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:50:21,428 - INFO - Response Status: 200 | Time: 0.023s
+2026-02-28 15:50:21,461 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:50:21,469 - INFO - Response Status: 304 | Time: 0.008s
+2026-02-28 15:50:47,622 - INFO - Request: POST http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:50:47,666 - INFO - Response Status: 302 | Time: 0.044s
+2026-02-28 15:50:47,674 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:50:47,698 - INFO - Response Status: 200 | Time: 0.024s
+2026-02-28 15:50:47,738 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:50:47,747 - INFO - Response Status: 304 | Time: 0.009s
+2026-02-28 15:51:12,898 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-02-28 15:51:12,932 - INFO - Response Status: 200 | Time: 0.034s
+2026-02-28 15:51:12,972 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-02-28 15:51:12,972 - INFO - Response Status: 304 | Time: 0.000s
+2026-02-28 15:51:14,074 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:51:14,099 - INFO - Response Status: 200 | Time: 0.025s
+2026-02-28 15:51:14,645 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-02-28 15:51:14,661 - INFO - Response Status: 200 | Time: 0.016s
+2026-02-28 15:51:23,417 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:51:23,449 - INFO - Response Status: 200 | Time: 0.033s
+2026-02-28 15:51:25,606 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-02-28 15:51:25,639 - INFO - Response Status: 200 | Time: 0.033s
+2026-02-28 15:51:27,350 - INFO - Request: GET http://127.0.0.1:8001/ADM/reports
+2026-02-28 15:51:27,376 - INFO - Response Status: 200 | Time: 0.026s
+2026-03-01 04:56:40,780 - INFO - Request: GET http://127.0.0.1:8001/
+2026-03-01 04:56:40,783 - INFO - Response Status: 404 | Time: 0.003s
+2026-03-01 04:56:40,815 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 04:56:40,815 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 04:56:43,816 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-01 04:56:43,928 - INFO - Response Status: 200 | Time: 0.112s
+2026-03-01 05:03:55,307 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-01 05:03:55,315 - INFO - Response Status: 200 | Time: 0.008s
+2026-03-01 05:04:00,802 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-01 05:04:01,112 - INFO - Response Status: 303 | Time: 0.310s
+2026-03-01 05:04:01,114 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-01 05:04:01,157 - INFO - Response Status: 200 | Time: 0.043s
+2026-03-01 05:04:06,276 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-01 05:04:06,300 - INFO - Response Status: 302 | Time: 0.024s
+2026-03-01 05:04:06,303 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-01 05:04:06,308 - INFO - Response Status: 200 | Time: 0.004s
+2026-03-01 05:04:17,905 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-01 05:04:18,082 - INFO - Response Status: 303 | Time: 0.177s
+2026-03-01 05:04:18,090 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:04:18,090 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:33,395 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:33,395 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:33,977 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:33,977 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:34,567 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:34,567 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:38,109 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-01 05:05:38,218 - INFO - Response Status: 303 | Time: 0.109s
+2026-03-01 05:05:38,226 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:38,226 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:42,700 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:42,700 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:44,635 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:44,635 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:44,676 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:44,687 - INFO - Response Status: 404 | Time: 0.011s
+2026-03-01 05:05:45,359 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:45,361 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-01 05:05:45,423 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:45,425 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-01 05:05:45,581 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:45,581 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:45,621 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:45,621 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:46,483 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:46,483 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:46,542 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:46,544 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-01 05:05:48,073 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:48,075 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-01 05:05:48,157 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:48,157 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:48,743 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:48,743 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:48,788 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:48,788 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:48,940 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:48,940 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:48,984 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:48,984 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:49,100 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:49,100 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:49,142 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:49,142 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:49,257 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:49,257 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:49,290 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:49,290 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:05:49,431 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacher_dashboard
+2026-03-01 05:05:49,431 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-01 05:05:49,457 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:05:49,457 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:07:53,908 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-01 05:07:53,926 - INFO - Response Status: 200 | Time: 0.018s
+2026-03-01 05:07:53,973 - INFO - Request: GET http://127.0.0.1:8001/static/login.css
+2026-03-01 05:07:54,061 - INFO - Response Status: 200 | Time: 0.088s
+2026-03-01 05:07:54,116 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:07:54,118 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-01 05:07:54,374 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-01 05:07:54,374 - INFO - Response Status: 200 | Time: 0.000s
+2026-03-01 05:07:54,584 - INFO - Request: GET http://127.0.0.1:8001/static/login.css
+2026-03-01 05:07:54,584 - INFO - Response Status: 200 | Time: 0.000s
+2026-03-01 05:07:54,675 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:07:54,675 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:07:54,701 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-01 05:07:54,709 - INFO - Response Status: 200 | Time: 0.008s
+2026-03-01 05:07:54,759 - INFO - Request: GET http://127.0.0.1:8001/static/login.css
+2026-03-01 05:07:54,761 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-01 05:07:54,905 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-01 05:07:54,905 - INFO - Response Status: 200 | Time: 0.000s
+2026-03-01 05:07:54,929 - INFO - Request: GET http://127.0.0.1:8001/static/login.css
+2026-03-01 05:07:54,929 - INFO - Response Status: 200 | Time: 0.000s
+2026-03-01 05:07:54,987 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-01 05:07:54,987 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:08:04,366 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-01 05:08:04,586 - INFO - Response Status: 303 | Time: 0.220s
+2026-03-01 05:08:04,588 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashboard
+2026-03-01 05:08:04,594 - INFO - Response Status: 404 | Time: 0.006s
+2026-03-01 05:11:27,910 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashboard
+2026-03-01 05:11:27,919 - INFO - Response Status: 404 | Time: 0.009s
+2026-03-01 05:11:28,467 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashboard
+2026-03-01 05:11:28,467 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:11:31,284 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-01 05:11:31,529 - INFO - Response Status: 303 | Time: 0.245s
+2026-03-01 05:11:31,537 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-01 05:12:49,714 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-01 05:12:49,725 - INFO - Response Status: 200 | Time: 0.011s
+2026-03-01 05:12:49,765 - INFO - Request: GET http://127.0.0.1:8001/static/teacherDashboard.css
+2026-03-01 05:12:49,768 - INFO - Response Status: 404 | Time: 0.004s
+2026-03-01 05:13:28,307 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-01 05:13:28,311 - INFO - Response Status: 200 | Time: 0.005s
+2026-03-01 05:13:28,339 - INFO - Request: GET http://127.0.0.1:8001/static/teacherDashbord.css
+2026-03-01 05:13:28,413 - INFO - Response Status: 200 | Time: 0.074s
+2026-03-01 05:13:28,736 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-01 05:13:28,736 - INFO - Response Status: 200 | Time: 0.000s
+2026-03-01 05:15:23,499 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-01 05:15:23,499 - INFO - Response Status: 200 | Time: 0.000s
+2026-03-01 05:15:23,538 - INFO - Request: GET http://127.0.0.1:8001/static/teacherDashboard.css
+2026-03-01 05:15:23,541 - INFO - Response Status: 404 | Time: 0.003s
+2026-03-01 05:15:24,603 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-01 05:15:24,612 - INFO - Response Status: 200 | Time: 0.008s
+2026-03-01 05:15:24,645 - INFO - Request: GET http://127.0.0.1:8001/static/teacherDashboard.css
+2026-03-01 05:15:24,652 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-01 05:15:37,706 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-01 05:15:37,713 - INFO - Response Status: 200 | Time: 0.007s
+2026-03-01 05:15:37,747 - INFO - Request: GET http://127.0.0.1:8001/static/teacherDashbord.css
+2026-03-01 05:15:37,749 - INFO - Response Status: 200 | Time: 0.002s

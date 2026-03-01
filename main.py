@@ -12,6 +12,7 @@ from router.reports import router as reports
 from router.courses_available import router as coursesAvailable
 from middleware.logging_middleware import LoggingMiddleware
 from router.admin import router as admin_router
+from router.teacher_dashbord import router as teacher_dashboard_router
 app = FastAPI()
 app.add_middleware(LoggingMiddleware)
 # 1️⃣ ربط مجلد static للـ CSS
@@ -61,6 +62,10 @@ app.include_router(coursesAvailable, prefix="/STU", tags=["user"],
                    # هنا نمرر templates كـ dependency
 )
 app.include_router(admin_router, prefix="/ADM", tags=["user"],
+                   responses={404: {"description": "Not found"}},
+                   # هنا نمرر templates كـ dependency
+)
+app.include_router(teacher_dashboard_router, prefix="/TEA", tags=["user"],
                    responses={404: {"description": "Not found"}},
                    # هنا نمرر templates كـ dependency
 )

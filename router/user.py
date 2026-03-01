@@ -46,6 +46,8 @@ async def register(request: Request, email: str=Form(...), password: str=Form(..
             redirect_url = "/STU/dashboard"
         elif role == "Admin":
             redirect_url = "/ADM/Admin_Dashboard"
+        elif role == "teacher":
+            redirect_url = "/TEA/teacherDashbord"
         else:
             raise HTTPException(status_code=403, detail="Invalid role")
 
