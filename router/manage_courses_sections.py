@@ -74,21 +74,40 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         with db_cursor(db) as cursor:
           sql = """
               SELECT id
-              FROM sections
-              WHERE from_time = %s and to_time = %s
-                AND (
-                  room_code = %s
-                 OR teacher_name = %s
-                  ) and todays=%s
-                   \
-              """
+                    FROM sections
+                    WHERE
+                        (
+                            %s < to_time
+                            AND %s > from_time
+                        )
+                    AND (
+                            room_code = %s
+                            OR teacher_name = %s
+                        )
+                    AND todays = %s
+                                  """
 
           cursor.execute(sql, (from_time,to_time,room,teacher,time_today))
           section_id = cursor.fetchone()
         if section_id ==None:
+            if from_time >= to_time:
+                return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject, "section": section, "messages": "ضيف الوقت بشكل صحيح"})
             with db_cursor(db) as cursor:
-              sql = "insert into sections (subject_id,teacher_name,room_code,from_time,to_time,todays,number_of_seats) values (%s,%s,%s,%s,%s,%s,%s)";
-              cursor.execute(sql, ( course,teacher,room,from_time,to_time,time_today,number_seat ))
+                sql="select id from user where full_name = %s and role=%s"
+                cursor.execute(sql, (teacher,"teacher"))
+                id_teacher = cursor.fetchone()
+            if id_teacher ==None:
+                return RedirectResponse("/ADM/manage_courses_sections", status_code=303)###########
+            with db_cursor(db) as cursor:
+                sql="select id from teacher where id_user = %s"
+                cursor.execute(sql, (id_teacher[0],))
+                id_teacher=cursor.fetchone()
+            with db_cursor(db) as cursor:
+                sql = "insert into  teacher_subject (id_user,id_subject) values (%s,%s)"
+                cursor.execute(sql, (id_teacher[0],course))
+            with db_cursor(db) as cursor:
+              sql = "insert into sections (subject_id,teacher_name,room_code,from_time,to_time,todays,number_of_seats) values (%s,%s,%s,%s,%s,%s,%s) ";
+              cursor.execute(sql, ( course,teacher,room,from_time,to_time,time_today,number_seat))
             return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,"messages":"لا يمكن إضافة الشعبة — يوجد تعارض في الوقت مع نفس القاعة أو نفس الدكتور في هذا اليوم."})
     elif action == "deleteCourse":
@@ -96,7 +115,6 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           sql = "select * from subject where id = %s"
           cursor.execute(sql, (course_id,))
           course_all = cursor.fetchone()
-
         with db_cursor(db) as cursor:
           sql = """SELECT id
                  FROM courses
@@ -105,7 +123,6 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                    AND Course_code = %s"""
           cursor.execute(sql, (course_all[1], course_all[2].strip(), course_all[3].strip()))
           courseId = cursor.fetchone()
-
         with db_cursor(db) as cursor:
           sql = "delete from subject where id = %s"
           cursor.execute(sql, (course_id,))
@@ -133,6 +150,19 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         with db_cursor(db) as cursor:
           sql = "delete from sections  where id = %s"
           cursor.execute(sql, (sections_id,))
+        with db_cursor(db) as cursor:
+            sql = "select id from user where full_name = %s and role=%s"
+            cursor.execute(sql, (course_all[2], "teacher"))
+            id_teacher = cursor.fetchone()
+        if id_teacher == None:
+            return RedirectResponse("/ADM/manage_courses_sections", status_code=303)  ###########
+        with db_cursor(db) as cursor:
+            sql = "select id from teacher where id_user = %s "
+            cursor.execute(sql, (id_teacher[0],))
+            id_teacher = cursor.fetchone()
+        with db_cursor(db) as cursor:
+            sql = "delete from teacher_subject  where id_user = %s and id_subject = %s"#######################
+            cursor.execute(sql, (id_teacher[0],course_all[1]))
         if courseId :
           with db_cursor(db) as cursor:
             sql="update courses set materialIsAvailable = %s where id = %s"
@@ -173,15 +203,18 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         with db_cursor(db) as cursor:
           sql = """
               SELECT id
-              FROM sections
-              WHERE from_time = %s and to_time = %s
-                AND (
-                  room_code = %s
-                 OR teacher_name = %s
-                  ) \
-                and todays=%s \
- \
-              """
+                        FROM sections
+                        WHERE
+                            (
+                                %s < to_time
+                                AND %s > from_time
+                            )
+                        AND (
+                                room_code = %s
+                                OR teacher_name = %s
+                            )
+                        AND todays = %s
+                                      """
           cursor.execute(sql,(update_from_time,update_to_time,update_room,update_teacher,update_today))
           update_section = cursor.fetchone()
         if update_section == None:
@@ -189,6 +222,30 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             sql = "select * from sections where id = %s"
             cursor.execute(sql, (update_id,))
             subject_all = cursor.fetchone()
+          if   update_from_time >= update_to_time:
+              return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,  "messages": "ضيف الوقت بشكل صحيح"})
+          if subject_all[2] != update_teacher :
+             with db_cursor(db) as cursor:
+                 sql = "select id from user where full_name = %s and role=%s"
+                 cursor.execute(sql, (update_teacher, "teacher"))
+                 id_teacher = cursor.fetchone()
+             with db_cursor(db) as cursor:
+                 sql = "select id from user where full_name = %s and role=%s"
+                 cursor.execute(sql, (subject_all[2], "teacher"))
+                 id_oldteacher = cursor.fetchone()
+             if id_teacher == None:
+                 return RedirectResponse("/ADM/manage_courses_sections", status_code=303)  ###########
+             with db_cursor(db) as cursor:
+                 sql = "select id from teacher where id_user = %s"
+                 cursor.execute(sql, (id_teacher[0],))
+                 id_teacher = cursor.fetchone()
+             with db_cursor(db) as cursor:
+                 sql = "select id from teacher where id_user = %s"
+                 cursor.execute(sql, (id_oldteacher[0],))
+                 id_oldteacher = cursor.fetchone()
+             with db_cursor(db) as cursor:
+                 sql = "update teacher_subject set id_user=%s where id_subject=%s and id_user=%s "
+                 cursor.execute(sql, (id_teacher[0], subject_all[1],id_oldteacher[0]))
           with db_cursor(db) as cursor:
             sql = """select id from courses where teacher=%s and Hall=%s and from_time=%s and today=%s and to_time=%s """
             cursor.execute(sql,(subject_all[2],subject_all[3],subject_all[4],subject_all[5],subject_all[6]))

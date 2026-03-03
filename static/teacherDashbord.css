@@ -43,6 +43,15 @@ transition:0.3s;
 .sidebar ul li:hover{
 background:#34495e;
 }
+.sidebar ul li a{
+color:white;
+text-decoration:none;
+display:block;
+}
+
+.sidebar ul li a:hover{
+background:#34495e;
+}
 
 /* Main */
 
