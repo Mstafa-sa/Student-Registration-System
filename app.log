@@ -2362,3 +2362,79 @@
 2026-03-03 03:15:20,216 - INFO - Response Status: 303 | Time: 0.056s
 2026-03-03 03:15:20,230 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
 2026-03-03 03:15:20,273 - INFO - Response Status: 200 | Time: 0.043s
+2026-03-03 06:21:51,539 - INFO - Request: GET http://127.0.0.1:8001/
+2026-03-03 06:21:51,541 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-03 06:21:51,609 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-03 06:21:51,610 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-03 06:21:54,372 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-03 06:21:54,400 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-03 06:22:21,636 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-03 06:22:21,815 - INFO - Response Status: 303 | Time: 0.178s
+2026-03-03 06:22:21,820 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-03 06:22:21,834 - INFO - Response Status: 200 | Time: 0.014s
+2026-03-03 06:22:21,856 - INFO - Request: GET http://127.0.0.1:8001/static/teacherDashbord.css
+2026-03-03 06:22:21,909 - INFO - Response Status: 200 | Time: 0.052s
+2026-03-03 06:24:18,478 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-03 06:24:18,500 - INFO - Response Status: 200 | Time: 0.021s
+2026-03-03 06:28:27,086 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-03 06:28:27,115 - INFO - Response Status: 200 | Time: 0.028s
+2026-03-03 06:31:12,112 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-03 06:31:12,153 - INFO - Response Status: 200 | Time: 0.040s
+2026-03-03 06:32:35,868 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-03 06:32:35,896 - INFO - Response Status: 200 | Time: 0.027s
+2026-03-03 06:32:48,709 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherDashbord
+2026-03-03 06:32:48,723 - INFO - Response Status: 200 | Time: 0.014s
+2026-03-03 06:35:43,310 - INFO - Request: GET http://127.0.0.1:8001/TEA/teacherCourses
+2026-03-03 06:35:43,328 - INFO - Response Status: 200 | Time: 0.018s
+2026-03-03 06:35:43,346 - INFO - Request: GET http://127.0.0.1:8001/static/teacherCourses.css
+2026-03-03 06:35:43,387 - INFO - Response Status: 200 | Time: 0.041s
+2026-03-03 06:51:25,404 - INFO - Request: GET http://127.0.0.1:8001/
+2026-03-03 06:51:25,406 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-03 06:51:25,432 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-03 06:51:25,434 - INFO - Response Status: 404 | Time: 0.002s
+2026-03-03 06:51:29,546 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-03 06:51:29,555 - INFO - Response Status: 200 | Time: 0.008s
+2026-03-03 06:51:47,334 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-03 06:51:47,458 - INFO - Response Status: 303 | Time: 0.123s
+2026-03-03 06:51:47,462 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-03 06:51:47,467 - INFO - Response Status: 200 | Time: 0.005s
+2026-03-03 06:51:50,670 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-03 06:51:50,701 - INFO - Response Status: 200 | Time: 0.032s
+2026-03-03 06:51:54,932 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-03 06:51:54,960 - INFO - Response Status: 303 | Time: 0.028s
+2026-03-03 06:51:54,963 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-03 06:51:54,975 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-03 06:52:14,307 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-03 06:52:14,327 - INFO - Response Status: 303 | Time: 0.020s
+2026-03-03 06:52:14,329 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-03 06:52:14,341 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-03 06:52:27,272 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-03 06:52:27,289 - INFO - Response Status: 302 | Time: 0.017s
+2026-03-03 06:52:27,292 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-03 06:52:27,293 - INFO - Response Status: 200 | Time: 0.001s
+2026-03-03 06:53:06,448 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-03 06:53:06,535 - INFO - Response Status: 200 | Time: 0.087s
+2026-03-03 06:53:19,917 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-03 06:53:20,001 - INFO - Response Status: 303 | Time: 0.085s
+2026-03-03 06:53:20,006 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-03 06:53:20,044 - INFO - Response Status: 200 | Time: 0.038s
+2026-03-03 06:53:20,061 - INFO - Request: GET http://127.0.0.1:8001/static/dashboard.css
+2026-03-03 06:53:20,117 - INFO - Response Status: 200 | Time: 0.056s
+2026-03-03 06:53:22,806 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-03 06:53:22,851 - INFO - Response Status: 200 | Time: 0.045s
+2026-03-03 06:53:22,866 - INFO - Request: GET http://127.0.0.1:8001/static/coursesAvailable.css
+2026-03-03 06:53:22,868 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-03 06:53:27,917 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-03 06:53:27,968 - INFO - Response Status: 200 | Time: 0.051s
+2026-03-03 06:53:27,982 - INFO - Request: GET http://127.0.0.1:8001/static/courses.css
+2026-03-03 06:53:27,985 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-03 06:53:32,549 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-03 06:53:32,559 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-03 06:53:35,688 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-03 06:53:35,700 - INFO - Response Status: 200 | Time: 0.013s
+2026-03-03 06:53:36,942 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-03 06:53:36,951 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-03 06:53:37,523 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-03 06:53:37,533 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-03 06:53:46,729 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-03 06:53:46,756 - INFO - Response Status: 200 | Time: 0.027s
