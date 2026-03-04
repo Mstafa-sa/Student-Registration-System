@@ -71,11 +71,12 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                             s.subject_code, \
                             sec.room_code, \
                             sec.id, \
-                            sec.teacher_name, \
+                            sec.teacher_id, \
                             sec.from_time, \
                             sec.todays,
                             sec.to_time,
-                            sec.number_of_seats
+                            sec.number_of_seats,
+                            s.id
                      FROM sections sec
                               JOIN subject s ON sec.subject_id = s.id
                      WHERE s.subject_code = %s
@@ -107,19 +108,19 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                         return templates.TemplateResponse("courses.html", {"request": request,
                                                                            "messages": "لا يوجد عدد مقاعد متاحه لتسجيل ",
                                                                            "course": Recorded_materials})
-                    with db_cursor(db) as cursor:
-                        sql="select * from registration_time reg join major m on  reg.id_major=m.id where  m.major_name=%s and (now() BETWEEN reg_start1 and reg_end1 or  now() BETWEEN reg_start2 and reg_end2 or now() BETWEEN reg_start3 and reg_end3) "
-                        cursor.execute(sql, (major,))
-                        true=cursor.fetchone()
-                    if true == None:
-                        return templates.TemplateResponse("courses.html", {"request": request,
-                                                                           "messages": "انتهى موعد التسجيل ",
-                                                                           "course": Recorded_materials})
+                    # with db_cursor(db) as cursor:
+                    #       sql="select * from registration_time reg join major m on  reg.id_major=m.id where  m.major_name=%s and (now() BETWEEN reg_start1 and reg_end1 or  now() BETWEEN reg_start2 and reg_end2 or now() BETWEEN reg_start3 and reg_end3) "
+                    #       cursor.execute(sql, (major,))
+                    #       true=cursor.fetchone()
+                    # if true == None:
+                    #       return templates.TemplateResponse("courses.html", {"request": request,
+                    #                                                          "messages": "انتهى موعد التسجيل ",
+                    #                                                          "course": Recorded_materials})
                     with db_cursor(db) as cursor:
                       sql = """
                       INSERT INTO courses
-                          (id_student,materialIsAvailable,Hall, from_time, teacher, article, today, hours,Course_code,to_time)
-                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s) \
+                          (id_student,materialIsAvailable,Hall, from_time, id_teacher, article, today, hours,Course_code,to_time,id_subject)
+                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s) \
                        """
                       cursor.execute(sql, (
                          id_student[0], # id_student
@@ -132,6 +133,8 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                          course[2],  # الساعات
                          course[3],#رمز المساق
                          course[9],
+                         course[11]
+
                         ))
                     with db_cursor(db) as cursor:
                       cursor.execute("update sections set number_of_seats=number_of_seats-1 where  room_code = %s and from_time=%s and to_time=%s and todays=%s ",

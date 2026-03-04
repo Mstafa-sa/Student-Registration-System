@@ -23,5 +23,10 @@ async def index(request: Request,user: dict = Depends(get_current_user),db=Depen
         sql="select count(id_user) from teacher_subject where id_user=%s"
         cursor.execute(sql,(id_teacher[0],))
         number_subject = cursor.fetchone()
+    with db_cursor(db) as cursor:
+        sql="select count(*) from courses where id_teacher=%s"
+        cursor.execute(sql,(id_teacher[0],))
+        number_student = cursor.fetchone()
 
-    return templates.TemplateResponse("teacherDashbord.html", {"request": request,"number_subject":number_subject})
+
+    return templates.TemplateResponse("teacherDashbord.html", {"request": request,"number_subject":number_subject,"number_student":number_student})

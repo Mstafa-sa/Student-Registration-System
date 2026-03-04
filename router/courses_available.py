@@ -25,13 +25,15 @@ async def courses_available(request: Request,user: dict = Depends(get_current_us
                     s.subject_code, \
                     sec.room_code, \
                     sec.id, \
-                    sec.teacher_name, \
+                    u.full_name, \
                     sec.from_time, \
                     sec.todays,
                     sec.to_time,
                     sec.number_of_seats
                    FROM sections sec
                    JOIN subject s ON sec.subject_id = s.id
+                   JOIN teacher t ON t.id = sec.teacher_id
+                    JOIN `user` u ON u.id = t.id_user 
                    WHERE major_code=%s\
                     """
       cursor.execute(sql,(major,))

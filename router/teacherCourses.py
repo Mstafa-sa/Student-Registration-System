@@ -14,6 +14,24 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 @router.get("/teacherCourses", response_class=HTMLResponse)
 async def teacherCourses(request: Request,user: dict = Depends(get_current_user),db=Depends(get_db)):
+    email = user["email"]
     with db_cursor(db) as cursor:
-        sql="select count(article) from courses  "
-    return templates.TemplateResponse("teacherCourses.html",{"request":request})
+        sql = "select t.id from user u join teacher t on u.id=t.id_user where u.email=%s"
+        cursor.execute(sql, (email,))
+        id_teacher = cursor.fetchone()
+    with db_cursor(db) as cursor:
+        sql="""select s.subject_name,
+           count(distinct sec.id) as total_sections,
+           count(distinct c.id_student) as total_students
+    from subject s
+    join teacher_subject t on t.id_subject = s.id
+    join sections sec on sec.subject_id = s.id
+    left join courses c 
+           on c.id_teacher = t.id_user
+           and c.id_subject = s.id
+    where t.id_user = %s
+    group by s.id, s.subject_name """
+        cursor.execute(sql, (id_teacher[0],))
+        num_subject=cursor.fetchall()
+
+    return templates.TemplateResponse("teacherCourses.html",{"request":request,"num_subject":num_subject})

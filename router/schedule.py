@@ -23,9 +23,11 @@ async def index(request: Request,user: dict = Depends(get_current_user),db=Depen
       cursor.execute(sql,(user_email,))
       id=cursor.fetchone()
     with db_cursor(db) as cursor:
-      sql="select * from courses where id_student=%s"
+      sql="""select * from courses s JOIN teacher t ON t.id = s.id_teacher
+         JOIN `user` u ON u.id = t.id_user where id_student=%s"""
       cursor.execute(sql,(id[0],))
       courses=cursor.fetchall()
+      print(courses)
     response = templates.TemplateResponse(
             "schedule.html",
             {"request": request,"courses":courses }
