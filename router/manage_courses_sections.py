@@ -62,10 +62,10 @@ JOIN `user` u ON u.id = t.id_user; """
     return response
 @router.post("/manage_courses_sections", response_class=HTMLResponse)
 async def manage_courses_sections(request: Request,subject_code: str = Form(None),subject_name: str = Form(None),hours: int = Form(None),majors_code: str = Form(None),user: dict = Depends(get_current_user),
-                                  room:str=Form(None),from_time:time=Form(None),action: str = Form(...),course:int=Form(None),teacher:str=Form(None),time_today:str=Form(None),course_id:int=Form(None),
-                                  sections_id:int=Form(None),update_id:int=Form(None),update_name:str=Form(None),update_hours:int=Form(None),update_majors:str=Form(None),update_code:str=Form(None),
-                                   update_teacher:str=Form(None),number_subject:int=Form(None),update_room:str=Form(None),update_from_time:time=Form(None),update_to_time:time=Form(None),update_today:str=Form(None),
-                                  number_seat:int=Form(None),to_time:time=Form(None),division:int=Form(None),db=Depends(get_db)):
+                                  room:str=Form(None),from_time:time=Form(None),action: str = Form(...),teacher:str=Form(None),time_today:str=Form(None),course_id:int=Form(None),
+                                  sections_id:int=Form(None),update_id:int=Form(None),number_subject:int=Form(None), number_seat:int=Form(None),to_time:time=Form(None),division:int=Form(None),db=Depends(get_db)):
+
+
     if user["role"] != "Admin":
         raise HTTPException(status_code=403, detail="Access denied")
     with db_cursor(db) as cursor:
@@ -133,7 +133,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
         if section_id ==None:
             with db_cursor(db) as cursor:
                 sql="select id from subject where id=%s  "
-                cursor.execute(sql, (course,))
+                cursor.execute(sql, (number_subject,))
                 id_subject=cursor.fetchone()
             if id_subject ==None:
                 return templates.TemplateResponse(
@@ -149,7 +149,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                 )
             with db_cursor(db) as cursor:
                 sql = "SELECT id FROM sections WHERE subject_id = %s AND division = %s"
-                cursor.execute(sql, (course, division))
+                cursor.execute(sql, (number_subject, division))
                 duplicate_division = cursor.fetchone()
             if duplicate_division:
                 return templates.TemplateResponse(
@@ -167,7 +167,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                 return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject, "section": section, "messages": "ضيف الوقت بشكل صحيح"})
             with db_cursor(db) as cursor:
                 sql = "SELECT id FROM sections WHERE subject_id = %s AND division = %s"
-                cursor.execute(sql, (course, division))
+                cursor.execute(sql, (number_subject, division))
                 duplicate_division = cursor.fetchone()
             if duplicate_division:
                 return templates.TemplateResponse(
@@ -183,10 +183,10 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                 )
             with db_cursor(db) as cursor:
                 sql = "insert into  teacher_subject (id_user,id_subject) values (%s,%s)"
-                cursor.execute(sql, (teacher,course))
+                cursor.execute(sql, (teacher,number_subject))
             with db_cursor(db) as cursor:
               sql = "insert into sections (subject_id,room_code,from_time,to_time,todays,number_of_seats,teacher_id,division) values (%s,%s,%s,%s,%s,%s,%s,%s) ";
-              cursor.execute(sql, ( course,room,from_time,to_time,time_today,number_seat,teacher,division))
+              cursor.execute(sql, ( number_subject,room,from_time,to_time,time_today,number_seat,teacher,division))
             return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,"majors": majors,    "teachers":teachers,"messages":"لا يمكن إضافة الشعبة — يوجد تعارض في الوقت مع نفس القاعة أو نفس الدكتور في هذا اليوم."})
     elif action == "deleteCourse":
@@ -244,7 +244,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
     elif action == "updateCourse":
         with db_cursor(db) as cursor:
           sql="select id from subject where id != %s and subject_code=%s and major_code=%s"
-          cursor.execute(sql,(update_id,update_code,update_majors))
+          cursor.execute(sql,(update_id,subject_code,majors_code))
           update_course=cursor.fetchone()
         if update_course ==None:
           with db_cursor(db) as cursor:
@@ -262,12 +262,12 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           with db_cursor(db) as cursor:
             sql = """update subject set   hours=%s , subject_name=%s , subject_code=%s , major_code=%s 
                 where id = %s """
-            cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),update_majors.strip(),update_id))
+            cursor.execute(sql,(hours,subject_name.strip(),subject_code.strip(),majors_code.strip(),update_id))
           if course_id :
 
             with db_cursor(db) as cursor:
               sql="update courses set  hours=%s , article=%s , Course_code=%s  where id = %s"
-              cursor.execute(sql,(update_hours,update_name.strip(),update_code.strip(),course_id[0]))
+              cursor.execute(sql,(hours,subject_name.strip(),subject_code.strip(),course_id[0]))
             return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
           return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return templates.TemplateResponse("manage_courses_sections.html", {"request": request, "subject": subject, "section": section,"majors": majors,"teachers":teachers, "messages": "الماده موجود لا يمكن اضافتها"})
@@ -288,7 +288,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                         AND todays = %s
                           AND id != %s
                                       """
-          cursor.execute(sql,(update_from_time,update_to_time,update_room,update_teacher,update_today,update_id))
+          cursor.execute(sql,(from_time,to_time,room,teacher,time_today,update_id))
           update_section = cursor.fetchone()
 
         if update_section == None:
@@ -328,16 +328,16 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                       "messages": "هذه الشعبة موجودة مسبقاً لنفس المادة"
                   }
               )
-          if update_from_time==None or update_to_time== None:
+          if from_time==None or to_time== None:
               return templates.TemplateResponse("manage_courses_sections.html",   {"request": request, "subject": subject, "section": section,"majors": majors,"teachers":teachers, "messages": "ضيف الوقت بشكل صحيح"})
-          if   update_from_time >= update_to_time:
+          if   from_time >= to_time:
               return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,"majors": majors,"teachers":teachers, "messages": "ضيف الوقت بشكل صحيح"})
 
-          if subject_all[8] != update_teacher :
+          if subject_all[8] != teacher :
 
              with db_cursor(db) as cursor:
                  sql = "update teacher_subject set id_user=%s where id_subject=%s and id_user=%s "
-                 cursor.execute(sql, (update_teacher, subject_all[1],subject_all[8]))
+                 cursor.execute(sql, (teacher, subject_all[1],subject_all[8]))
           with db_cursor(db) as cursor:
             sql = """select id from courses where id_teacher=%s and Hall=%s and from_time=%s and today=%s and to_time=%s and division=%s """
             cursor.execute(sql, (
@@ -352,11 +352,11 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
           with db_cursor(db) as cursor:
             sql = """update sections set   subject_id=%s , teacher_id=%s , room_code=%s , from_time=%s ,todays=%s,to_time=%s,number_of_seats=%s,division=%s
                 where id = %s """
-            cursor.execute(sql,(number_subject,update_teacher,update_room,update_from_time,update_today,update_to_time,number_seat,division,update_id))
+            cursor.execute(sql,(number_subject,teacher,room,from_time,time_today,to_time,number_seat,division,update_id))
           if course_id :
             with db_cursor(db) as cursor:
               sql="update courses set id_teacher=%s , Hall=%s , from_time=%s ,today=%s,to_time=%s,division=%s where id= %s "
-              cursor.execute(sql,(update_teacher,update_room,update_from_time,update_today,update_to_time,division,course_id[0]))
+              cursor.execute(sql,(teacher,room,from_time,time_today,to_time,division,course_id[0]))
             return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
           return RedirectResponse("/ADM/manage_courses_sections", status_code=303)
         return templates.TemplateResponse("manage_courses_sections.html",  {"request": request, "subject": subject, "section": section,"majors": majors,"teachers":teachers,"messages": "لا يمكن إضافة الشعبة — يوجد تعارض في الوقت مع نفس القاعة أو نفس الدكتور في هذا اليوم."})

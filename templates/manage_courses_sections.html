@@ -143,12 +143,12 @@
 <input type="hidden" name="action" value="updateCourse">
 <input type="hidden" name="update_id" value="{{course[0]}}">
 
-<input name="update_code" value="{{course[3]}}">
-<input name="update_name" value="{{course[2]}}">
-<input  type="number" name="update_hours" value="{{course[1]}}">
+<input name="subject_code" value="{{course[3]}}"  placeholder="رمز المادة" >
+<input name="subject_name" value="{{course[2]}}" placeholder="اسم المادة">
+<input  type="number" name="hours" value="{{course[1]}}" placeholder="الساعات">
 
 
-    <select  name="update_majors" style="width: 440px;margin-bottom: 10px;height: 30px" required>
+    <select  name="majors_code" style="width: 440px;margin-bottom: 10px;height: 30px" required>
                 <option value="{{course[4]}}">{{course[4]}}</option>
               {%for major in majors %}
                 <option value="{{major[1]}}">{{major[1]}}</option>
@@ -171,7 +171,7 @@
 
 <form method="post" action="">
  <input type="hidden" name="action" value="addSection" >
-<input   type="number" name="course" placeholder="رقم المادة">
+<input   type="number" name="number_subject" placeholder="رقم المادة">
 <input name="room" placeholder="القاعة">
 <input type="time" name="from_time" placeholder="الوقت البدايه">
     <input type="time" name="to_time" placeholder=" الوقت نهايه">
@@ -208,17 +208,17 @@
 
       <input type="number" name="number_subject" value="{{sections[1]}}" placeholder="رقم المادة">
 
-        <select  name="update_teacher" style="width: 400px;margin-bottom: 10px;height: 30px" required>
+        <select  name="teacher" style="width: 400px;margin-bottom: 10px;height: 30px" required>
                 <option value="{{sections[9]}}">{{sections[2]}}</option>
               {%for teacher in teachers %}
                 <option value="{{teacher[0]}}">{{teacher[1]}}</option>
                 {%endfor%}
             </select>
-      <input name="update_room" value="{{sections[3]}}" placeholder="القاعة">
+      <input name="room" value="{{sections[3]}}" placeholder="القاعة">
         <input type="number" name="division" value="{{sections[8]}}" placeholder="الشعبه">
-      <input  type="time" name="update_from_time" value="{{sections[4]}}" placeholder=" البدايه الوقت">
-          <input  type="time" name="update_to_time" value="{{sections[6]}}" placeholder="نهايه الوقت">
-      <input name="update_today" value="{{sections[5]}}" placeholder="الأيام">
+      <input  type="time" name="from_time" value="{{sections[4]}}" placeholder=" البدايه الوقت">
+          <input  type="time" name="to_time" value="{{sections[6]}}" placeholder="نهايه الوقت">
+      <input name="time_today" value="{{sections[5]}}" placeholder="الأيام">
        <input  type="number" name="number_seat" value="{{sections[7]}}" placeholder="عدد المقاعد ">
       <button class="btn save">حفظ</button>
       <a href="#" class="btn cancel">إلغاء</a>
