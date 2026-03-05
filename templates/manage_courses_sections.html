@@ -116,7 +116,7 @@
 <input type="hidden" name="action" value="addCourse">
 <input name="subject_code" placeholder="رمز المادة">
 <input name="subject_name" placeholder="اسم المادة">
-<input name="hours" placeholder="الساعات">
+<input type="number" name="hours" placeholder="الساعات">
 <select  name="majors_code" style="width: 400px;margin-bottom: 10px;height: 30px" required>
                 <option value="">اختر التخصص</option>
               {%for major in majors %}
@@ -145,7 +145,7 @@
 
 <input name="update_code" value="{{course[3]}}">
 <input name="update_name" value="{{course[2]}}">
-<input name="update_hours" value="{{course[1]}}">
+<input  type="number" name="update_hours" value="{{course[1]}}">
 
 
     <select  name="update_majors" style="width: 440px;margin-bottom: 10px;height: 30px" required>
@@ -171,12 +171,12 @@
 
 <form method="post" action="">
  <input type="hidden" name="action" value="addSection" >
-<input name="course" placeholder="رقم المادة">
+<input   type="number" name="course" placeholder="رقم المادة">
 <input name="room" placeholder="القاعة">
 <input type="time" name="from_time" placeholder="الوقت البدايه">
     <input type="time" name="to_time" placeholder=" الوقت نهايه">
  <input name="time_today" placeholder="الايام">
-  <input name="division" placeholder="الشعبه">
+  <input type="number" name="division" placeholder="الشعبه">
    <select  name="teacher" style="width: 400px;margin-bottom: 10px;height: 30px" required>
                 <option value="">اخترالمعلم</option>
               {%for teacher in teachers %}
@@ -184,7 +184,7 @@
                 {%endfor%}
             </select>
 
-<input name="number_seat" placeholder="عدد المقاعد ">
+<input  type="number" name="number_seat" placeholder="عدد المقاعد ">
 
 
 <button class="btn save">حفظ</button>
@@ -204,22 +204,22 @@
 
     <form method="post" action="">
       <input type="hidden" name="action" value="updateSection">
-      <input type="hidden" name="update_id" value="{{sections[0]}}">
+      <input  type="hidden" name="update_id" value="{{sections[0]}}">
 
-      <input name="number_subject" value="{{sections[1]}}" placeholder="رقم المادة">
+      <input type="number" name="number_subject" value="{{sections[1]}}" placeholder="رقم المادة">
 
         <select  name="update_teacher" style="width: 400px;margin-bottom: 10px;height: 30px" required>
-                <option value="">اخترالمعلم</option>
+                <option value="{{sections[9]}}">{{sections[2]}}</option>
               {%for teacher in teachers %}
                 <option value="{{teacher[0]}}">{{teacher[1]}}</option>
                 {%endfor%}
             </select>
       <input name="update_room" value="{{sections[3]}}" placeholder="القاعة">
-        <input name="division" value="{{sections[8]}}" placeholder="الشعبه">
+        <input type="number" name="division" value="{{sections[8]}}" placeholder="الشعبه">
       <input  type="time" name="update_from_time" value="{{sections[4]}}" placeholder=" البدايه الوقت">
           <input  type="time" name="update_to_time" value="{{sections[6]}}" placeholder="نهايه الوقت">
       <input name="update_today" value="{{sections[5]}}" placeholder="الأيام">
-       <input name="number_seat" value="{{sections[7]}}" placeholder="عدد المقاعد ">
+       <input  type="number" name="number_seat" value="{{sections[7]}}" placeholder="عدد المقاعد ">
       <button class="btn save">حفظ</button>
       <a href="#" class="btn cancel">إلغاء</a>
     </form>

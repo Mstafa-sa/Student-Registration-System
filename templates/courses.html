@@ -44,13 +44,13 @@
                     </div>
 
                     <div class="input-field">
-                        <label>اسم المساق</label>
-                        <input type="text" name="Course_name" value="اختياري" readonly>
+                        <label>القاعة</label>
+                        <input type="text" name="hall" placeholder="القاعة" required>
                     </div>
 
                     <div class="input-field">
                         <label>الشعبة</label>
-                        <input type="text" name="Division" required>
+                        <input type="number" name="Division" placeholder="الشعبة" required>
                     </div>
 
                     <div class="button-wrapper">
@@ -84,6 +84,7 @@
                         <th>الساعات</th>
                         <th>المدرس</th>
                         <th>الشعبة</th>
+                        <th>القاعة</th>
                         <th colspan="2" >الوقت</th>
                         <th>اليوم</th>
                         <th>الماده موجوده؟</th>
@@ -95,15 +96,16 @@
 
                       <td> <input type="checkbox" name="id" value="{{ i[0] }}"></td>
 
-                        <td>{{i[8]}}</td>
-                        <td>{{i[5]}}</td>
                         <td>{{i[7]}}</td>
                         <td>{{i[4]}}</td>
+                        <td>{{i[6]}}</td>
+                        <td>{{i[1]}}</td>
+                        <td>{{i[12]}}</td>
                         <td>{{i[2]}}</td>
-                        <td>{{i[3]}}</td>
-                         <td>{{i[11]}}</td>
-                         <td>{{i[6]}}</td>
-                        <td>{{i[9]}}</td>
+                         <td>{{i[3]}}</td>
+                         <td>{{i[10]}}</td>
+                         <td>{{i[5]}}</td>
+                        <td>{{i[8]}}</td>
                     </tr>
 
                   {%endfor%}

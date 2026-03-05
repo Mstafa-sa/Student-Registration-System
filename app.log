@@ -3229,3 +3229,507 @@
 2026-03-05 00:55:57,670 - INFO - Response Status: 200 | Time: 0.017s
 2026-03-05 00:56:05,119 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
 2026-03-05 00:56:05,134 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 00:58:06,833 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 00:58:06,834 - INFO - Response Status: 302 | Time: 0.001s
+2026-03-05 00:58:06,838 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 00:58:06,842 - INFO - Response Status: 200 | Time: 0.004s
+2026-03-05 00:58:32,708 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 00:58:32,812 - INFO - Response Status: 303 | Time: 0.103s
+2026-03-05 00:58:32,816 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 00:58:32,828 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-05 00:58:38,932 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 00:58:38,947 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 01:00:31,575 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 01:00:31,602 - INFO - Response Status: 200 | Time: 0.026s
+2026-03-05 01:01:11,637 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 01:01:11,652 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 01:01:28,250 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:01:28,266 - INFO - Response Status: 200 | Time: 0.016s
+2026-03-05 01:01:37,081 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:01:37,093 - INFO - Response Status: 303 | Time: 0.012s
+2026-03-05 01:01:37,095 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:01:37,107 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-05 01:01:37,367 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:01:37,376 - INFO - Response Status: 303 | Time: 0.009s
+2026-03-05 01:01:37,379 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:01:37,389 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 01:01:37,607 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:01:37,615 - INFO - Response Status: 303 | Time: 0.008s
+2026-03-05 01:01:37,618 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:01:37,629 - INFO - Response Status: 200 | Time: 0.011s
+2026-03-05 01:10:32,244 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:10:32,282 - INFO - Response Status: 200 | Time: 0.038s
+2026-03-05 01:10:33,021 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:10:33,045 - INFO - Response Status: 200 | Time: 0.025s
+2026-03-05 01:12:15,047 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:12:15,081 - INFO - Response Status: 200 | Time: 0.034s
+2026-03-05 01:13:35,304 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:13:35,339 - INFO - Response Status: 200 | Time: 0.036s
+2026-03-05 01:13:51,074 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 01:13:51,111 - INFO - Response Status: 200 | Time: 0.037s
+2026-03-05 01:14:13,141 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:14:13,174 - INFO - Response Status: 200 | Time: 0.033s
+2026-03-05 01:15:06,358 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:15:06,392 - INFO - Response Status: 200 | Time: 0.034s
+2026-03-05 01:15:17,699 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:20:08,739 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:20:08,793 - INFO - Response Status: 200 | Time: 0.055s
+2026-03-05 01:20:09,603 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:20:09,627 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 01:20:15,480 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:20:15,520 - INFO - Response Status: 303 | Time: 0.040s
+2026-03-05 01:20:15,525 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:20:15,547 - INFO - Response Status: 200 | Time: 0.022s
+2026-03-05 01:20:31,284 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:23:33,708 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:23:33,769 - INFO - Response Status: 200 | Time: 0.061s
+2026-03-05 01:23:37,921 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:23:37,962 - INFO - Response Status: 303 | Time: 0.041s
+2026-03-05 01:23:37,969 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:23:38,004 - INFO - Response Status: 200 | Time: 0.035s
+2026-03-05 01:23:52,776 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:23:52,818 - INFO - Response Status: 303 | Time: 0.041s
+2026-03-05 01:23:52,826 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:23:52,857 - INFO - Response Status: 200 | Time: 0.030s
+2026-03-05 01:24:11,449 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 01:24:11,485 - INFO - Response Status: 200 | Time: 0.037s
+2026-03-05 01:24:26,315 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:24:26,342 - INFO - Response Status: 200 | Time: 0.027s
+2026-03-05 01:28:42,819 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:28:42,851 - INFO - Response Status: 200 | Time: 0.032s
+2026-03-05 01:28:57,147 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:28:57,176 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 01:29:08,388 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:29:08,416 - INFO - Response Status: 200 | Time: 0.028s
+2026-03-05 01:39:56,335 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:39:56,395 - INFO - Response Status: 200 | Time: 0.060s
+2026-03-05 01:41:09,542 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:41:09,583 - INFO - Response Status: 200 | Time: 0.041s
+2026-03-05 01:41:31,241 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:41:31,270 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 01:41:47,213 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:41:47,248 - INFO - Response Status: 200 | Time: 0.035s
+2026-03-05 01:42:33,679 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:42:33,715 - INFO - Response Status: 200 | Time: 0.036s
+2026-03-05 01:43:24,044 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:43:24,076 - INFO - Response Status: 200 | Time: 0.031s
+2026-03-05 01:43:38,214 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:43:38,244 - INFO - Response Status: 200 | Time: 0.030s
+2026-03-05 01:44:08,884 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:44:08,929 - INFO - Response Status: 200 | Time: 0.044s
+2026-03-05 01:44:36,796 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:44:36,820 - INFO - Response Status: 200 | Time: 0.024s
+2026-03-05 01:45:30,377 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:45:30,412 - INFO - Response Status: 200 | Time: 0.034s
+2026-03-05 01:45:48,502 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:45:48,531 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 01:46:11,775 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:46:11,815 - INFO - Response Status: 200 | Time: 0.040s
+2026-03-05 01:46:50,982 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:46:51,018 - INFO - Response Status: 200 | Time: 0.036s
+2026-03-05 01:47:11,434 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:47:11,466 - INFO - Response Status: 200 | Time: 0.032s
+2026-03-05 01:50:42,394 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:50:42,451 - INFO - Response Status: 303 | Time: 0.056s
+2026-03-05 01:50:42,457 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:50:42,498 - INFO - Response Status: 200 | Time: 0.040s
+2026-03-05 01:50:45,496 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 01:50:45,519 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 01:51:03,873 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:51:03,907 - INFO - Response Status: 200 | Time: 0.033s
+2026-03-05 01:51:12,119 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:51:12,162 - INFO - Response Status: 303 | Time: 0.043s
+2026-03-05 01:51:12,169 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:51:12,191 - INFO - Response Status: 200 | Time: 0.022s
+2026-03-05 01:51:13,807 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 01:51:13,832 - INFO - Response Status: 200 | Time: 0.025s
+2026-03-05 01:53:08,694 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:53:08,769 - INFO - Response Status: 200 | Time: 0.075s
+2026-03-05 01:53:17,949 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:53:17,975 - INFO - Response Status: 422 | Time: 0.026s
+2026-03-05 01:53:27,940 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 01:53:27,961 - INFO - Response Status: 200 | Time: 0.021s
+2026-03-05 01:53:36,249 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:53:36,274 - INFO - Response Status: 200 | Time: 0.025s
+2026-03-05 01:59:57,600 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 01:59:57,674 - INFO - Response Status: 200 | Time: 0.074s
+2026-03-05 02:00:07,283 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 02:00:07,306 - INFO - Response Status: 422 | Time: 0.023s
+2026-03-05 02:01:40,248 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 02:01:40,281 - INFO - Response Status: 200 | Time: 0.033s
+2026-03-05 02:02:00,364 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 02:02:00,394 - INFO - Response Status: 200 | Time: 0.030s
+2026-03-05 02:02:46,348 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 02:02:46,350 - INFO - Response Status: 302 | Time: 0.002s
+2026-03-05 02:02:46,361 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 02:02:46,369 - INFO - Response Status: 200 | Time: 0.008s
+2026-03-05 02:02:54,943 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 02:02:55,155 - INFO - Response Status: 303 | Time: 0.213s
+2026-03-05 02:02:55,162 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-05 02:02:55,169 - INFO - Response Status: 200 | Time: 0.007s
+2026-03-05 02:03:04,003 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:03:04,057 - INFO - Response Status: 200 | Time: 0.055s
+2026-03-05 02:03:34,429 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:03:34,510 - INFO - Response Status: 200 | Time: 0.081s
+2026-03-05 02:04:08,468 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:04:08,515 - INFO - Response Status: 200 | Time: 0.047s
+2026-03-05 02:06:29,546 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:06:29,618 - INFO - Response Status: 200 | Time: 0.072s
+2026-03-05 02:10:52,114 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:10:52,203 - INFO - Response Status: 200 | Time: 0.089s
+2026-03-05 02:11:04,988 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:11:05,058 - INFO - Response Status: 303 | Time: 0.070s
+2026-03-05 02:11:05,071 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:11:05,105 - INFO - Response Status: 200 | Time: 0.035s
+2026-03-05 02:11:31,670 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:11:31,718 - INFO - Response Status: 303 | Time: 0.048s
+2026-03-05 02:11:31,724 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:11:31,753 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 02:13:17,579 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:17:37,098 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:17:37,186 - INFO - Response Status: 200 | Time: 0.088s
+2026-03-05 02:20:28,835 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:22:10,816 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:22:10,900 - INFO - Response Status: 200 | Time: 0.084s
+2026-03-05 02:22:34,001 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:22:34,044 - INFO - Response Status: 303 | Time: 0.043s
+2026-03-05 02:22:34,050 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:22:34,081 - INFO - Response Status: 200 | Time: 0.031s
+2026-03-05 02:23:19,348 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:23:19,407 - INFO - Response Status: 303 | Time: 0.059s
+2026-03-05 02:23:19,416 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:23:19,445 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 02:30:24,632 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:30:24,696 - INFO - Response Status: 200 | Time: 0.064s
+2026-03-05 02:30:55,561 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:34:51,029 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:34:51,101 - INFO - Response Status: 200 | Time: 0.072s
+2026-03-05 02:35:01,077 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:35:01,147 - INFO - Response Status: 303 | Time: 0.070s
+2026-03-05 02:35:01,154 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:35:01,188 - INFO - Response Status: 200 | Time: 0.034s
+2026-03-05 02:36:13,964 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:36:14,011 - INFO - Response Status: 303 | Time: 0.047s
+2026-03-05 02:36:14,016 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:36:14,039 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 02:36:46,021 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:36:46,065 - INFO - Response Status: 303 | Time: 0.044s
+2026-03-05 02:36:46,071 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:36:46,095 - INFO - Response Status: 200 | Time: 0.024s
+2026-03-05 02:37:13,148 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:37:13,186 - INFO - Response Status: 303 | Time: 0.038s
+2026-03-05 02:37:13,192 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:37:13,222 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 02:39:03,156 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:39:03,198 - INFO - Response Status: 303 | Time: 0.042s
+2026-03-05 02:39:03,204 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:39:03,227 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 02:47:15,486 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 02:47:15,490 - INFO - Response Status: 302 | Time: 0.005s
+2026-03-05 02:47:15,496 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 02:47:15,506 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 02:47:25,445 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 02:47:25,665 - INFO - Response Status: 303 | Time: 0.220s
+2026-03-05 02:47:25,673 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 02:47:25,698 - INFO - Response Status: 200 | Time: 0.026s
+2026-03-05 02:47:33,270 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 02:47:33,338 - INFO - Response Status: 200 | Time: 0.067s
+2026-03-05 02:47:36,394 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 02:47:36,432 - INFO - Response Status: 303 | Time: 0.038s
+2026-03-05 02:47:36,442 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 02:47:36,466 - INFO - Response Status: 200 | Time: 0.024s
+2026-03-05 02:47:41,171 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 02:47:41,199 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 02:47:43,659 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 02:47:43,681 - INFO - Response Status: 200 | Time: 0.022s
+2026-03-05 02:47:51,520 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 02:47:51,521 - INFO - Response Status: 302 | Time: 0.001s
+2026-03-05 02:47:51,531 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 02:47:51,534 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 02:47:56,691 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 02:47:56,843 - INFO - Response Status: 303 | Time: 0.151s
+2026-03-05 02:47:56,849 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-05 02:47:56,856 - INFO - Response Status: 200 | Time: 0.007s
+2026-03-05 02:47:58,846 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:47:58,887 - INFO - Response Status: 200 | Time: 0.041s
+2026-03-05 02:48:36,310 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:48:36,354 - INFO - Response Status: 303 | Time: 0.044s
+2026-03-05 02:48:36,362 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:48:36,386 - INFO - Response Status: 200 | Time: 0.024s
+2026-03-05 02:48:55,325 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:48:55,367 - INFO - Response Status: 303 | Time: 0.042s
+2026-03-05 02:48:55,373 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:48:55,406 - INFO - Response Status: 200 | Time: 0.033s
+2026-03-05 02:49:27,396 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:49:27,442 - INFO - Response Status: 303 | Time: 0.046s
+2026-03-05 02:49:27,450 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:49:27,480 - INFO - Response Status: 200 | Time: 0.030s
+2026-03-05 02:49:31,490 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 02:49:31,491 - INFO - Response Status: 302 | Time: 0.001s
+2026-03-05 02:49:31,501 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 02:49:31,503 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 02:49:41,440 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 02:49:41,618 - INFO - Response Status: 303 | Time: 0.179s
+2026-03-05 02:49:41,626 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 02:49:41,648 - INFO - Response Status: 200 | Time: 0.022s
+2026-03-05 02:49:44,531 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 02:49:44,554 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 02:49:47,156 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 02:49:47,180 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 02:50:15,023 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 02:50:15,060 - INFO - Response Status: 200 | Time: 0.038s
+2026-03-05 02:50:17,213 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 02:50:17,248 - INFO - Response Status: 200 | Time: 0.034s
+2026-03-05 02:50:28,688 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 02:50:28,746 - INFO - Response Status: 303 | Time: 0.058s
+2026-03-05 02:50:28,752 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 02:50:28,777 - INFO - Response Status: 200 | Time: 0.025s
+2026-03-05 02:50:53,617 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 02:50:53,659 - INFO - Response Status: 303 | Time: 0.042s
+2026-03-05 02:50:53,665 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 02:50:53,688 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 02:50:58,453 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 02:50:58,457 - INFO - Response Status: 302 | Time: 0.004s
+2026-03-05 02:50:58,478 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 02:50:58,505 - INFO - Response Status: 200 | Time: 0.027s
+2026-03-05 02:51:09,175 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 02:51:09,374 - INFO - Response Status: 303 | Time: 0.198s
+2026-03-05 02:51:09,380 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-05 02:51:09,388 - INFO - Response Status: 200 | Time: 0.008s
+2026-03-05 02:51:11,957 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 02:51:12,017 - INFO - Response Status: 200 | Time: 0.060s
+2026-03-05 02:51:38,538 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:03:20,403 - INFO - Request: GET http://127.0.0.1:8001/
+2026-03-05 03:03:20,404 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:03:20,424 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:03:20,425 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:03:25,370 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 03:03:25,380 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:03:25,388 - INFO - Request: GET http://127.0.0.1:8001/static/login.css
+2026-03-05 03:03:25,436 - INFO - Response Status: 200 | Time: 0.048s
+2026-03-05 03:03:31,342 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 03:03:31,511 - INFO - Response Status: 303 | Time: 0.169s
+2026-03-05 03:03:31,514 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-05 03:03:31,520 - INFO - Response Status: 200 | Time: 0.006s
+2026-03-05 03:03:31,544 - INFO - Request: GET http://127.0.0.1:8001/static/Admin_Dashboard.css
+2026-03-05 03:03:31,546 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:03:37,926 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:03:37,955 - INFO - Response Status: 200 | Time: 0.029s
+2026-03-05 03:03:37,972 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:03:37,974 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:03:46,752 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:03:46,768 - INFO - Response Status: 200 | Time: 0.016s
+2026-03-05 03:03:52,691 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:05:53,071 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:05:53,109 - INFO - Response Status: 200 | Time: 0.038s
+2026-03-05 03:05:56,541 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:05:56,551 - INFO - Response Status: 200 | Time: 0.011s
+2026-03-05 03:06:21,279 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:06:21,310 - INFO - Response Status: 303 | Time: 0.031s
+2026-03-05 03:06:21,314 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:06:21,327 - INFO - Response Status: 200 | Time: 0.014s
+2026-03-05 03:07:26,302 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:07:26,325 - INFO - Response Status: 303 | Time: 0.023s
+2026-03-05 03:07:26,328 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:07:26,340 - INFO - Response Status: 200 | Time: 0.013s
+2026-03-05 03:07:47,744 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:07:47,764 - INFO - Response Status: 303 | Time: 0.020s
+2026-03-05 03:07:47,767 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:07:47,780 - INFO - Response Status: 200 | Time: 0.013s
+2026-03-05 03:08:11,263 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:08:11,286 - INFO - Response Status: 303 | Time: 0.022s
+2026-03-05 03:08:11,289 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:08:11,304 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 03:09:41,335 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-03-05 03:09:41,355 - INFO - Response Status: 200 | Time: 0.020s
+2026-03-05 03:09:41,373 - INFO - Request: GET http://127.0.0.1:8001/static/admin.css
+2026-03-05 03:09:41,420 - INFO - Response Status: 200 | Time: 0.047s
+2026-03-05 03:09:44,974 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-03-05 03:09:45,005 - INFO - Response Status: 200 | Time: 0.030s
+2026-03-05 03:09:45,020 - INFO - Request: GET http://127.0.0.1:8001/static/manage_students.css
+2026-03-05 03:09:45,055 - INFO - Response Status: 200 | Time: 0.035s
+2026-03-05 03:09:48,767 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:09:48,794 - INFO - Response Status: 200 | Time: 0.027s
+2026-03-05 03:14:00,664 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:00,684 - INFO - Response Status: 200 | Time: 0.020s
+2026-03-05 03:14:00,699 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:00,701 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:00,717 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:00,717 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:01,067 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:01,076 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:14:01,091 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:01,092 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:01,101 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:01,102 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:01,311 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:01,320 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:14:01,338 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:01,339 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:01,350 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:01,350 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:01,536 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:01,545 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-05 03:14:01,561 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:01,563 - INFO - Response Status: 200 | Time: 0.001s
+2026-03-05 03:14:01,572 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:01,573 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:02,908 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:02,918 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:14:02,932 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:02,934 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:02,950 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:02,951 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:03,215 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:03,225 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:14:03,241 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:03,242 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:03,252 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:03,253 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:03,919 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:03,928 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-05 03:14:03,946 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:03,948 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:03,957 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:03,957 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:04,117 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:04,127 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:14:04,142 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:04,143 - INFO - Response Status: 200 | Time: 0.001s
+2026-03-05 03:14:04,155 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:04,155 - INFO - Response Status: 404 | Time: 0.000s
+2026-03-05 03:14:06,821 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:06,830 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-05 03:14:06,847 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:06,848 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:06,858 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:06,859 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:07,009 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:07,022 - INFO - Response Status: 200 | Time: 0.013s
+2026-03-05 03:14:07,039 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:07,041 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:07,051 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:07,051 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:07,178 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:07,189 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-05 03:14:07,205 - INFO - Request: GET http://127.0.0.1:8001/static/manage.css
+2026-03-05 03:14:07,206 - INFO - Response Status: 200 | Time: 0.002s
+2026-03-05 03:14:07,217 - INFO - Request: GET http://127.0.0.1:8001/favicon.ico
+2026-03-05 03:14:07,218 - INFO - Response Status: 404 | Time: 0.001s
+2026-03-05 03:14:07,345 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:07,353 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-05 03:14:08,338 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:08,349 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-05 03:14:08,695 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:08,706 - INFO - Response Status: 200 | Time: 0.011s
+2026-03-05 03:14:08,867 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:08,877 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:14:09,189 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:09,201 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-05 03:14:44,513 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:44,541 - INFO - Response Status: 303 | Time: 0.028s
+2026-03-05 03:14:44,544 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:14:44,559 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 03:15:28,513 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:15:28,535 - INFO - Response Status: 200 | Time: 0.022s
+2026-03-05 03:15:29,020 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:15:29,031 - INFO - Response Status: 200 | Time: 0.010s
+2026-03-05 03:15:40,600 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_students
+2026-03-05 03:15:40,611 - INFO - Response Status: 200 | Time: 0.011s
+2026-03-05 03:15:53,529 - INFO - Request: GET http://127.0.0.1:8001/ADM/Registration_time
+2026-03-05 03:15:53,544 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 03:16:03,299 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-05 03:16:03,302 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:16:05,403 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 03:16:05,405 - INFO - Response Status: 302 | Time: 0.002s
+2026-03-05 03:16:05,409 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 03:16:05,413 - INFO - Response Status: 200 | Time: 0.004s
+2026-03-05 03:16:14,626 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 03:16:14,744 - INFO - Response Status: 303 | Time: 0.118s
+2026-03-05 03:16:14,749 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 03:16:14,771 - INFO - Response Status: 200 | Time: 0.023s
+2026-03-05 03:16:14,793 - INFO - Request: GET http://127.0.0.1:8001/static/dashboard.css
+2026-03-05 03:16:14,795 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:16:43,747 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 03:16:43,762 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 03:16:43,779 - INFO - Request: GET http://127.0.0.1:8001/static/courses.css
+2026-03-05 03:16:43,782 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:16:47,670 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 03:27:59,981 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 03:28:00,006 - INFO - Response Status: 200 | Time: 0.025s
+2026-03-05 03:28:02,386 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 03:28:02,387 - INFO - Response Status: 302 | Time: 0.001s
+2026-03-05 03:28:02,393 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 03:28:02,396 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:28:09,178 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 03:28:09,279 - INFO - Response Status: 303 | Time: 0.100s
+2026-03-05 03:28:09,283 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-05 03:28:09,286 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:28:11,513 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:28:11,544 - INFO - Response Status: 200 | Time: 0.031s
+2026-03-05 03:28:50,430 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:28:50,445 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 03:29:14,734 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:29:14,756 - INFO - Response Status: 303 | Time: 0.022s
+2026-03-05 03:29:14,759 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:29:14,770 - INFO - Response Status: 200 | Time: 0.011s
+2026-03-05 03:29:20,178 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 03:29:20,179 - INFO - Response Status: 302 | Time: 0.000s
+2026-03-05 03:29:20,182 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 03:29:20,183 - INFO - Response Status: 200 | Time: 0.001s
+2026-03-05 03:29:28,859 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 03:29:28,941 - INFO - Response Status: 303 | Time: 0.082s
+2026-03-05 03:29:28,945 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 03:29:28,957 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-05 03:29:31,330 - INFO - Request: GET http://127.0.0.1:8001/STU/coursesAvailable
+2026-03-05 03:29:31,344 - INFO - Response Status: 200 | Time: 0.014s
+2026-03-05 03:29:31,359 - INFO - Request: GET http://127.0.0.1:8001/static/coursesAvailable.css
+2026-03-05 03:29:31,397 - INFO - Response Status: 200 | Time: 0.038s
+2026-03-05 03:29:36,129 - INFO - Request: GET http://127.0.0.1:8001/STU/schedule
+2026-03-05 03:29:36,143 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 03:29:36,160 - INFO - Request: GET http://127.0.0.1:8001/static/schedule.css
+2026-03-05 03:29:36,162 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:29:37,337 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 03:29:37,345 - INFO - Response Status: 200 | Time: 0.008s
+2026-03-05 03:29:44,663 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 03:29:44,683 - INFO - Response Status: 200 | Time: 0.020s
+2026-03-05 03:30:14,294 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 03:30:14,325 - INFO - Response Status: 303 | Time: 0.031s
+2026-03-05 03:30:14,328 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 03:30:14,345 - INFO - Response Status: 200 | Time: 0.017s
+2026-03-05 03:30:24,064 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 03:30:24,065 - INFO - Response Status: 302 | Time: 0.001s
+2026-03-05 03:30:24,070 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 03:30:24,073 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:30:31,264 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 03:30:31,365 - INFO - Response Status: 303 | Time: 0.101s
+2026-03-05 03:30:31,369 - INFO - Request: GET http://127.0.0.1:8001/ADM/Admin_Dashboard
+2026-03-05 03:30:31,372 - INFO - Response Status: 200 | Time: 0.003s
+2026-03-05 03:30:33,655 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:30:33,679 - INFO - Response Status: 200 | Time: 0.024s
+2026-03-05 03:30:37,814 - INFO - Request: POST http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:30:37,837 - INFO - Response Status: 303 | Time: 0.023s
+2026-03-05 03:30:37,840 - INFO - Request: GET http://127.0.0.1:8001/ADM/manage_courses_sections
+2026-03-05 03:30:37,853 - INFO - Response Status: 200 | Time: 0.012s
+2026-03-05 03:30:38,968 - INFO - Request: GET http://127.0.0.1:8001/STU/log_out
+2026-03-05 03:30:38,969 - INFO - Response Status: 302 | Time: 0.001s
+2026-03-05 03:30:38,972 - INFO - Request: GET http://127.0.0.1:8001/Auth/login
+2026-03-05 03:30:38,972 - INFO - Response Status: 200 | Time: 0.001s
+2026-03-05 03:30:48,284 - INFO - Request: POST http://127.0.0.1:8001/Auth/login
+2026-03-05 03:30:48,369 - INFO - Response Status: 303 | Time: 0.085s
+2026-03-05 03:30:48,373 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 03:30:48,387 - INFO - Response Status: 200 | Time: 0.015s
+2026-03-05 03:30:51,316 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 03:30:51,324 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-05 03:30:55,562 - INFO - Request: POST http://127.0.0.1:8001/STU/courses
+2026-03-05 03:30:55,576 - INFO - Response Status: 303 | Time: 0.015s
+2026-03-05 03:30:55,579 - INFO - Request: GET http://127.0.0.1:8001/STU/courses
+2026-03-05 03:30:55,588 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-05 03:31:09,573 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 03:31:09,583 - INFO - Response Status: 200 | Time: 0.009s
+2026-03-05 03:32:58,638 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 03:32:58,662 - INFO - Response Status: 200 | Time: 0.024s
+2026-03-05 03:32:59,142 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 03:32:59,153 - INFO - Response Status: 200 | Time: 0.011s
+2026-03-05 03:32:59,505 - INFO - Request: GET http://127.0.0.1:8001/STU/dashboard
+2026-03-05 03:32:59,515 - INFO - Response Status: 200 | Time: 0.010s

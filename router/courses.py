@@ -29,7 +29,22 @@ async def courses(request: Request,user: dict = Depends(get_current_user),db=Dep
       id_student = cursor.fetchone()
     if id_student:
             with db_cursor(db) as cursor:
-              sql="select * from courses where id_student = %s"
+              sql="""select  
+                     c.id,
+                     u.full_name,
+                     c.Hall,
+                     c.from_time,
+                     c.article,
+                     c.today,
+                     c.hours,
+                     c.Course_code,
+                     c.materialIsAvailable,
+                     c.Registration_date,
+                     c.to_time,
+                     c.id_subject,
+                     c.division
+                     from courses c join teacher t on t.id= c.id_teacher
+                     join user u on u.id=t.id_user where id_student = %s"""
               cursor.execute(sql, (id_student[0],))
               course=cursor.fetchall()
 
@@ -46,7 +61,7 @@ async def courses(request: Request,user: dict = Depends(get_current_user),db=Dep
     return templates.TemplateResponse("courses.html", {"request": request, })#note
 
 @router.post("/courses", response_class=HTMLResponse)
-async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(None)
+async def courses(request: Request,Course_code:str=Form(None),Division:int=Form(None),hall:str=Form(None)
                   ,method: str = Form(...),id:list[int]=Form(None),user: dict = Depends(get_current_user),db=Depends(get_db)):
     if method == "post":
         if user["role"] != "student":
@@ -59,10 +74,32 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
           id_student = cursor.fetchone()
         if id_student:
              with db_cursor(db) as cursor:
-               sql = "select * from courses where id_student = %s"
-               cursor.execute(sql, (id_student[0],))
-               Recorded_materials = cursor.fetchall()
-             if Course_code and Division:
+                 sql = """select c.id,
+                            u.full_name,
+                            c.Hall,
+                            c.from_time,
+                            c.article,
+                            c.today,
+                            c.hours,
+                            c.Course_code,
+                            c.materialIsAvailable,
+                            c.Registration_date,
+                            c.to_time,
+                            c.id_subject,
+                            c.division
+                        from courses c join teacher t on t.id= c.id_teacher
+                                       join user u on u.id=t.id_user where id_student = %s"""
+                 cursor.execute(sql, (id_student[0],))
+             Recorded_materials = cursor.fetchall()
+             if Course_code and Division and hall:
+               with db_cursor(db) as cursor:
+                   sql="select id from sections where division = %s"
+                   cursor.execute(sql, (Division,))
+                   id_section = cursor.fetchone()
+               if   id_section==None:
+                   return templates.TemplateResponse("courses.html", {"request": request,
+                                                                      "messages": "هذه الشعبه غير موجوده ",
+                                                                      "course": Recorded_materials})
                with db_cursor(db) as cursor:
                  sql = """
                      SELECT s.subject_name, \
@@ -76,14 +113,17 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                             sec.todays,
                             sec.to_time,
                             sec.number_of_seats,
-                            s.id
+                            s.id,
+                            sec.division
+                         
                      FROM sections sec
                               JOIN subject s ON sec.subject_id = s.id
                      WHERE s.subject_code = %s
                        AND sec.room_code = %s \
                          and  s.major_code=%s
+                         and sec.division=%s
                      """
-                 cursor.execute(sql,(Course_code, Division,major))
+                 cursor.execute(sql,(Course_code, hall,major,Division))
                  course=cursor.fetchone()# name
                if course:
                 number_seat = course[10]
@@ -108,19 +148,19 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                         return templates.TemplateResponse("courses.html", {"request": request,
                                                                            "messages": "لا يوجد عدد مقاعد متاحه لتسجيل ",
                                                                            "course": Recorded_materials})
-                    # with db_cursor(db) as cursor:
-                    #       sql="select * from registration_time reg join major m on  reg.id_major=m.id where  m.major_name=%s and (now() BETWEEN reg_start1 and reg_end1 or  now() BETWEEN reg_start2 and reg_end2 or now() BETWEEN reg_start3 and reg_end3) "
-                    #       cursor.execute(sql, (major,))
-                    #       true=cursor.fetchone()
-                    # if true == None:
-                    #       return templates.TemplateResponse("courses.html", {"request": request,
-                    #                                                          "messages": "انتهى موعد التسجيل ",
-                    #                                                          "course": Recorded_materials})
+                    with db_cursor(db) as cursor:
+                             sql="select * from registration_time reg join major m on  reg.id_major=m.id where  m.major_name=%s and (now() BETWEEN reg_start1 and reg_end1 or  now() BETWEEN reg_start2 and reg_end2 or now() BETWEEN reg_start3 and reg_end3) "
+                             cursor.execute(sql, (major,))
+                             true=cursor.fetchone()
+                    if true == None:
+                             return templates.TemplateResponse("courses.html", {"request": request,
+                                                                                "messages": "انتهى موعد التسجيل ",
+                                                                                "course": Recorded_materials})
                     with db_cursor(db) as cursor:
                       sql = """
                       INSERT INTO courses
-                          (id_student,materialIsAvailable,Hall, from_time, id_teacher, article, today, hours,Course_code,to_time,id_subject)
-                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s) \
+                          (id_student,materialIsAvailable,Hall, from_time, id_teacher, article, today, hours,Course_code,to_time,id_subject,division)
+                      VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s) \
                        """
                       cursor.execute(sql, (
                          id_student[0], # id_student
@@ -133,12 +173,13 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
                          course[2],  # الساعات
                          course[3],#رمز المساق
                          course[9],
-                         course[11]
+                         course[11],
+                         course[12]
 
                         ))
                     with db_cursor(db) as cursor:
                       cursor.execute("update sections set number_of_seats=number_of_seats-1 where  room_code = %s and from_time=%s and to_time=%s and todays=%s ",
-                                   ( Division,course[7],course[9],course[8]))
+                                   ( hall,course[7],course[9],course[8]))
                     return RedirectResponse(url="/STU/courses",status_code=303)
                   return templates.TemplateResponse("courses.html", {"request": request, "messages": "لا تستطيع التسجيل اكثر من 21 ساعه",  "course": Recorded_materials})
                 return templates.TemplateResponse("courses.html", {"request": request, "messages": "الماده موجوده او امسجل بنفس الوقت","course":Recorded_materials})
@@ -157,6 +198,13 @@ async def courses(request: Request,Course_code:str=Form(None),Division:str=Form(
           cursor.execute(sql, (i,))
         with db_cursor(db) as cursor:
           cursor.execute(
-            "update sections set number_of_seats=number_of_seats+1 where  room_code = %s and from_time=%s and to_time=%s and todays=%s ",
-            ( course[2], course[3], course[11], course[6]))
+            "select id from sections  where  room_code = %s and from_time=%s and to_time=%s and todays=%s and division=%s ",
+            ( course[2], course[3], course[11], course[6],course[13]))
+          id_sections=cursor.fetchone()
+        if id_sections==None:
+            return RedirectResponse(url="/STU/courses", status_code=303)
+        with db_cursor(db) as cursor:
+          cursor.execute(
+            "update sections set number_of_seats=number_of_seats+1 where  room_code = %s and from_time=%s and to_time=%s and todays=%s and division=%s ",
+            ( course[2], course[3], course[11], course[6],course[13]))
       return RedirectResponse(url="/STU/courses", status_code=303)

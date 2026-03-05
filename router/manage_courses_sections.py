@@ -42,7 +42,8 @@ async def manage_courses_sections(request: Request,user: dict = Depends(get_curr
     s.todays,
     s.to_time,
     s.number_of_seats,
-    s.division       
+    s.division,
+    s.teacher_id     
 FROM sections s
 JOIN teacher t ON t.id = s.teacher_id
 JOIN `user` u ON u.id = t.id_user; """
@@ -87,7 +88,8 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                        s.todays,
                        s.to_time,
                        s.number_of_seats,
-                        s.division   
+                        s.division,
+                         s.teacher_id   
                    FROM sections s
                             JOIN teacher t ON t.id = s.teacher_id
                             JOIN `user` u ON u.id = t.id_user; """
@@ -221,8 +223,10 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                    and Hall = %s \
                    and from_time = %s \
                    and today = %s 
-                     and to_time=%s"""
-          cursor.execute(sql, (course_all[8], course_all[3], course_all[4], course_all[5],course_all[6]))
+                     and to_time=%s
+                     and division=%s
+                """
+          cursor.execute(sql, (course_all[7], course_all[2], course_all[3], course_all[4],course_all[5],course_all[8]))
           courseId = cursor.fetchone()
         with db_cursor(db) as cursor:
           sql = "delete from sections  where id = %s"
@@ -230,7 +234,7 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
 
         with db_cursor(db) as cursor:
             sql = "delete from teacher_subject  where id_user = %s and id_subject = %s"#######################
-            cursor.execute(sql, (course_all[8],course_all[1]))
+            cursor.execute(sql, (course_all[7],course_all[1]))
         if courseId :
           with db_cursor(db) as cursor:
             sql="update courses set materialIsAvailable = %s where id = %s"
@@ -309,8 +313,8 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
             cursor.execute(sql, (update_id,))
             subject_all = cursor.fetchone()
           with db_cursor(db) as cursor:
-              sql = "SELECT id FROM sections WHERE subject_id = %s AND division = %s"
-              cursor.execute(sql, (number_subject, division))
+              sql = "SELECT id FROM sections WHERE subject_id = %s AND division = %s and id!=%s"
+              cursor.execute(sql, (number_subject, division,update_id))
               duplicate_division = cursor.fetchone()
           if duplicate_division:
               return templates.TemplateResponse(
@@ -336,7 +340,14 @@ async def manage_courses_sections(request: Request,subject_code: str = Form(None
                  cursor.execute(sql, (update_teacher, subject_all[1],subject_all[8]))
           with db_cursor(db) as cursor:
             sql = """select id from courses where id_teacher=%s and Hall=%s and from_time=%s and today=%s and to_time=%s and division=%s """
-            cursor.execute(sql,(subject_all[8],subject_all[3],subject_all[4],subject_all[5],subject_all[6],subject_all[8]))
+            cursor.execute(sql, (
+                subject_all[7],  # teacher_id
+                subject_all[2],  # room
+                subject_all[3],  # from_time
+                subject_all[4],  # today
+                subject_all[5],  # to_time
+                subject_all[8]  # division
+            ))
             course_id = cursor.fetchone()
           with db_cursor(db) as cursor:
             sql = """update sections set   subject_id=%s , teacher_id=%s , room_code=%s , from_time=%s ,todays=%s,to_time=%s,number_of_seats=%s,division=%s
